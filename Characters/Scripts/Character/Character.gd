@@ -4,6 +4,7 @@ extends Actor
 const FLOOR_DETECT_DISTANCE = 20.0
 
 onready var sprite = $Sprite
+onready var animationPlayer = $AnimationPlayer
 
 var run_speed = 310
 var jump_strength = 500
@@ -29,6 +30,10 @@ func _physics_process(_delta):
 			sprite.scale.x = -1
 		else:
 			sprite.scale.x = 1
+
+	if _velocity.x != 0:
+		animationPlayer.play("Walk")
+
 
 
 func get_direction():
