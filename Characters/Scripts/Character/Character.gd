@@ -31,6 +31,10 @@ func _physics_process(_delta):
 		else:
 			sprite.scale.x = 1
 
+	if _velocity.x != 0:
+		animationPlayer.play("Walk")
+
+
 
 func get_direction():
 	return Vector2(

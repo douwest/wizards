@@ -30,6 +30,11 @@ config/name="Wizards"
 run/main_scene="res://Prototype.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=800
+
 [input]
 
 move_left={
