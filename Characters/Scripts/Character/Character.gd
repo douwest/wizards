@@ -42,8 +42,10 @@ func _physics_process(_delta):
 		else:
 			sprite.scale.x = -1
 
-	if _velocity.x != 0:
-		animationPlayer.play("Walk")
+	if state == State.RUN:
+		animationPlayer.play("walk")
+	elif state == State.IDLE:
+		animationPlayer.play("idle")
 
 
 func get_posture():
