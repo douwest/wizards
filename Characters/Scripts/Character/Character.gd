@@ -44,6 +44,10 @@ func _physics_process(_delta):
 
 	if state == State.RUN:
 		animationPlayer.play("walk")
+	elif state == State.JUMP and _velocity.y > 0:
+		animationPlayer.play("falling")
+	elif state == State.JUMP and _velocity.y < 0:
+		animationPlayer.play("jump")
 	elif state == State.IDLE:
 		animationPlayer.play("idle")
 
