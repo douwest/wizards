@@ -42,15 +42,18 @@ func _physics_process(_delta):
 		else:
 			sprite.scale.x = -1
 
-	if state == State.RUN:
+	if state == State.RUN and posture == Posture.LOW:
+		animationPlayer.play("idle_low")
+	elif state == State.RUN:
 		animationPlayer.play("walk")
 	elif state == State.JUMP and _velocity.y > 0:
 		animationPlayer.play("falling")
 	elif state == State.JUMP and _velocity.y < 0:
 		animationPlayer.play("jump")
-	elif state == State.IDLE:
-		animationPlayer.play("idle")
-
+	elif state == State.IDLE and posture == Posture.LOW:
+		animationPlayer.play("idle_low")
+	elif state == State.IDLE and posture == Posture.HIGH or posture == Posture.MEDIUM:
+		animationPlayer.play("idle_medium")
 
 func get_posture():
 	if Input.is_action_pressed("crouch"):
