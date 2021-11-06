@@ -122,11 +122,10 @@ func get_sprite_direction():
 		return -1
 	else:
 		return 1
-		
+
 
 func cast_spell():
 	var spell = Spell.instance()
 	spell.set_speed_from_direction(get_sprite_direction())
 	owner.add_child(spell)
 	spell.global_transform = castPosition.global_transform
-	
