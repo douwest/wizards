@@ -1,12 +1,14 @@
 class_name Character
 extends Actor
 
-const FLOOR_DETECT_DISTANCE = 20.0
+var Spell = preload("res://Spells/Spell.tscn")
 
+const FLOOR_DETECT_DISTANCE = 20.0
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
+onready var castPosition = $CastPosition
 
-enum State { IDLE, JUMP, RUN }
+enum State { IDLE, JUMP, RUN, CAST }
 enum Posture { LOW, MEDIUM, HIGH }
 
 var run_speed = 310
@@ -25,6 +27,7 @@ func _physics_process(_delta):
 	
 	state = get_state()
 	posture = get_posture()
+	castPosition.position.y = get_cast_height(posture)
 	
 	var direction = get_direction()
 	
@@ -36,15 +39,18 @@ func _physics_process(_delta):
 		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
 		
 	_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, false, 4, 0.9, false)
-	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
-	# This will make Robi face left or right depending on the direction you move.
+
 	if direction.x != 0:
 		if direction.x > 0:
 			sprite.scale.x = 1
+			castPosition.position.x = 28
 		else:
 			sprite.scale.x = -1
+			castPosition.position.x = -28
 
-	if state == State.RUN and posture == Posture.LOW:
+	if state == State.CAST:
+		animationPlayer.play("attack_high")
+	elif state == State.RUN and posture == Posture.LOW:
 		animationPlayer.play("idle_low")
 	elif state == State.RUN:
 		animationPlayer.play("walk")
@@ -59,6 +65,7 @@ func _physics_process(_delta):
 	elif state == State.IDLE and posture == Posture.HIGH:
 		animationPlayer.play("idle_high")
 
+
 func get_posture():
 	if Input.is_action_pressed("crouch"):
 		return Posture.LOW
@@ -69,12 +76,23 @@ func get_posture():
 
 
 func get_state():
-	if !is_on_floor():
+	if Input.is_action_pressed("move_1"):
+		return State.CAST
+	elif !is_on_floor():
 		return State.JUMP
 	elif Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left"):
 		return State.RUN
 	else:
 		return State.IDLE
+
+
+func get_cast_height(posture):
+	if posture == Posture.LOW:
+		return -8
+	elif posture == Posture.MEDIUM:
+		return -24
+	else:
+		return -40
 
 
 func get_direction():
@@ -84,12 +102,7 @@ func get_direction():
 	)
 
 
-func calculate_move_velocity(
-		linear_velocity,
-		direction,
-		speed,
-		is_jump_interrupted
-	):
+func calculate_move_velocity(linear_velocity, direction, speed, is_jump_interrupted):
 	var velocity = linear_velocity
 	
 	if direction.x != 0:
@@ -100,7 +113,20 @@ func calculate_move_velocity(
 	if direction.y != 0.0:
 		velocity.y = speed.y * direction.y
 	if is_jump_interrupted:
-		# Decrease the Y velocity by multiplying it, but don't set it to 0
-		# as to not be too abrupt.
 		velocity.y *= 0.6
 	return velocity
+
+
+func get_sprite_direction():
+	if sprite.scale.x < 0:
+		return -1
+	else:
+		return 1
+		
+
+func cast_spell():
+	var spell = Spell.instance()
+	spell.set_speed_from_direction(get_sprite_direction())
+	owner.add_child(spell)
+	spell.global_transform = castPosition.global_transform
+	
