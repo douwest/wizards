@@ -52,8 +52,10 @@ func _physics_process(_delta):
 		animationPlayer.play("jump")
 	elif state == State.IDLE and posture == Posture.LOW:
 		animationPlayer.play("idle_low")
-	elif state == State.IDLE and posture == Posture.HIGH or posture == Posture.MEDIUM:
+	elif state == State.IDLE and posture == Posture.MEDIUM:
 		animationPlayer.play("idle_medium")
+	elif state == State.IDLE and posture == Posture.HIGH:
+		animationPlayer.play("idle_high")
 
 func get_posture():
 	if Input.is_action_pressed("crouch"):
