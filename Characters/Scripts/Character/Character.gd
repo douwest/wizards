@@ -14,6 +14,9 @@ var jump_strength = 500
 var state = State.IDLE
 var posture = Posture.MEDIUM
 
+var acceleration = 0.25
+var friction = 0.25
+
 func _ready():
 	speed = Vector2(run_speed, jump_strength)
 
@@ -23,8 +26,6 @@ func _physics_process(_delta):
 	state = get_state()
 	posture = get_posture()
 	
-	print('state: ', state, " posture: ", posture)
-
 	var direction = get_direction()
 	
 	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
@@ -33,6 +34,7 @@ func _physics_process(_delta):
 	var snap_vector = Vector2.ZERO
 	if direction.y == 0.0:
 		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
+		
 	_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, false, 4, 0.9, false)
 	# When the character’s direction changes, we want to to scale the Sprite accordingly to flip it.
 	# This will make Robi face left or right depending on the direction you move.
@@ -89,7 +91,12 @@ func calculate_move_velocity(
 		is_jump_interrupted
 	):
 	var velocity = linear_velocity
-	velocity.x = speed.x * direction.x
+	
+	if direction.x != 0:
+		velocity.x = lerp(velocity.x, speed.x * direction.x, acceleration)
+	else:
+		velocity.x = lerp(velocity.x, 0, friction)
+		
 	if direction.y != 0.0:
 		velocity.y = speed.y * direction.y
 	if is_jump_interrupted:
