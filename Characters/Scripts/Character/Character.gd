@@ -4,15 +4,27 @@ extends Actor
 const FLOOR_DETECT_DISTANCE = 20.0
 
 onready var sprite = $Sprite
+onready var animationPlayer = $AnimationPlayer
+
+enum State { IDLE, JUMP, RUN }
+enum Posture { LOW, MEDIUM, HIGH }
 
 var run_speed = 310
 var jump_strength = 500
+var state = State.IDLE
+var posture = Posture.MEDIUM
 
 func _ready():
 	speed = Vector2(run_speed, jump_strength)
 
 
 func _physics_process(_delta):
+	
+	state = get_state()
+	posture = get_posture()
+	
+	print('state: ', state, " posture: ", posture)
+
 	var direction = get_direction()
 	
 	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
@@ -26,9 +38,36 @@ func _physics_process(_delta):
 	# This will make Robi face left or right depending on the direction you move.
 	if direction.x != 0:
 		if direction.x > 0:
-			sprite.scale.x = -1
-		else:
 			sprite.scale.x = 1
+		else:
+			sprite.scale.x = -1
+
+	if state == State.RUN:
+		animationPlayer.play("walk")
+	elif state == State.JUMP and _velocity.y > 0:
+		animationPlayer.play("falling")
+	elif state == State.JUMP and _velocity.y < 0:
+		animationPlayer.play("jump")
+	elif state == State.IDLE:
+		animationPlayer.play("idle")
+
+
+func get_posture():
+	if Input.is_action_pressed("crouch"):
+		return Posture.LOW
+	elif Input.is_action_pressed("extend"):
+		return Posture.HIGH
+	else:
+		return Posture.MEDIUM
+
+
+func get_state():
+	if !is_on_floor():
+		return State.JUMP
+	elif Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left"):
+		return State.RUN
+	else:
+		return State.IDLE
 
 
 func get_direction():

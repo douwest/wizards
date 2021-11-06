@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wizard-2.png-0e79e2a37a682c69fbe8c482a853f951.stex"
+path="res://.import/Wizard Gramps.png-164488f00ebba448580773a1a916caba.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Sprites/Wizard-2.png"
-dest_files=[ "res://.import/Wizard-2.png-0e79e2a37a682c69fbe8c482a853f951.stex" ]
+source_file="res://Characters/Sprites/Wizard Gramps.png"
+dest_files=[ "res://.import/Wizard Gramps.png-164488f00ebba448580773a1a916caba.stex" ]
 
 [params]
 
