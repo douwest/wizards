@@ -19,8 +19,7 @@ func _on_Create_pressed():
 
 
 func _on_Join_pressed():
-	if ipAddress.text != '' && ipAddress.text != ipAddress.placeholder_text:
-		Network.join_server(ipAddress.text)
+	Network.join_server(ipAddress.text, int($Panel/PortNumberInputField.text))
 	
 
 func _on_join_fail():
