@@ -33,6 +33,7 @@ puppet var puppet_state = State.IDLE
 puppet var puppet_posture = Posture.MEDIUM
 
 func _ready():
+	sprite.modulate = Color(randf(), randf(), randf(), 1)
 	speed = Vector2(run_speed, jump_strength)
 	if is_network_master():
 		camera = Camera2D.new()
