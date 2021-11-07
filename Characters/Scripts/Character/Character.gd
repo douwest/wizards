@@ -2,13 +2,16 @@ class_name Character
 extends Actor
 
 var Spell = preload("res://Spells/Spell.tscn")
+var Barrier = preload("res://Spells/Barrier.tscn")
 
 const FLOOR_DETECT_DISTANCE = 20.0
+
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var castPosition = $CastPosition
+onready var barrier = $Barrier
 
-enum State { IDLE, JUMP, RUN, CAST, DIE }
+enum State { IDLE, JUMP, RUN, CAST, DIE, BLOCK }
 enum Posture { LOW, MEDIUM, HIGH }
 
 var run_speed = 310
@@ -31,6 +34,11 @@ func _physics_process(_delta):
 	
 	var direction = get_direction()
 	
+	var is_block_interrupted = Input.is_action_just_released("move_2")
+	
+	if(is_block_interrupted):
+		remove_barrier()
+		
 	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 
@@ -43,13 +51,15 @@ func _physics_process(_delta):
 	if direction.x != 0:
 		if direction.x > 0:
 			sprite.scale.x = 1
+			barrier.set_sprite_scale_x(1)
 			castPosition.position.x = 28
 		else:
 			sprite.scale.x = -1
+			barrier.set_sprite_scale_x(-1)
 			castPosition.position.x = -28
 
-	if state == State.DIE:
-		animationPlayer.play("die")
+	if state == State.BLOCK:
+		animationPlayer.play("block_" + get_posture_suffix(posture))
 	elif state == State.CAST:
 		animationPlayer.play("attack_" + get_posture_suffix(posture))
 	elif state == State.RUN:
@@ -60,6 +70,8 @@ func _physics_process(_delta):
 		animationPlayer.play("jump")
 	elif state == State.IDLE:
 		animationPlayer.play("idle_" + get_posture_suffix(posture))
+		
+	update_barrier_position()
 
 
 func get_posture():
@@ -75,7 +87,7 @@ func get_state():
 	if Input.is_action_pressed("move_1"):
 		return State.CAST
 	elif Input.is_action_pressed("move_2"):
-		return State.DIE
+		return State.BLOCK
 	elif !is_on_floor():
 		return State.JUMP
 	elif Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left"):
@@ -135,3 +147,13 @@ func cast_spell():
 	spell.set_speed_from_direction(get_sprite_direction())
 	owner.add_child(spell)
 	spell.global_transform = castPosition.global_transform
+
+func update_barrier_position():
+	barrier.global_transform = castPosition.global_transform	
+
+
+func cast_barrier():
+	barrier.visible = true
+
+func remove_barrier():
+	barrier.visible = false
