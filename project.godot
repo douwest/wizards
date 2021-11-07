@@ -27,8 +27,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Wizards"
-run/main_scene="res://Prototype.tscn"
+run/main_scene="res://Network/Scenes/MainMenu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Gamestate="*res://Network/Scripts/gamestate.gd"
+Network="*res://Network/Scripts/network.gd"
 
 [display]
 

@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Network/Scenes/MainMenu.gd" type="Script" id=1]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel"]
+margin_left = 865.546
+margin_top = 226.951
+margin_right = 1286.55
+margin_bottom = 311.951
+text = "Wizards (?)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Version" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 813.341
+margin_top = 1057.57
+margin_right = 949.341
+margin_bottom = 1071.57
+text = "Wizards pre-alpha"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Create" type="Button" parent="Panel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 400.0
+margin_top = -40.0
+margin_right = 800.0
+margin_bottom = 60.0
+text = "Create server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Join" type="Button" parent="Panel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -920.0
+margin_top = -40.0
+margin_right = -520.0
+margin_bottom = 60.0
+text = "Join server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IPAddressInputField" type="LineEdit" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 39.0
+margin_top = -117.0
+margin_right = 441.0
+margin_bottom = -53.0
+text = "Enter IP address you want to join (no port number required)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Panel/Create" to="." method="_on_Create_pressed"]
+[connection signal="pressed" from="Panel/Join" to="." method="_on_Join_pressed"]
