@@ -65,11 +65,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 39.0
-margin_top = -117.0
-margin_right = 441.0
-margin_bottom = -53.0
-text = "Enter IP address you want to join (no port number required)"
+margin_left = 46.4161
+margin_top = -185.865
+margin_right = 448.416
+margin_bottom = -121.865
+placeholder_text = "Ip address"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortNumberInputField" type="LineEdit" parent="Panel"]
+margin_left = 1007.0
+margin_top = 431.0
+margin_right = 1228.0
+margin_bottom = 481.0
+placeholder_text = "Port number"
 __meta__ = {
 "_edit_use_anchors_": false
 }

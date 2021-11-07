@@ -4,13 +4,16 @@ extends Node2D
 func _ready():
 	# Connect event handler to the player_list_changed signal
 	Network.connect("player_list_changed", self, "_on_player_list_changed")
+	# If we are in the server, connect to the event that will deal with player despawning
+	if (get_tree().is_network_server()):
+		Network.connect("player_removed", self, "_on_player_removed")
 	
 	# Spawn the players
 	if (get_tree().is_network_server()):
 		spawn_players(Gamestate.player_info, 1)
 	else:
 		rpc_id(1, "spawn_players", Gamestate.player_info, -1)
-		
+
 
 # Spawns a new player actor, using the provided player_info structure and the given spawn index
 remote func spawn_players(pinfo, spawn_index):
@@ -46,3 +49,30 @@ remote func spawn_players(pinfo, spawn_index):
 	nactor.set_name(str(pinfo.net_id))
 	# Finally add the actor into the world
 	add_child(nactor)
+
+func _on_player_removed(pinfo):
+	despawn_player(pinfo)
+
+
+remote func despawn_player(pinfo):
+	if (get_tree().is_network_server()):
+		for id in Network.players:
+			# Skip disconnecte player and server from replication code
+			if (id == pinfo.net_id || id == 1):
+				continue
+			
+			# Replicate despawn into currently iterated player
+			rpc_id(id, "despawn_player", pinfo)
+	
+	# Try to locate the player actor
+	var player_node = get_node(str(pinfo.net_id))
+	if (!player_node):
+		print("Cannoot remove invalid node from tree")
+		return
+	
+	# Mark the node for deletion
+	player_node.queue_free()
+
+
+func _on_player_list_changed():
+	pass
