@@ -7,6 +7,11 @@ const FLOOR_DETECT_DISTANCE = 20.0
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var castPosition = $CastPosition
+<<<<<<< Updated upstream
+=======
+onready var castLight = $CastPosition/CastLight
+onready var barrier = $Barrier
+>>>>>>> Stashed changes
 
 enum State { IDLE, JUMP, RUN, CAST, DIE }
 enum Posture { LOW, MEDIUM, HIGH }
@@ -31,6 +36,17 @@ func _physics_process(_delta):
 	
 	var direction = get_direction()
 	
+<<<<<<< Updated upstream
+=======
+	var is_cast_interrupted = Input.is_action_just_released("move_1")	
+	var is_block_interrupted = Input.is_action_just_released("move_2")
+	
+	if(is_block_interrupted):
+		remove_barrier()
+	if(is_cast_interrupted):
+		castLight.energy = 0
+		
+>>>>>>> Stashed changes
 	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 
