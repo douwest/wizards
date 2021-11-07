@@ -51,21 +51,15 @@ func _physics_process(_delta):
 	if state == State.DIE:
 		animationPlayer.play("die")
 	elif state == State.CAST:
-		animationPlayer.play("attack_high")
-	elif state == State.RUN and posture == Posture.LOW:
-		animationPlayer.play("idle_low")
+		animationPlayer.play("attack_" + get_posture_suffix(posture))
 	elif state == State.RUN:
 		animationPlayer.play("walk")
 	elif state == State.JUMP and _velocity.y > 0:
 		animationPlayer.play("falling")
 	elif state == State.JUMP and _velocity.y < 0:
 		animationPlayer.play("jump")
-	elif state == State.IDLE and posture == Posture.LOW:
-		animationPlayer.play("idle_low")
-	elif state == State.IDLE and posture == Posture.MEDIUM:
-		animationPlayer.play("idle_medium")
-	elif state == State.IDLE and posture == Posture.HIGH:
-		animationPlayer.play("idle_high")
+	elif state == State.IDLE:
+		animationPlayer.play("idle_" + get_posture_suffix(posture))
 
 
 func get_posture():
@@ -104,6 +98,14 @@ func get_direction():
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		-1 if is_on_floor() and Input.is_action_just_pressed("jump") else 0
 	)
+
+func get_posture_suffix(posture):
+	if posture == Posture.HIGH:
+		return 'high'
+	elif posture == Posture.MEDIUM:
+		return 'mid'
+	elif posture == Posture.LOW:
+		return 'low'
 
 
 func calculate_move_velocity(linear_velocity, direction, speed, is_jump_interrupted):
