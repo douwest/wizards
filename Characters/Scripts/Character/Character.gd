@@ -8,7 +8,7 @@ onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var castPosition = $CastPosition
 
-enum State { IDLE, JUMP, RUN, CAST }
+enum State { IDLE, JUMP, RUN, CAST, DIE }
 enum Posture { LOW, MEDIUM, HIGH }
 
 var run_speed = 310
@@ -48,7 +48,9 @@ func _physics_process(_delta):
 			sprite.scale.x = -1
 			castPosition.position.x = -28
 
-	if state == State.CAST:
+	if state == State.DIE:
+		animationPlayer.play("die")
+	elif state == State.CAST:
 		animationPlayer.play("attack_high")
 	elif state == State.RUN and posture == Posture.LOW:
 		animationPlayer.play("idle_low")
@@ -78,6 +80,8 @@ func get_posture():
 func get_state():
 	if Input.is_action_pressed("move_1"):
 		return State.CAST
+	elif Input.is_action_pressed("move_2"):
+		return State.DIE
 	elif !is_on_floor():
 		return State.JUMP
 	elif Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left"):
