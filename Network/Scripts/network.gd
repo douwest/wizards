@@ -38,10 +38,10 @@ func create_server():
 	register_player(Gamestate.player_info)
 
 
-func join_server():
+func join_server(ip_address):
 	var net = NetworkedMultiplayerENet.new()
 	
-	if (net.create_client('127.0.0.1', 25570) != OK):
+	if (net.create_client(ip_address, 25570) != OK):
 		print("Failed to create client")
 		emit_signal("join_fail")
 		return
