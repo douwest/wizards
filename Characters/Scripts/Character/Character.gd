@@ -9,6 +9,7 @@ const FLOOR_DETECT_DISTANCE = 20.0
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var castPosition = $CastPosition
+onready var castLight = $CastPosition/CastLight
 onready var barrier = $Barrier
 
 enum State { IDLE, JUMP, RUN, CAST, DIE, BLOCK }
@@ -35,9 +36,12 @@ func _physics_process(_delta):
 	var direction = get_direction()
 	
 	var is_block_interrupted = Input.is_action_just_released("move_2")
+	var is_cast_interrupted = Input.is_action_just_released("move_1")
 	
 	if(is_block_interrupted):
 		remove_barrier()
+	if(is_cast_interrupted):
+		castLight.energy = 0
 		
 	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
