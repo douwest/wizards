@@ -12,6 +12,7 @@ onready var castPosition = $CastPosition
 onready var castLight = $CastPosition/CastLight
 onready var barrier = $Barrier
 onready var tween = $Tween
+onready var stats = $Stats
 
 var camera = null
 
@@ -22,6 +23,7 @@ var run_speed = 310
 var jump_strength = 500
 var state = State.IDLE
 var posture = Posture.MEDIUM
+
 
 var acceleration = 0.25
 var friction = 0.25
@@ -36,7 +38,7 @@ func _ready():
 	speed = Vector2(run_speed, jump_strength)
 	if is_network_master():
 		camera = Camera2D.new()
-		camera.zoom = Vector2(0.5, 0.5)		
+		camera.zoom = Vector2(0.5, 0.5)
 		self.add_child(camera)
 		camera.make_current()
 
@@ -60,64 +62,60 @@ func _physics_process(_delta):
 		var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
 		_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 
-		var snap_vector = Vector2.ZERO
-		if direction.y == 0.0:
-			snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
+		var snap_vector = calculate_snap_vector(direction.y)
 			
 		_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, false, 4, 0.9, false)
 
-		if direction.x != 0:
-			if direction.x > 0:
-				sprite.scale.x = 1
-				barrier.set_sprite_scale_x(1)
-				castPosition.position.x = 28
-			else:
-				sprite.scale.x = -1
-				barrier.set_sprite_scale_x(-1)
-				castPosition.position.x = -28
-		if state == State.BLOCK:
-			animationPlayer.play("block_" + get_posture_suffix(posture))
-		elif state == State.CAST:
-			animationPlayer.play("attack_" + get_posture_suffix(posture))
-		elif state == State.RUN:
-			animationPlayer.play("walk")
-		elif state == State.JUMP and _velocity.y > 0:
-			animationPlayer.play("falling")
-		elif state == State.JUMP and _velocity.y < 0:
-			animationPlayer.play("jump")
-		elif state == State.IDLE:
-			animationPlayer.play("idle_" + get_posture_suffix(posture))
+		update_sprite_directions(direction.x)
+		play_animation(state, posture, _velocity)
 		update_casting_position()
 		update_barrier_position()
+		
 	else:
-		if puppet_velocity.x != 0:
-			if puppet_velocity.x > 0:
-				sprite.scale.x = 1
-				barrier.set_sprite_scale_x(1)
-				castPosition.position.x = 28
-			else:
-				sprite.scale.x = -1
-				barrier.set_sprite_scale_x(-1)	
-				castPosition.position.x = -28			
 		if not tween.is_active():
 			puppet_velocity = move_and_slide(puppet_velocity * speed)
-			
-		if puppet_state == State.BLOCK:
-			animationPlayer.play("block_" + get_posture_suffix(puppet_posture))
-		else:
+		if puppet_state != State.BLOCK:
 			remove_barrier()
-		if puppet_state == State.CAST:
-			animationPlayer.play("attack_" + get_posture_suffix(puppet_posture))
-		elif puppet_state == State.RUN:
-			animationPlayer.play("walk")
-		elif puppet_state == State.JUMP and puppet_velocity.y > 0:
-			animationPlayer.play("falling")
-		elif puppet_state == State.JUMP and puppet_velocity.y < 0:
-			animationPlayer.play("jump")
-		elif puppet_state == State.IDLE:
-			animationPlayer.play("idle_" + get_posture_suffix(puppet_posture))
+		if puppet_state != State.CAST:
+			castLight.energy = 0
+			
+		update_sprite_directions(puppet_velocity.x)
+		play_animation(puppet_state, puppet_posture, puppet_velocity)
 		update_casting_position_from_puppet()
 		update_barrier_position()
+
+
+func calculate_snap_vector(vertical_direction) -> Vector2:
+	var snap_vector = Vector2.ZERO
+	if vertical_direction == 0.0:
+		snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE
+	return snap_vector
+
+
+func update_sprite_directions(horizontal_direction):
+	if horizontal_direction != 0:
+		if horizontal_direction > 0:
+			sprite.scale.x = 1
+			barrier.set_sprite_scale_x(1)
+			castPosition.position.x = 28
+		else:
+			sprite.scale.x = -1
+			barrier.set_sprite_scale_x(-1)
+			castPosition.position.x = -28
+
+func play_animation(s, p, v):
+	if state == State.BLOCK:
+		animationPlayer.play("block_" + get_posture_suffix(posture))
+	elif s == State.CAST:
+		animationPlayer.play("attack_" + get_posture_suffix(p))
+	elif s == State.RUN:
+		animationPlayer.play("walk")
+	elif s == State.JUMP and v.y > 0:
+		animationPlayer.play("falling")
+	elif s == State.JUMP and v.y < 0:
+		animationPlayer.play("jump")
+	elif s == State.IDLE:
+		animationPlayer.play("idle_" + get_posture_suffix(p))
 
 
 func get_posture() -> int:
