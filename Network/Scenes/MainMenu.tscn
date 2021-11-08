@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Network/Scenes/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Static/Fonts/Medium_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Static/Fonts/Large_Font.tres" type="DynamicFont" id=3]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -13,11 +15,17 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Panel"]
-margin_left = 865.546
-margin_top = 226.951
-margin_right = 1286.55
-margin_bottom = 311.951
-text = "Wizards (?)"
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.5
+margin_top = -286.286
+margin_right = 150.5
+margin_bottom = -248.286
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Dueling Wizards"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -25,11 +33,11 @@ __meta__ = {
 [node name="Version" type="Label" parent="Panel"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 813.341
-margin_top = 1057.57
-margin_right = 949.341
-margin_bottom = 1071.57
-text = "Wizards pre-alpha"
+margin_left = 769.341
+margin_top = 1044.57
+margin_right = 941.341
+margin_bottom = 1058.57
+text = "Dueling Wizards pre-alpha "
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,6 +49,7 @@ margin_left = 400.0
 margin_top = -40.0
 margin_right = 800.0
 margin_bottom = 60.0
+custom_fonts/font = ExtResource( 2 )
 text = "Create server"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -55,6 +64,7 @@ margin_left = -920.0
 margin_top = -40.0
 margin_right = -520.0
 margin_bottom = 60.0
+custom_fonts/font = ExtResource( 2 )
 text = "Join server"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,10 +75,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 46.4161
-margin_top = -185.865
-margin_right = 448.416
-margin_bottom = -121.865
+margin_left = 46.0
+margin_top = 91.0
+margin_right = 432.0
+margin_bottom = 155.0
+custom_fonts/font = ExtResource( 2 )
 placeholder_text = "Ip address"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -76,9 +87,10 @@ __meta__ = {
 
 [node name="PortNumberInputField" type="LineEdit" parent="Panel"]
 margin_left = 1007.0
-margin_top = 431.0
+margin_top = 702.529
 margin_right = 1228.0
-margin_bottom = 481.0
+margin_bottom = 752.529
+custom_fonts/font = ExtResource( 2 )
 placeholder_text = "Port number"
 __meta__ = {
 "_edit_use_anchors_": false
