@@ -142,10 +142,10 @@ func get_state() -> int:
 		return State.IDLE
 
 
-func get_cast_height(posture) -> int:
-	if posture == Posture.LOW:
+func get_cast_height(p) -> int:
+	if p == Posture.LOW:
 		return -8
-	elif posture == Posture.MEDIUM:
+	elif p == Posture.MEDIUM:
 		return -24
 	else:
 		return -40
@@ -157,10 +157,10 @@ func get_direction() -> Vector2:
 		-1 if is_on_floor() and Input.is_action_just_pressed("jump") else 0
 	)
 
-func get_posture_suffix(posture) -> String:
-	if posture == Posture.HIGH:
+func get_posture_suffix(p) -> String:
+	if p == Posture.HIGH:
 		return 'high'
-	elif posture == Posture.MEDIUM:
+	elif p == Posture.MEDIUM:
 		return 'mid'
 	else:
 		return 'low'
