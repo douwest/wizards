@@ -14,22 +14,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="Panel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -150.5
-margin_top = -286.286
-margin_right = 150.5
-margin_bottom = -248.286
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 3 )
-text = "Dueling Wizards"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Version" type="Label" parent="Panel"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -42,59 +26,73 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Create" type="Button" parent="Panel"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 400.0
-margin_top = -40.0
-margin_right = 800.0
-margin_bottom = 60.0
-custom_fonts/font = ExtResource( 2 )
-text = "Create server"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Join" type="Button" parent="Panel"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -920.0
-margin_top = -40.0
-margin_right = -520.0
-margin_bottom = 60.0
-custom_fonts/font = ExtResource( 2 )
-text = "Join server"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IPAddressInputField" type="LineEdit" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 46.0
-margin_top = 91.0
-margin_right = 432.0
-margin_bottom = 155.0
+margin_left = -150.5
+margin_top = -66.5
+margin_right = 150.5
+margin_bottom = 66.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 301.0
+margin_bottom = 38.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Dueling Wizards"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IPAddressInputField" type="LineEdit" parent="Panel/VBoxContainer"]
+margin_top = 42.0
+margin_right = 301.0
+margin_bottom = 71.0
 custom_fonts/font = ExtResource( 2 )
 placeholder_text = "Ip address"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PortNumberInputField" type="LineEdit" parent="Panel"]
-margin_left = 1007.0
-margin_top = 702.529
-margin_right = 1228.0
-margin_bottom = 752.529
+[node name="PortNumberInputField" type="LineEdit" parent="Panel/VBoxContainer"]
+margin_top = 75.0
+margin_right = 301.0
+margin_bottom = 104.0
 custom_fonts/font = ExtResource( 2 )
 placeholder_text = "Port number"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Panel/Create" to="." method="_on_Create_pressed"]
-[connection signal="pressed" from="Panel/Join" to="." method="_on_Join_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 108.0
+margin_right = 301.0
+margin_bottom = 133.0
+
+[node name="Create" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+margin_right = 137.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 2 )
+text = "Create server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Join" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+margin_left = 141.0
+margin_right = 253.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 2 )
+disabled = true
+text = "Join server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Create" to="." method="_on_Create_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Join" to="." method="_on_Join_pressed"]
