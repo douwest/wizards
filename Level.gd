@@ -72,21 +72,8 @@ remote func despawn_player(pinfo):
 
 
 func _on_player_died(pinfo, lives):
-	print('player ', pinfo.name, 'died! :(')
-	despawn_player(pinfo)
-	if lives > 0:
-		var timer = Timer.new()
-		add_child(timer)
-		timer.start(5)
-		timer.connect('timeout', self, '_respawn_and_remove_timer', [pinfo, timer])
+	print('player ', pinfo.name, 'died!')
 
-
-func _respawn_and_remove_timer(pinfo, timer):
-	if (get_tree().is_network_server()):
-		spawn_players(pinfo, 1)
-	else:
-		rpc_id(1, "spawn_players", pinfo, -1)
-	timer.queue_free()
 
 func _on_player_list_changed():
 	pass

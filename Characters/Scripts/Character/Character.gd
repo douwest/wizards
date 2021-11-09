@@ -16,16 +16,18 @@ onready var castLight = $CastPosition/CastLight
 onready var barrier = $Barrier
 onready var tween = $Tween
 onready var stats = $Stats
+onready var respawnTimer = $Timers/RespawnTimer
 
 var camera = null
 
-enum State { IDLE, JUMP, RUN, CAST, DEATH, BLOCK }
-enum Posture { LOW, MEDIUM, HIGH }
+enum State { IDLE = 0, JUMP = 1, RUN = 2, CAST = 3, DEATH = 4, BLOCK = 5 }
+enum Posture { LOW = 0, MEDIUM = 1, HIGH = 2 }
 
 var run_speed = 310
 var jump_strength = 500
 var state = State.IDLE
 var posture = Posture.MEDIUM
+var controllable = true
 
 var acceleration = 0.25
 var friction = 0.25
@@ -35,8 +37,11 @@ puppet var puppet_velocity = Vector2(0,0)
 puppet var puppet_state = State.IDLE
 puppet var puppet_posture = Posture.MEDIUM
 puppet var puppet_health = 9999
+puppet var puppet_lives = 9999
+puppet var puppet_visible = true
 
 func _ready():
+	respawnTimer.connect('timeout', self, 'respawn')
 	speed = Vector2(run_speed, jump_strength)
 	if is_network_master():
 		camera = Camera2D.new()
@@ -46,8 +51,11 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if(is_network_master()):
+	if !controllable:
+		return
 		
+	if is_network_master():	
+		respawnTimer.stop()		
 		state = get_state()
 		posture = get_posture()
 		
@@ -71,6 +79,7 @@ func _physics_process(_delta):
 		update_barrier_position()
 		
 	else:
+		visible = puppet_visible
 		if not tween.is_active():
 			puppet_velocity = move_and_slide(puppet_velocity * speed)
 		if puppet_state != State.BLOCK:
@@ -222,8 +231,10 @@ func _on_NetworkTickRate_timeout():
 		rset_unreliable('puppet_state', state)
 		rset_unreliable('puppet_posture', posture)
 		rset_unreliable('puppet_health', stats.current_health)
-	
-	
+		rset_unreliable('puppet_lives', stats.lives)
+		rset_unreliable('puppet_visible', visible)
+		
+
 func set_puppet_position(new_value) -> void:
 	puppet_position = new_value
 	tween.interpolate_property(self, 'global_position', global_position, puppet_position, 0.1)
@@ -235,4 +246,27 @@ func take_damage(damage):
 
 
 func player_died() -> void:
-	emit_signal('died', Gamestate.player_info, 99)
+	if(is_network_master()):
+		print('player died!')
+		emit_signal('died', Gamestate.player_info, 99)		
+		controllable = false
+		if stats.lives > 0:
+			respawnTimer.start()
+		else:
+			print('Player <', Gamestate.player_info.name, '> has lost!')
+	
+
+func respawn():
+	if(is_network_master()):
+		state = State.IDLE
+		posture = Posture.MEDIUM
+		global_position = Vector2(500, 500)
+		stats.current_health = stats.max_health
+		stats.lives -= 1
+		visible = true
+		controllable = true
+		_on_NetworkTickRate_timeout()
+	else:
+		visible = true
+		controllable = true
+		_on_NetworkTickRate_timeout()

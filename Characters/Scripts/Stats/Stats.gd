@@ -4,7 +4,7 @@ extends Node
 
 export var max_health = 10
 var current_health = 0 setget set_current_health
-
+var lives = 3
 
 func _ready():
 	current_health = max_health
