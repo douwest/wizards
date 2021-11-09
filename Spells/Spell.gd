@@ -1,16 +1,20 @@
 extends Area2D
 
-export var BULLET_SPEED = 400
+export var bullet_speed = 400
+export var damage = 10
 var speed = 0
+
 
 func _physics_process(delta):
 	position += transform.x * speed * delta
 
 func set_speed_from_direction(direction: int):
 	if direction == 1:
-		speed = BULLET_SPEED
+		speed = bullet_speed
 	else: 
-		speed = -BULLET_SPEED
+		speed = -bullet_speed
 
 func _on_Spell_body_entered(body):
+	if body.has_method('take_damage'):
+		body.take_damage(damage)
 	queue_free()

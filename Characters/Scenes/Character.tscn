@@ -218,7 +218,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=11]
-resource_name = "die"
+resource_name = "death"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -230,6 +230,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 19, 20, 21, 22, 24 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "player_died"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -332,7 +346,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 hframes = 30
-frame = 18
+frame = 20
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack_high = SubResource( 2 )
@@ -341,7 +355,7 @@ anims/attack_mid = SubResource( 4 )
 anims/block_high = SubResource( 12 )
 anims/block_low = SubResource( 14 )
 anims/block_mid = SubResource( 13 )
-anims/die = SubResource( 11 )
+anims/death = SubResource( 11 )
 anims/falling = SubResource( 5 )
 anims/idle_high = SubResource( 6 )
 anims/idle_low = SubResource( 7 )
@@ -356,17 +370,19 @@ position = Vector2( 28, -40 )
 scale = Vector2( 6, 6 )
 texture = ExtResource( 3 )
 color = Color( 0.454902, 0.596078, 0.74902, 0.745098 )
-energy = 0.201507
+energy = 0.0
 
 [node name="Barrier" parent="." instance=ExtResource( 4 )]
-
-[node name="NetworkTickRate" type="Timer" parent="."]
-wait_time = 0.03
-autostart = true
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[connection signal="timeout" from="NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
+[node name="Timers" type="Node" parent="."]
+
+[node name="NetworkTickRate" type="Timer" parent="Timers"]
+wait_time = 0.03
+autostart = true
+
+[connection signal="timeout" from="Timers/NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
