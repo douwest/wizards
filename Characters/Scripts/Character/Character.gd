@@ -251,6 +251,7 @@ func player_died() -> void:
 		emit_signal('died', Gamestate.player_info, 99)		
 		controllable = false
 		if stats.lives > 0:
+			global_position = Vector2(500, 500)			
 			respawnTimer.start()
 		else:
 			print('Player <', Gamestate.player_info.name, '> has lost!')
@@ -260,7 +261,6 @@ func respawn():
 	if(is_network_master()):
 		state = State.IDLE
 		posture = Posture.MEDIUM
-		global_position = Vector2(500, 500)
 		stats.current_health = stats.max_health
 		stats.lives -= 1
 	visible = true
