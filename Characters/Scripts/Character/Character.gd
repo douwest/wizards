@@ -217,11 +217,11 @@ func update_casting_position(p) -> void:
 
 
 func cast_barrier():
-	barrier.visible = true
+	barrier.enable()
 
 
 func remove_barrier():
-	barrier.visible = false
+	barrier.disable()
 
 
 func _on_NetworkTickRate_timeout():
@@ -263,10 +263,5 @@ func respawn():
 		global_position = Vector2(500, 500)
 		stats.current_health = stats.max_health
 		stats.lives -= 1
-		visible = true
-		controllable = true
-		_on_NetworkTickRate_timeout()
-	else:
-		visible = true
-		controllable = true
-		_on_NetworkTickRate_timeout()
+	visible = true
+	controllable = true

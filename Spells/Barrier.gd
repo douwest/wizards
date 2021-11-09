@@ -19,3 +19,11 @@ func _ready():
 func set_sprite_scale_x(scale: float):
 	if sprite:
 		sprite.scale.x = scale
+
+func disable():
+	visible = false
+	$CollisionShape2D.disabled = true
+	
+func enable():
+	visible = true
+	$CollisionShape2D.disabled = false

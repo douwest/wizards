@@ -18,3 +18,7 @@ func _on_Spell_body_entered(body):
 	if body.has_method('take_damage'):
 		body.take_damage(damage)
 	queue_free()
+	
+
+func _on_Spell_area_entered(area):
+	queue_free()
