@@ -1,6 +1,5 @@
 extends Node2D
 
-
 func _ready():
 	# Connect event handler to the player_list_changed signal
 	Network.connect("player_list_changed", self, "_on_player_list_changed")
@@ -40,6 +39,7 @@ remote func spawn_players(pinfo, spawn_index):
 	# Load the scene and create an instance
 	var pclass = load(pinfo.actor_path)
 	var nactor = pclass.instance()
+	nactor.connect('died', self, '_on_player_died')
 	# Setup player customization (well, the color)
 	# And the actor position
 	nactor.position = Vector2(500, 500)
@@ -49,10 +49,7 @@ remote func spawn_players(pinfo, spawn_index):
 	nactor.set_name(str(pinfo.net_id))
 	# Finally add the actor into the world
 	add_child(nactor)
-
-func _on_player_removed(pinfo):
-	despawn_player(pinfo)
-
+	
 
 remote func despawn_player(pinfo):
 	if (get_tree().is_network_server()):
@@ -67,12 +64,20 @@ remote func despawn_player(pinfo):
 	# Try to locate the player actor
 	var player_node = get_node(str(pinfo.net_id))
 	if (!player_node):
-		print("Cannoot remove invalid node from tree")
+		print("Cannot remove invalid node from tree")
 		return
 	
 	# Mark the node for deletion
 	player_node.queue_free()
 
 
+func _on_player_died(pinfo, lives):
+	print('player ', pinfo.name, 'died!')
+
+
 func _on_player_list_changed():
 	pass
+	
+func _on_player_removed(pinfo):
+	despawn_player(pinfo)
+

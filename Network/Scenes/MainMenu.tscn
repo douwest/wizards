@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Network/Scenes/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Static/Fonts/Medium_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Static/Fonts/Large_Font.tres" type="DynamicFont" id=3]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -12,77 +14,87 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="Panel"]
-margin_left = 865.546
-margin_top = 226.951
-margin_right = 1286.55
-margin_bottom = 311.951
-text = "Wizards (?)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Version" type="Label" parent="Panel"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 813.341
-margin_top = 1057.57
-margin_right = 949.341
-margin_bottom = 1071.57
-text = "Wizards pre-alpha"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Create" type="Button" parent="Panel"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 400.0
-margin_top = -40.0
-margin_right = 800.0
-margin_bottom = 60.0
-text = "Create server"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Join" type="Button" parent="Panel"]
 anchor_left = 1.0
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -920.0
-margin_top = -40.0
-margin_right = -520.0
-margin_bottom = 60.0
-text = "Join server"
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -30.0
+text = "Dueling Wizards pre-alpha "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IPAddressInputField" type="LineEdit" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 46.4161
-margin_top = -185.865
-margin_right = 448.416
-margin_bottom = -121.865
+margin_left = -150.5
+margin_top = -66.5
+margin_right = 150.5
+margin_bottom = 66.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 301.0
+margin_bottom = 38.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Dueling Wizards"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IPAddressInputField" type="LineEdit" parent="Panel/VBoxContainer"]
+margin_top = 42.0
+margin_right = 301.0
+margin_bottom = 71.0
+custom_fonts/font = ExtResource( 2 )
 placeholder_text = "Ip address"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PortNumberInputField" type="LineEdit" parent="Panel"]
-margin_left = 1007.0
-margin_top = 431.0
-margin_right = 1228.0
-margin_bottom = 481.0
+[node name="PortNumberInputField" type="LineEdit" parent="Panel/VBoxContainer"]
+margin_top = 75.0
+margin_right = 301.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 2 )
 placeholder_text = "Port number"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Panel/Create" to="." method="_on_Create_pressed"]
-[connection signal="pressed" from="Panel/Join" to="." method="_on_Join_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 108.0
+margin_right = 301.0
+margin_bottom = 133.0
+alignment = 1
+
+[node name="Create" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+margin_left = 37.0
+margin_right = 161.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 2 )
+text = "Create game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Join" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+margin_left = 165.0
+margin_right = 264.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 2 )
+disabled = true
+text = "Join game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Create" to="." method="_on_Create_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/Join" to="." method="_on_Join_pressed"]
