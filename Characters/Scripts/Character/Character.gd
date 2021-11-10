@@ -23,7 +23,7 @@ var camera = null
 enum State { IDLE = 0, JUMP = 1, RUN = 2, CAST = 3, DEATH = 4, BLOCK = 5 }
 enum Posture { LOW = 0, MEDIUM = 1, HIGH = 2 }
 
-var run_speed = 310
+var run_speed = 230
 var jump_strength = 500
 var state = State.IDLE
 var posture = Posture.MEDIUM
