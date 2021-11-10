@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Static/Resources/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://Static/Resources/Background.png" type="Texture" id=2]
+[ext_resource path="res://Static/Tiles/Health Table-Sheet.png" type="Texture" id=3]
 [ext_resource path="res://Level.gd" type="Script" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -91,10 +92,10 @@ points = PoolVector2Array( 0, 0, 16, 16, 0, 16 )
 [sub_resource type="ConvexPolygonShape2D" id=29]
 points = PoolVector2Array( 0, 16, 16, 0, 16, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=31]
+[sub_resource type="ConvexPolygonShape2D" id=30]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
-[sub_resource type="TileSet" id=30]
+[sub_resource type="TileSet" id=31]
 0/name = "Tileset.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -307,7 +308,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "autotile_coord": Vector2( 0, 4 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 31 ),
+"shape": SubResource( 30 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
@@ -316,7 +317,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 30 )
+tile_set = SubResource( 31 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
 format = 1
@@ -335,3 +336,12 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 950.987, 736.173 )
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+position = Vector2( -370.168, -54.3448 )
+scale = Vector2( 1.61945, 1.61945 )
+texture = ExtResource( 3 )
+hframes = 6
