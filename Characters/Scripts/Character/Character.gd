@@ -3,8 +3,8 @@ extends Actor
 
 signal died(pinfo, lives)
 
-var Spell = preload("res://Spells/Spell.tscn")
-var Barrier = preload("res://Spells/Barrier.tscn")
+var Spell = preload("res://Spells/Scenes/Spell.tscn")
+var Barrier = preload("res://Spells/Scenes/Barrier.tscn")
 
 export var can_cast_and_move = false
 
