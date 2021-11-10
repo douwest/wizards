@@ -6,6 +6,8 @@ signal died(pinfo, lives)
 var Spell = preload("res://Spells/Spell.tscn")
 var Barrier = preload("res://Spells/Barrier.tscn")
 
+export var can_cast_and_move = false
+
 const FLOOR_DETECT_DISTANCE = 20.0
 const HORIZONTAL_CAST_OFFSET = 28.0
 
@@ -66,12 +68,11 @@ func _physics_process(_delta):
 		if state != State.CAST:
 			castLight.energy = 0
 			
-		var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
-		_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
-
-		var snap_vector = calculate_snap_vector(direction.y)
-			
-		_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, false, 4, 0.9, false)
+		if can_cast_and_move || state != State.CAST:
+			var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
+			_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+			var snap_vector = calculate_snap_vector(direction.y)
+			_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, false, 4, 0.9, false)
 
 		update_sprite_directions(direction.x)
 		play_animation(state, posture, _velocity)
@@ -101,7 +102,7 @@ func play_animation(s, p, v):
 	elif s == State.CAST:
 		animationPlayer.play("attack_" + get_posture_suffix(p))
 	elif s == State.RUN:
-		animationPlayer.play("walk")
+		animationPlayer.play("walk_" + get_posture_suffix(p))
 	elif s == State.JUMP and v.y > 0:
 		animationPlayer.play("falling")
 	elif s == State.JUMP and v.y < 0:
@@ -122,7 +123,7 @@ func get_posture() -> int:
 func get_state() -> int:
 	if(stats.current_health <= 0):
 		return State.DEATH
-	elif Input.is_action_pressed("move_1"):
+	elif Input.is_action_pressed("move_1") and is_on_floor():
 		return State.CAST
 	elif Input.is_action_pressed("move_2"):
 		return State.BLOCK
