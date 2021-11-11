@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dungeon.jpg-ea6a2edd7075b1afd26d8028b5d62ece.stex"
+path="res://.import/Background.png-d0ab0b2d76171e6f5b252c1d465d9580.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Resources/Dungeon.jpg"
-dest_files=[ "res://.import/Dungeon.jpg-ea6a2edd7075b1afd26d8028b5d62ece.stex" ]
+source_file="res://Static/Resources/Backgrounds/Background.png"
+dest_files=[ "res://.import/Background.png-d0ab0b2d76171e6f5b252c1d465d9580.stex" ]
 
 [params]
 
@@ -20,11 +20,11 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

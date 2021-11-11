@@ -100,7 +100,7 @@ func play_animation(s, p, v):
 	if s == State.BLOCK:
 		animationPlayer.play("block_" + get_posture_suffix(posture))
 	elif s == State.CAST:
-		animationPlayer.play("attack_" + get_posture_suffix(p))
+		animationPlayer.play("cast_" + get_posture_suffix(p))
 	elif s == State.RUN:
 		animationPlayer.play("walk_" + get_posture_suffix(p))
 	elif s == State.JUMP and v.y > 0:

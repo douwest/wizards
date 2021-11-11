@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tileset.png-709b0dafb537bdbfce0c4c7ae9fe1220.stex"
+path="res://.import/Wall-Stone.png-7b3b684b636ee25e48a865f8cbb70cd8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Resources/Tileset.png"
-dest_files=[ "res://.import/Tileset.png-709b0dafb537bdbfce0c4c7ae9fe1220.stex" ]
+source_file="res://Static/Textures/Wall-Stone.png"
+dest_files=[ "res://.import/Wall-Stone.png-7b3b684b636ee25e48a865f8cbb70cd8.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

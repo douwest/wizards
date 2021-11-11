@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wall-Stone.png-448e39773ee47be52fc6ffb5363e3248.stex"
+path="res://.import/Pilar-Sheet.png-2d44e763e7edb51c54ea3fcace2f58a5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Tiles/Wall-Stone.png"
-dest_files=[ "res://.import/Wall-Stone.png-448e39773ee47be52fc6ffb5363e3248.stex" ]
+source_file="res://Static/Resources/Backgrounds/Pilar-Sheet.png"
+dest_files=[ "res://.import/Pilar-Sheet.png-2d44e763e7edb51c54ea3fcace2f58a5.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -28,7 +28,8 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0
