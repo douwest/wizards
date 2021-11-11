@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Actor",
 "language": "GDScript",
-"path": "res://Characters/Scripts/Actor/Actor.gd"
+"path": "res://Characters/Scripts/Abstract/Actor/Actor.gd"
 }, {
-"base": "Actor",
+"base": "Reference",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Characters/Scripts/Character/Character.gd"
+"path": "res://Characters/Scripts/Abstract/Character/Character.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Stats",
 "language": "GDScript",
-"path": "res://Characters/Scripts/Stats/Stats.gd"
+"path": "res://Characters/Scripts/Abstract/Stats/Stats.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
