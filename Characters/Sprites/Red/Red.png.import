@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wizard_1-sorted.png-2266099acb919764de7c59b479fdc7ed.stex"
+path="res://.import/Red.png-448af755513aa82be8dff6bc7344f4fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Sprites/Wizard_1-sorted.png"
-dest_files=[ "res://.import/Wizard_1-sorted.png-2266099acb919764de7c59b479fdc7ed.stex" ]
+source_file="res://Characters/Sprites/Red/Red.png"
+dest_files=[ "res://.import/Red.png-448af755513aa82be8dff6bc7344f4fe.stex" ]
 
 [params]
 

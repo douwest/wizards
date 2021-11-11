@@ -470,7 +470,7 @@ position = Vector2( 1104, 688 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="HealthTable"]
 frames = SubResource( 62 )
-frame = 10
+frame = 21
 playing = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HealthTable"]
