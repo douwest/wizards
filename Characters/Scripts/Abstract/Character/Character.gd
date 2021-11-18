@@ -6,7 +6,7 @@ signal died(pinfo, lives)
 var Spell = preload("res://Spells/Scenes/Spell.tscn")
 var Barrier = preload("res://Spells/Scenes/Barrier.tscn")
 
-export var can_cast_and_move = false
+export var can_cast_and_move = true
 
 const FLOOR_DETECT_DISTANCE = 20.0
 const HORIZONTAL_CAST_OFFSET = 28.0
@@ -270,3 +270,7 @@ func respawn():
 		stats.lives -= 1
 	visible = true
 	controllable = true
+
+
+func set_controllable(value):
+	controllable = value
