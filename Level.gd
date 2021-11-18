@@ -44,7 +44,7 @@ remote func spawn_players(pinfo, spawn_index):
 	nactor.connect('died', self, '_on_player_died')
 	# Setup player customization (well, the color)
 	# And the actor position
-	nactor.position = Vector2(500, 500)
+	nactor.position = Vector2(0, 0)
 	# If this actor does not belong to the server, change the node name and network master accordingly
 	if (pinfo.net_id != 1):
 		nactor.set_network_master(pinfo.net_id)

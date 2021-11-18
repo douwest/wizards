@@ -50,6 +50,10 @@ func _ready():
 		camera.zoom = Vector2(0.5, 0.5)
 		self.add_child(camera)
 		camera.make_current()
+		camera.limit_left = -540
+		camera.limit_right = 540
+		camera.limit_top = -270
+		camera.limit_bottom = 270 
 
 
 func _physics_process(_delta):
@@ -252,7 +256,7 @@ func player_died() -> void:
 		emit_signal('died', Gamestate.player_info, 99)		
 		controllable = false
 		if stats.lives > 0:
-			global_position = Vector2(500, 500)			
+			global_position = Vector2(0, 0)			
 			respawnTimer.start()
 		else:
 			print('Player <', Gamestate.player_info.name, '> has lost!')
