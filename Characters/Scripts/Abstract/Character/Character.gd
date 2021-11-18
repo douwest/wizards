@@ -102,7 +102,7 @@ func play_animation(s, p, v):
 		animationPlayer.play("death")
 		return
 	if s == State.BLOCK:
-		animationPlayer.play("block_" + get_posture_suffix(posture))
+		animationPlayer.play("block_" + get_posture_suffix(p))
 	elif s == State.CAST:
 		animationPlayer.play("cast_" + get_posture_suffix(p))
 	elif s == State.RUN:
