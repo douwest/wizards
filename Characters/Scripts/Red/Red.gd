@@ -4,6 +4,8 @@ extends Character
 const TELEPORT_DISTANCE = 150
 const MARGIN = 32
 
+var Lightning = preload("res://Spells/Scenes/AnimatedSpell.tscn")
+
 func _physics_process(delta):
 	if Input.is_action_just_released("move_3"):
 		controllable = false
@@ -31,3 +33,11 @@ func teleport():
 			global_position.x = result.values()[0][0] - (MARGIN * h_direction)
 		else:
 			global_position.x += h_direction * TELEPORT_DISTANCE
+
+
+func cast_spell():
+	var spell = Lightning.instance()
+	get_parent().add_child(spell)
+	spell.global_transform = castPosition.global_transform
+	spell.start(sprite.scale.x)
+
