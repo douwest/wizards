@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Level-Nature-Shrine.png-3334b137a2e99c7c09c07cf6b957820e.stex"
+path="res://.import/Level-Nature-Shrine.png-8d4808ae6a3a63a61615dbd6973f8cf4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Resources/Backgrounds/Level-Nature-Shrine.png"
-dest_files=[ "res://.import/Level-Nature-Shrine.png-3334b137a2e99c7c09c07cf6b957820e.stex" ]
+source_file="res://Levels/Resources/Level-Nature-Shrine.png"
+dest_files=[ "res://.import/Level-Nature-Shrine.png-8d4808ae6a3a63a61615dbd6973f8cf4.stex" ]
 
 [params]
 

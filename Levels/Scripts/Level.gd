@@ -1,6 +1,5 @@
 extends Node2D
 
-onready var health_table = $HealthTable
 
 func _ready():
 	# Connect event handler to the player_list_changed signal
@@ -75,8 +74,6 @@ remote func despawn_player(pinfo):
 
 func _on_player_died(pinfo, lives):
 	print('player ', pinfo.name, 'died!')
-	health_table.set_lives(lives)
-
 
 func _on_player_list_changed():
 	pass

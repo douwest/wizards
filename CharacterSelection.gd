@@ -1,26 +1,7 @@
 extends CanvasLayer
 
-
-var base_scene_path = "res://Characters/Scenes/"
-var base_sprite_path = "res://Characters/Sprites/"
-
-var character_scene_paths = [
-	"Abstract/Character.tscn",
-	"Red/Red.tscn"
-]
-
-var character_sprite_paths = [
-	"Abstract/Template-Spritesheet.png",
-	"Red/Red.png"
-]
-
-var character_names = [
-	"Template Character",
-	"Red the Wise"
-]
-
-var selected_character = 0 setget set_selected_character
-var selected_character_scene = base_scene_path + character_scene_paths[0]
+var index = 0 setget set_index
+var selected_character = Characters.resources[index]
 
 onready var ip_address = $Panel/Menu/InputFields/IPAddressInputField
 onready var port_number = $Panel/Menu/InputFields/PortNumberInputField
@@ -30,7 +11,7 @@ onready var selected_character_sprite = $Panel/CharacterSelectContainer/Portrait
 onready var selected_character_label = $Panel/CharacterSelectContainer/PortraitContainer/CharacterName
 
 func _ready():
-	selected_character_label.text = character_names[selected_character]
+	selected_character_label.text = selected_character.name
 	Network.connect('server_created', self, '_on_ready_to_play')
 	Network.connect("join_success", self, "_on_ready_to_play")
 	Network.connect("join_fail", self, "_on_join_fail")
@@ -44,20 +25,20 @@ func _process(delta):
 
 
 func _on_ready_to_play():
-	get_tree().change_scene("res://Level.tscn")
+	get_tree().change_scene("res://Levels/Scenes/Level.tscn")
 
 
 func _on_PreviousButton_pressed():
-	if(selected_character == 0):
-		set_selected_character(character_scene_paths.size() - 1)
+	if(index == 0):
+		set_index(Characters.resources.size() - 1)
 	else:
-		set_selected_character(selected_character - 1)
+		set_index(index - 1)
 
 func _on_NextButton_pressed():
-	if(selected_character == character_scene_paths.size() - 1):
-		set_selected_character(0)
+	if(index == Characters.resources.size() - 1):
+		set_index(0)
 	else:
-		set_selected_character(selected_character + 1)
+		set_index(index + 1)
 
 
 func _on_Create_pressed():
@@ -68,11 +49,12 @@ func _on_Join_pressed():
 	Network.join_server(ip_address.text, int(port_number.text))
 
 
-func set_selected_character(value):
-	selected_character = value
-	selected_character_scene = base_scene_path + character_scene_paths[selected_character]	
-	selected_character_sprite.texture = load(base_sprite_path + character_sprite_paths[selected_character])
-	selected_character_label.text = character_names[selected_character]
-	Gamestate.player_info.actor_path = selected_character_scene
+func set_index(value):
+	print(value)
+	index = value
+	selected_character = Characters.resources[index]
+	selected_character_sprite.texture = load(selected_character.portrait)
+	selected_character_label.text = selected_character.name
+	Gamestate.player_info.actor_path = selected_character.scene
 	print(Gamestate.player_info.actor_path)
 	

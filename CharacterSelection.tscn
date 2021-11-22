@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Static/Fonts/Large_Font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://CharacterSelection.gd" type="Script" id=2]
-[ext_resource path="res://Characters/Sprites/Abstract/Template-Spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://Characters/Sprites/Red/Red_Portrait.png" type="Texture" id=3]
 [ext_resource path="res://Static/Fonts/Title_Font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Static/Fonts/Medium_Font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Roster.gd" type="Script" id=6]
 
 [node name="CharacterSelection" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -80,11 +81,9 @@ rect_min_size = Vector2( 250, 250 )
 color = Color( 0.0470588, 0.054902, 0.054902, 1 )
 
 [node name="Sprite" type="Sprite" parent="Panel/CharacterSelectContainer/PortraitContainer/Portrait"]
-position = Vector2( 147.847, 102.046 )
+position = Vector2( 153.192, 119.864 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
-hframes = 45
-frame = 32
 
 [node name="CharacterName" type="Label" parent="Panel/CharacterSelectContainer/PortraitContainer"]
 margin_top = 254.0
@@ -191,6 +190,15 @@ margin_bottom = 44.0
 custom_fonts/font = ExtResource( 1 )
 disabled = true
 text = "Join game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Roster" type="GridContainer" parent="Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+columns = 4
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
