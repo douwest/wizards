@@ -1,6 +1,6 @@
 extends Node
 
-var resources = [
+var characters = [
 	{
 		name = "Red", 
 		portrait = "res://Characters/Sprites/Red/Red_Portrait.png",
@@ -15,5 +15,16 @@ var resources = [
 		name = "Random",
 		portrait = "res://Characters/Sprites/Random/Random_Portrait.png",
 		scene = "res://Characters/Scenes/Abstract/Character.tscn"
+	}
+]
+
+var levels = [
+	{
+		name = "Nature Shrine",
+		scene = "res://Levels/Scenes/NatureShrine.tscn"
+	},
+	{
+		name = "Test Level",
+		scene = 'res://Levels/Scenes/TestLevel.tscn'
 	}
 ]

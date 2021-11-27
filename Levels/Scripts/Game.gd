@@ -1,7 +1,9 @@
 extends Node2D
 
 
+
 func _ready():
+	add_child(load(Gamestate.level.actor_path).instance())
 	# Connect event handler to the player_list_changed signal
 	Network.connect("player_list_changed", self, "_on_player_list_changed")
 	# If we are in the server, connect to the event that will deal with player despawning
