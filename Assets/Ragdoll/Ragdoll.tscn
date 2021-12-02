@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[node name="Skeleton" type="Skeleton2D"]
+rotation = 0.0133167
+
+[node name="Hip" type="Bone2D" parent="."]
+material = SubResource( 1 )
+rotation = -1.5708
+rest = Transform2D( -4.37114e-08, -1, 1, -4.37114e-08, 0, 0 )
+default_length = 20.0
+
+[node name="Chest" type="Bone2D" parent="Hip"]
+position = Vector2( 8, 0 )
+rest = Transform2D( 1, 0, 0, 1, 8, 0 )
+
+[node name="Head" type="Bone2D" parent="Hip/Chest"]
+position = Vector2( 18, 7.86805e-07 )
+rest = Transform2D( 1, 0, 0, 1, 18, 7.86805e-07 )
+default_length = 9.0
+
+[node name="Jaw" type="Bone2D" parent="Hip/Chest/Head"]
+position = Vector2( 11, 4.80825e-07 )
+rotation = -0.801633
+scale = Vector2( 1, 1 )
+rest = Transform2D( 0.695534, -0.718493, 0.718493, 0.695534, 11, 4.80825e-07 )
+default_length = 7.0
+
+[node name="ArmRight" type="Bone2D" parent="Hip/Chest/Head"]
+position = Vector2( -3, 11 )
+rotation = 3.06153
+rest = Transform2D( -0.996796, 0.0799799, -0.0799799, -0.996796, -3, 11 )
+
+[node name="ArmLeft" type="Bone2D" parent="Hip/Chest/Head"]
+position = Vector2( -4, -9 )
+rotation = 3.17472
+rest = Transform2D( -0.999451, -0.0331261, 0.0331261, -0.999451, -4, -9 )
+
+[node name="LegRight" type="Bone2D" parent="Hip"]
+position = Vector2( -5, 8 )
+rotation = 3.11871
+rest = Transform2D( -0.999738, 0.0228804, -0.0228804, -0.999738, -5, 8 )
+
+[node name="UnderLeg" type="Bone2D" parent="Hip/LegRight"]
+position = Vector2( 19.0179, -0.565011 )
+rotation = -0.0927665
+rest = Transform2D( 0.9957, -0.0926335, 0.0926335, 0.9957, 19.0179, -0.565011 )
+default_length = 8.0
+
+[node name="Foot" type="Bone2D" parent="Hip/LegRight/UnderLeg"]
+position = Vector2( 14.0219, 0.622158 )
+rotation = -1.12811
+rest = Transform2D( 0.42837, -0.903604, 0.903604, 0.42837, 14.0219, 0.622158 )
+default_length = 5.0
+
+[node name="LegLeft" type="Bone2D" parent="Hip"]
+position = Vector2( -5, -8 )
+rotation = -2.99338
+rest = Transform2D( -0.989036, -0.147672, 0.147672, -0.989036, -5, -8 )
+
+[node name="UnderLeg" type="Bone2D" parent="Hip/LegLeft"]
+position = Vector2( 19.087, -0.82769 )
+rotation = -0.0204639
+rest = Transform2D( 0.999791, -0.0204625, 0.0204625, 0.999791, 19.087, -0.82769 )
+default_length = 8.0
+
+[node name="Foot" type="Bone2D" parent="Hip/LegLeft/UnderLeg"]
+position = Vector2( 14.0219, 0.622158 )
+rotation = 1.07779
+rest = Transform2D( 0.47328, 0.880912, -0.880912, 0.47328, 14.0219, 0.622158 )
+default_length = 5.0
+
+[node name="polygons" type="Node2D" parent="."]
+
+[node name="body" type="Polygon2D" parent="polygons"]
+rotation = 0.00729656
+color = Color( 0.501961, 0.0235294, 0.0235294, 1 )
+skeleton = NodePath("../..")
+polygon = PoolVector2Array( -4.01976, -0.917341, -4.55567, -26.9118, -0.597742, -28.9938, 4.44242, -27.0973, 4.60083, -19.4136, 4.97833, -1.10285, 0.0206118, 0.999788 )
