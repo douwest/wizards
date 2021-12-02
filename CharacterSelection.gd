@@ -16,18 +16,25 @@ onready var player_1_ready: CheckBox = $Panel/MenuContainer/ConfigurationContain
 onready var player_2_ready: CheckBox = $Panel/MenuContainer/ConfigurationContainer/Player2/Ready/CheckBox
 onready var start_button: Button = $Panel/MenuContainer/NavigationContainer/StartButton
 
+onready var prevMapBtn: Button = $Panel/MenuContainer/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer/PreviousMapButton
+onready var nextMapBtn: Button = $Panel/MenuContainer/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer/NextMapButton
+
+
+# Lifecycle hooks
+
 
 func _ready():
-	if ! get_tree().is_network_server():
-		$Panel/MenuContainer/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer/PreviousMapButton.disabled = true
-		$Panel/MenuContainer/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer/NextMapButton.disabled = true
+	Network.connect("server_closed", self, '_on_server_closed')
+	
+	if not get_tree().is_network_server():
+		prevMapBtn.disabled = true
+		nextMapBtn.disabled = true
 
 	update_map()
-	Network.connect("server_closed", self, '_on_server_closed')
 
 
 func _process(_delta):
-	if player_1_ready.pressed and player_2_ready.pressed:
+	if (player_1_ready.pressed and player_2_ready.pressed) or (player_1_character and get_tree().is_network_server()):
 		start_button.disabled = false
 	else:
 		start_button.disabled = true
@@ -116,6 +123,7 @@ func _on_LeaveButton_pressed():
 		get_tree().set_network_peer(null)
 		get_tree().change_scene("res://Network/Scenes/MainMenu.tscn")
 	
+
 
 func _on_StartButton_pressed():
 	rpc('start_game')
