@@ -1,62 +1,136 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Static/Fonts/Large_Font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://CharacterSelection.gd" type="Script" id=2]
-[ext_resource path="res://Characters/Sprites/Red/Red_Portrait.png" type="Texture" id=3]
-[ext_resource path="res://Static/Fonts/Title_Font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Static/Fonts/Medium_Font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://CharacterSelection.gd" type="Script" id=1]
+[ext_resource path="res://Static/Fonts/Title_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Characters/Sprites/Random/Random_Portrait.png" type="Texture" id=3]
+[ext_resource path="res://Static/Fonts/Medium_Font_Cursive.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Static/Resources/UI/Ready_Checked.png" type="Texture" id=5]
+[ext_resource path="res://Static/Resources/UI/Ready_Unchecked.png" type="Texture" id=6]
+[ext_resource path="res://SelectionContainer.gd" type="Script" id=7]
+[ext_resource path="res://Static/Fonts/Large_Font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Roster.gd" type="Script" id=9]
+[ext_resource path="res://Static/Resources/UI/Roster_Frame.png" type="Texture" id=10]
+[ext_resource path="res://Static/Resources/UI/Roster_Frame_Pressed.png" type="Texture" id=11]
+[ext_resource path="res://Static/Resources/UI/RosterButton.gd" type="Script" id=12]
+[ext_resource path="res://Static/Fonts/Medium_Font.tres" type="DynamicFont" id=13]
+[ext_resource path="res://Levels/Resources/Level-Nature-Shrine.png" type="Texture" id=14]
 
 [node name="CharacterSelection" type="CanvasLayer"]
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -2.3916
+margin_top = -2.39166
+margin_right = -2.3916
+margin_bottom = -2.3916
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TitleContainer" type="MarginContainer" parent="Panel"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -269.5
-margin_top = 100.0
-margin_right = 269.5
-margin_bottom = 168.0
+editor/display_folded = true
+anchor_right = 1.0
+margin_bottom = 68.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="Panel/TitleContainer"]
-margin_right = 539.0
+margin_right = 1920.0
 margin_bottom = 68.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 4 )
 text = "Dueling Wizards"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CharacterSelectContainer" type="VBoxContainer" parent="Panel"]
-anchor_left = 0.5
+[node name="ConfigurationContainer" type="HBoxContainer" parent="Panel"]
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -153.5
-margin_top = -203.0
-margin_right = 153.5
-margin_bottom = 203.0
-grow_horizontal = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_top = -432.0
+margin_bottom = 367.0
+custom_constants/separation = 100
+alignment = 1
 
-[node name="Label" type="Label" parent="Panel/CharacterSelectContainer"]
-margin_right = 307.0
+[node name="Player1" type="VBoxContainer" parent="Panel/ConfigurationContainer"]
+margin_right = 557.0
+margin_bottom = 799.0
+size_flags_horizontal = 3
+custom_constants/separation = 50
+
+[node name="Title" type="Label" parent="Panel/ConfigurationContainer/Player1"]
+margin_right = 557.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0.611765, 0.0941176, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "P 1"
+align = 1
+
+[node name="Portrait" type="TextureRect" parent="Panel/ConfigurationContainer/Player1"]
+margin_top = 118.0
+margin_right = 557.0
+margin_bottom = 380.0
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 6
+
+[node name="CharacterName" type="Label" parent="Panel/ConfigurationContainer/Player1"]
+margin_top = 430.0
+margin_right = 557.0
+margin_bottom = 460.0
+size_flags_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "<character name>"
+align = 1
+
+[node name="Ready" type="HBoxContainer" parent="Panel/ConfigurationContainer/Player1"]
+margin_top = 742.0
+margin_right = 557.0
+margin_bottom = 798.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="Panel/ConfigurationContainer/Player1/Ready"]
+margin_left = 174.0
+margin_right = 230.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+focus_mode = 0
+custom_icons/checked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 6 )
+enabled_focus_mode = 0
+flat = true
+align = 1
+
+[node name="Label" type="Label" parent="Panel/ConfigurationContainer/Player1/Ready"]
+margin_left = 280.0
+margin_top = 13.0
+margin_right = 382.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 4 )
+text = "Ready?"
+
+[node name="SelectionContainer" type="VBoxContainer" parent="Panel/ConfigurationContainer"]
+editor/display_folded = true
+margin_left = 657.0
+margin_right = 1262.0
+margin_bottom = 799.0
+size_flags_horizontal = 3
+custom_constants/separation = 50
+script = ExtResource( 7 )
+
+[node name="Description" type="Label" parent="Panel/ConfigurationContainer/SelectionContainer"]
+margin_right = 605.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 8 )
 text = "Select your hero"
 align = 1
 valign = 1
@@ -64,178 +138,164 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PortraitContainer" type="VBoxContainer" parent="Panel/CharacterSelectContainer"]
-margin_top = 54.0
-margin_right = 307.0
-margin_bottom = 406.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_min_size = Vector2( 100, 0 )
+[node name="CharacterRoster" type="HBoxContainer" parent="Panel/ConfigurationContainer/SelectionContainer"]
+margin_top = 100.0
+margin_right = 605.0
+margin_bottom = 322.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 
-[node name="Portrait" type="ColorRect" parent="Panel/CharacterSelectContainer/PortraitContainer"]
-margin_right = 307.0
-margin_bottom = 250.0
-rect_min_size = Vector2( 250, 250 )
-color = Color( 0.0470588, 0.054902, 0.054902, 1 )
+[node name="Roster" type="GridContainer" parent="Panel/ConfigurationContainer/SelectionContainer/CharacterRoster"]
+margin_left = 238.0
+margin_right = 366.0
+margin_bottom = 222.0
+columns = 4
+script = ExtResource( 9 )
 
-[node name="Sprite" type="Sprite" parent="Panel/CharacterSelectContainer/PortraitContainer/Portrait"]
-position = Vector2( 153.192, 119.864 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 3 )
+[node name="RandomCharacterButton" type="TextureButton" parent="Panel/ConfigurationContainer/SelectionContainer/CharacterRoster/Roster"]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 11 )
+texture_focused = ExtResource( 11 )
+expand = true
+script = ExtResource( 12 )
 
-[node name="CharacterName" type="Label" parent="Panel/CharacterSelectContainer/PortraitContainer"]
-margin_top = 254.0
-margin_right = 307.0
-margin_bottom = 304.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 5 )
-text = "<Character Name>"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CharacterSelectContainer/PortraitContainer"]
-margin_top = 308.0
-margin_right = 307.0
-margin_bottom = 352.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="PreviousButton" type="Button" parent="Panel/CharacterSelectContainer/PortraitContainer/HBoxContainer"]
-margin_left = 123.0
-margin_right = 150.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 1 )
-text = "<"
-
-[node name="NextButton" type="Button" parent="Panel/CharacterSelectContainer/PortraitContainer/HBoxContainer"]
-margin_left = 154.0
-margin_right = 184.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 1 )
-text = ">"
-
-[node name="Version" type="Label" parent="Panel"]
-margin_left = 1720.0
-margin_top = 1050.0
-margin_right = 2152.0
-margin_bottom = 1064.0
-text = "Dueling Wizards pre-alpha "
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Menu" type="VBoxContainer" parent="Panel"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[node name="Portrait" type="TextureRect" parent="Panel/ConfigurationContainer/SelectionContainer/CharacterRoster/Roster/RandomCharacterButton"]
+show_behind_parent = true
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -216.0
-margin_top = -188.0
-margin_right = 216.0
-alignment = 1
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Tooltip" type="Label" parent="Panel/ConfigurationContainer/SelectionContainer"]
+margin_top = 372.0
+margin_right = 605.0
+margin_bottom = 391.0
+custom_fonts/font = ExtResource( 13 )
+text = "<tooltip>"
+align = 1
+
+[node name="MapSelectionContainer" type="VBoxContainer" parent="Panel/ConfigurationContainer/SelectionContainer"]
+margin_top = 441.0
+margin_right = 605.0
+margin_bottom = 799.0
+custom_constants/separation = 25
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InputFields" type="VBoxContainer" parent="Panel/Menu"]
-margin_top = 30.0
-margin_right = 432.0
-margin_bottom = 110.0
-rect_min_size = Vector2( 0, 80 )
+[node name="Description" type="Label" parent="Panel/ConfigurationContainer/SelectionContainer/MapSelectionContainer"]
+margin_right = 605.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 4 )
+text = "Select a map"
+align = 1
 
-[node name="IPAddressInputField" type="LineEdit" parent="Panel/Menu/InputFields"]
-margin_right = 432.0
-margin_bottom = 29.0
-custom_fonts/font = ExtResource( 5 )
-placeholder_text = "Ip address"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PortNumberInputField" type="LineEdit" parent="Panel/Menu/InputFields"]
-margin_top = 33.0
-margin_right = 432.0
-margin_bottom = 62.0
-custom_fonts/font = ExtResource( 5 )
-placeholder_text = "Port number"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="InputButtons" type="HBoxContainer" parent="Panel/Menu"]
-margin_top = 114.0
-margin_right = 432.0
-margin_bottom = 158.0
-alignment = 1
-
-[node name="Create" type="Button" parent="Panel/Menu/InputButtons"]
-margin_right = 239.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 1 )
-text = "Create game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Join" type="Button" parent="Panel/Menu/InputButtons"]
-margin_left = 243.0
-margin_right = 432.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 1 )
-disabled = true
-text = "Join game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MapSelectionContainer" type="VBoxContainer" parent="Panel"]
-anchor_left = 0.462
-anchor_top = 0.74
-anchor_right = 0.535
-anchor_bottom = 0.784
-margin_left = 0.959961
-margin_top = -0.200012
-margin_right = 0.799927
-margin_bottom = 0.279968
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Panel/MapSelectionContainer"]
-margin_right = 140.0
-margin_bottom = 19.0
-custom_fonts/font = ExtResource( 5 )
+[node name="MapNameLabel" type="Label" parent="Panel/ConfigurationContainer/SelectionContainer/MapSelectionContainer"]
+margin_top = 55.0
+margin_right = 605.0
+margin_bottom = 93.0
+custom_fonts/font = ExtResource( 8 )
 text = "<Level name>"
 align = 1
 
-[node name="ButtonContainer" type="HBoxContainer" parent="Panel/MapSelectionContainer"]
-margin_top = 23.0
-margin_right = 140.0
-margin_bottom = 48.0
+[node name="ButtonContainer" type="HBoxContainer" parent="Panel/ConfigurationContainer/SelectionContainer/MapSelectionContainer"]
+margin_top = 118.0
+margin_right = 605.0
+margin_bottom = 358.0
 alignment = 1
 
-[node name="PreviousMapButton" type="Button" parent="Panel/MapSelectionContainer/ButtonContainer"]
-margin_left = 47.0
-margin_right = 67.0
-margin_bottom = 25.0
-custom_fonts/font = ExtResource( 5 )
+[node name="PreviousMapButton" type="Button" parent="Panel/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer"]
+margin_right = 27.0
+margin_bottom = 240.0
+custom_fonts/font = ExtResource( 8 )
 text = "<"
 
-[node name="NextMapButton" type="Button" parent="Panel/MapSelectionContainer/ButtonContainer"]
-margin_left = 71.0
-margin_right = 92.0
-margin_bottom = 25.0
-custom_fonts/font = ExtResource( 5 )
+[node name="MapPreview" type="TextureRect" parent="Panel/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer"]
+margin_left = 31.0
+margin_right = 571.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 540, 240 )
+texture = ExtResource( 14 )
+expand = true
+
+[node name="NextMapButton" type="Button" parent="Panel/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer"]
+margin_left = 575.0
+margin_right = 605.0
+margin_bottom = 240.0
+custom_fonts/font = ExtResource( 8 )
 text = ">"
 
-[connection signal="pressed" from="Panel/CharacterSelectContainer/PortraitContainer/HBoxContainer/PreviousButton" to="." method="_on_PreviousButton_pressed"]
-[connection signal="pressed" from="Panel/CharacterSelectContainer/PortraitContainer/HBoxContainer/NextButton" to="." method="_on_NextButton_pressed"]
-[connection signal="pressed" from="Panel/Menu/InputButtons/Create" to="." method="_on_Create_pressed"]
-[connection signal="pressed" from="Panel/Menu/InputButtons/Join" to="." method="_on_Join_pressed"]
-[connection signal="pressed" from="Panel/MapSelectionContainer/ButtonContainer/PreviousMapButton" to="." method="_on_PreviousMapButton_pressed"]
-[connection signal="pressed" from="Panel/MapSelectionContainer/ButtonContainer/NextMapButton" to="." method="_on_NextMapButton_pressed"]
+[node name="Player2" type="VBoxContainer" parent="Panel/ConfigurationContainer"]
+margin_left = 1362.0
+margin_right = 1920.0
+margin_bottom = 799.0
+size_flags_horizontal = 3
+custom_constants/separation = 50
+
+[node name="Title" type="Label" parent="Panel/ConfigurationContainer/Player2"]
+margin_right = 558.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.776471, 0.129412, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "P 2"
+align = 1
+
+[node name="Portrait" type="TextureRect" parent="Panel/ConfigurationContainer/Player2"]
+margin_top = 118.0
+margin_right = 558.0
+margin_bottom = 380.0
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 6
+
+[node name="CharacterName" type="Label" parent="Panel/ConfigurationContainer/Player2"]
+margin_top = 430.0
+margin_right = 558.0
+margin_bottom = 692.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
+text = "<character name>"
+align = 1
+
+[node name="Ready" type="HBoxContainer" parent="Panel/ConfigurationContainer/Player2"]
+margin_top = 742.0
+margin_right = 558.0
+margin_bottom = 798.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="Panel/ConfigurationContainer/Player2/Ready"]
+margin_left = 175.0
+margin_right = 231.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+focus_mode = 0
+custom_icons/checked = ExtResource( 5 )
+custom_icons/unchecked = ExtResource( 6 )
+enabled_focus_mode = 0
+flat = true
+align = 1
+
+[node name="Label" type="Label" parent="Panel/ConfigurationContainer/Player2/Ready"]
+margin_left = 281.0
+margin_top = 13.0
+margin_right = 383.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 4 )
+text = "Ready?"
+
+[connection signal="character_selected" from="Panel/ConfigurationContainer/SelectionContainer" to="." method="_on_SelectionContainer_character_selected"]
+[connection signal="character_blur" from="Panel/ConfigurationContainer/SelectionContainer/CharacterRoster/Roster" to="Panel/ConfigurationContainer/SelectionContainer" method="_on_Roster_character_blur"]
+[connection signal="character_focus" from="Panel/ConfigurationContainer/SelectionContainer/CharacterRoster/Roster" to="Panel/ConfigurationContainer/SelectionContainer" method="_on_Roster_character_focus"]
+[connection signal="character_selected" from="Panel/ConfigurationContainer/SelectionContainer/CharacterRoster/Roster" to="Panel/ConfigurationContainer/SelectionContainer" method="_on_Roster_character_selected"]
+[connection signal="mouse_entered" from="Panel/ConfigurationContainer/SelectionContainer/CharacterRoster/Roster/RandomCharacterButton" to="Panel/ConfigurationContainer/SelectionContainer" method="_on_RandomCharacterButton_mouse_entered"]
+[connection signal="pressed" from="Panel/ConfigurationContainer/SelectionContainer/CharacterRoster/Roster/RandomCharacterButton" to="." method="_on_RandomCharacterButton_pressed"]
+[connection signal="pressed" from="Panel/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer/PreviousMapButton" to="." method="_on_PreviousMapButton_pressed"]
+[connection signal="pressed" from="Panel/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer/NextMapButton" to="." method="_on_NextMapButton_pressed"]

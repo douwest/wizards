@@ -10,11 +10,6 @@ var characters = [
 		name = "Green", 
 		portrait = "res://Characters/Sprites/Green/Green_Portrait.png",
 		scene = "res://Characters/Scenes/Green/Green.tscn"
-	},
-	{
-		name = "Random",
-		portrait = "res://Characters/Sprites/Random/Random_Portrait.png",
-		scene = "res://Characters/Scenes/Abstract/Character.tscn"
 	}
 ]
 

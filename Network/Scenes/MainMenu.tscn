@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Network/Scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Static/Fonts/Title_Font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Static/Fonts/Large_Font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Static/Resources/UI/NetworkMenu.tscn" type="PackedScene" id=3]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -49,27 +49,49 @@ rect_min_size = Vector2( 0, 150 )
 margin_top = 41.0
 margin_right = 539.0
 margin_bottom = 109.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Dueling Wizards"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="StartScreen/VBoxContainer"]
+[node name="Menu" parent="StartScreen/VBoxContainer" instance=ExtResource( 3 )]
+visible = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
 margin_top = 154.0
 margin_right = 539.0
-margin_bottom = 198.0
-alignment = 1
+margin_bottom = 282.0
 
-[node name="Start game" type="Button" parent="StartScreen/VBoxContainer/HBoxContainer"]
-margin_left = 110.0
-margin_right = 429.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 3 )
-text = "Select your hero"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="InputFields" parent="StartScreen/VBoxContainer/Menu" index="0"]
+margin_top = 0.0
+margin_right = 539.0
+margin_bottom = 80.0
 
-[connection signal="pressed" from="StartScreen/VBoxContainer/HBoxContainer/Start game" to="." method="_on_Start_game_pressed"]
+[node name="IPAddressInputField" parent="StartScreen/VBoxContainer/Menu/InputFields" index="0"]
+margin_right = 539.0
+
+[node name="PortNumberInputField" parent="StartScreen/VBoxContainer/Menu/InputFields" index="1"]
+margin_right = 539.0
+
+[node name="InputButtons" parent="StartScreen/VBoxContainer/Menu" index="1"]
+margin_top = 84.0
+margin_right = 539.0
+margin_bottom = 128.0
+
+[node name="Create" parent="StartScreen/VBoxContainer/Menu/InputButtons" index="0"]
+margin_left = 53.0
+margin_right = 292.0
+
+[node name="Join" parent="StartScreen/VBoxContainer/Menu/InputButtons" index="1"]
+margin_left = 296.0
+margin_right = 485.0
+
+[connection signal="pressed" from="StartScreen/VBoxContainer/Menu/InputButtons/Create" to="." method="_on_Create_pressed"]
+[connection signal="pressed" from="StartScreen/VBoxContainer/Menu/InputButtons/Join" to="." method="_on_Join_pressed"]
+
+[editable path="StartScreen/VBoxContainer/Menu"]
