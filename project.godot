@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "TextureButton",
 "class": "RosterButton",
 "language": "GDScript",
-"path": "res://Static/Resources/UI/RosterButton.gd"
+"path": "res://Static/Resources/UI Elements/Scripts/RosterButton.gd"
 }, {
 "base": "Node",
 "class": "Stats",
@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Wizards"
-run/main_scene="res://Network/Scenes/MainMenu.tscn"
+run/main_scene="res://Interfaces/Scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

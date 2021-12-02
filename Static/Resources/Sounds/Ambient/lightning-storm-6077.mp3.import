@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lightning-storm-6077.mp3-259f32a77f6a4c4b9242ec988c963387.mp3str"
+
+[deps]
+
+source_file="res://Static/Resources/Sounds/Ambient/lightning-storm-6077.mp3"
+dest_files=[ "res://.import/lightning-storm-6077.mp3-259f32a77f6a4c4b9242ec988c963387.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

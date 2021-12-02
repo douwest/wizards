@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Static/Textures/Light.png" type="Texture" id=1]
+[ext_resource path="res://Static/Resources/Textures/Particles/Light.png" type="Texture" id=1]
+
 
 [node name="SpellLight" type="Light2D"]
 scale = Vector2( 0.303574, 0.303574 )
