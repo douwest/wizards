@@ -40,7 +40,7 @@ remote func spawn_players(pinfo, spawn_index):
 			s_index += 1
 	
 	# Load the scene and create an instance
-	var pclass = load(pinfo.actor_path)
+	var pclass = load(pinfo.character.scene)
 	var nactor = pclass.instance()
 	nactor.connect('died', self, '_on_player_died')
 	# Setup player customization (well, the color)

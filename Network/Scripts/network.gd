@@ -2,7 +2,7 @@ extends Node
 
 var server_info = {
 	name = "Server",      # Holds the name of the server
-	max_players = 3,      # Maximum allowed connections
+	max_players = 2,      # Maximum allowed connections
 	used_port = 25570         # Listening port
 }
 
@@ -13,6 +13,7 @@ signal join_success                            # When the peer successfully join
 signal join_fail                               # Failed to join a server
 signal player_list_changed                     # List of players has been changed
 signal player_removed(pinfo)                   # A player has been removed from the list
+signal server_closed
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")
@@ -118,3 +119,4 @@ func _on_disconnected_from_server():
 	players.clear()
 	# Reset the player info network ID
 	Gamestate.player_info.net_id = 1
+	emit_signal('server_closed')
