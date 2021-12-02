@@ -16,12 +16,14 @@ signal player_removed(pinfo)                   # A player has been removed from 
 signal server_closed
 
 func _ready():
-	get_tree().connect("network_peer_connected", self, "_on_player_connected")
-	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
-	get_tree().connect("connected_to_server", self, "_on_connected_to_server")
-	get_tree().connect("connection_failed", self, "_on_connection_failed")
-	get_tree().connect("server_disconnected", self, "_on_disconnected_from_server")
-
+	var error = null
+	error = get_tree().connect("network_peer_connected", self, "_on_player_connected")
+	error = get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
+	error = get_tree().connect("connected_to_server", self, "_on_connected_to_server")
+	error = get_tree().connect("connection_failed", self, "_on_connection_failed")
+	error = get_tree().connect("server_disconnected", self, "_on_disconnected_from_server")
+	if error:
+		print(error)
 
 func create_server():
 	# Initialize the networking system

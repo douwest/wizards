@@ -3,12 +3,14 @@ extends Node2D
 
 
 func _ready():
+	var error = Network.connect("server_closed", self, '_on_server_closed')
+	
 	add_child(load(Gamestate.level.actor_path).instance())
 	# Connect event handler to the player_list_changed signal
-	Network.connect("player_list_changed", self, "_on_player_list_changed")
+	error =  Network.connect("player_list_changed", self, "_on_player_list_changed")
 	# If we are in the server, connect to the event that will deal with player despawning
 	if (get_tree().is_network_server()):
-		Network.connect("player_removed", self, "_on_player_removed")
+		error = Network.connect("player_removed", self, "_on_player_removed")
 	
 	# Spawn the players
 	if (get_tree().is_network_server()):
@@ -16,6 +18,8 @@ func _ready():
 	else:
 		rpc_id(1, "spawn_players", Gamestate.player_info, -1)
 
+	if error:
+		print(error)
 
 # Spawns a new player actor, using the provided player_info structure and the given spawn index
 remote func spawn_players(pinfo, spawn_index):
@@ -42,7 +46,7 @@ remote func spawn_players(pinfo, spawn_index):
 	# Load the scene and create an instance
 	var pclass = load(pinfo.character.scene)
 	var nactor = pclass.instance()
-	nactor.connect('died', self, '_on_player_died')
+	var _err = nactor.connect('died', self, '_on_player_died')
 	# Setup player customization (well, the color)
 	# And the actor position
 	nactor.position = Vector2(0, 0)
@@ -74,12 +78,14 @@ remote func despawn_player(pinfo):
 	player_node.queue_free()
 
 
-func _on_player_died(pinfo, lives):
+func _on_player_died(pinfo, _lives):
 	print('player ', pinfo.name, 'died!')
 
 func _on_player_list_changed():
-	pass
+	print(Network.players)
 	
 func _on_player_removed(pinfo):
 	despawn_player(pinfo)
 
+func _on_server_closed():
+	var _error = get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")

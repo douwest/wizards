@@ -4,7 +4,7 @@ signal character_selected(character)
 signal character_focus(character)
 signal character_blur()
 
-const RosterButton = preload("res://Static/Resources/UI Elements/Scenes/RosterButton.tscn")
+const RosterButton = preload("res://Static/Resources/UIElements/Scenes/RosterButton.tscn")
 
 func _ready():
 	for character in Resources.characters:

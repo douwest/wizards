@@ -12,10 +12,14 @@ var canvas_modifier = 1
 
 func _ready():
 	ambient_sound_player.play()
-	Network.connect('server_created', self, '_on_ready_to_play')
-	Network.connect("join_success", self, "_on_ready_to_play")
-	Network.connect("join_fail", self, "_on_join_fail")
-
+	var error = null
+	
+	error = Network.connect('server_created', self, '_on_ready_to_play')
+	error = Network.connect("join_success", self, "_on_ready_to_play")
+	error = Network.connect("join_fail", self, "_on_join_fail")
+	if error:
+		print(error)
+		
 
 func _physics_process(_delta):
 	if !ip_address.text:
@@ -39,7 +43,9 @@ func _physics_process(_delta):
 
 
 func _on_ready_to_play():
-	get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")
+	var error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")
+	if error:
+		print(error)
 
 
 func _on_Create_pressed():

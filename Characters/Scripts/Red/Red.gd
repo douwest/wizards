@@ -6,7 +6,7 @@ const MARGIN = 32
 
 var Lightning = preload("res://Spells/Scenes/AnimatedSpell.tscn")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_released("move_3"):
 		controllable = false
 		animationPlayer.play("teleport")

@@ -19,10 +19,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Characters/Scripts/Abstract/Character/Character.gd"
 }, {
-"base": "TextureButton",
+"base": "Reference",
 "class": "RosterButton",
 "language": "GDScript",
-"path": "res://Static/Resources/UI Elements/Scripts/RosterButton.gd"
+"path": "res://Static/Resources/UIElements/Scripts/RosterButton.gd"
 }, {
 "base": "Node",
 "class": "Stats",

@@ -25,7 +25,7 @@ onready var rain_sound_player: AudioStreamPlayer = $RainSoundPlayer
 
 func _ready():
 	rain_sound_player.play(0.1)
-	Network.connect("server_closed", self, '_on_server_closed')
+	var _err = Network.connect("server_closed", self, '_on_server_closed')
 	
 	if not get_tree().is_network_server():
 		prevMapBtn.disabled = true
@@ -78,7 +78,7 @@ remotesync func update_map():
 
 
 remotesync func start_game():
-	get_tree().change_scene("res://Levels/Scenes/Game.tscn")
+	return get_tree().change_scene("res://Levels/Scenes/Game.tscn")
 
 
 remote func toggle_p1_ready(ready):
@@ -118,11 +118,11 @@ func _on_RandomCharacterButton_pressed():
 func _on_LeaveButton_pressed():
 	if get_tree().is_network_server():
 		get_tree().set_network_peer(null)
-		get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")
+		return get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")
 	else:
 		Network.unregister_player(Gamestate.player_info.net_id)
 		get_tree().set_network_peer(null)
-		get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")
+		return get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")
 	
 
 
@@ -131,8 +131,8 @@ func _on_StartButton_pressed():
 
 
 func _on_server_closed():
-	get_tree().set_network_peer(null)
-	get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")
+	get_tree().call_deferred('set_network_peer', null)
+	get_tree().call_deferred('change_scene', "res://Interfaces/Scenes/MainMenu.tscn")
 
 
 func _on_Player1_CheckBox_toggled(button_pressed):
