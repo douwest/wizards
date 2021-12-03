@@ -5,12 +5,16 @@ onready var join_button = $StartScreen/Panel/VBoxContainer/Menu/InputButtons/Joi
 onready var canvas_modulate = $LightningEffect
 onready var ambient_sound_player = $AmbientSoundPlayer
 onready var lightning_sound_player = $LightningSoundPlayer
+onready var animation_player = $AnimationPlayer
 
 var effect_processing = false
 var show_effect = false
 var canvas_modifier = 1
 
+var lightning_random_divisor = 320
+
 func _ready():
+	randomize()
 	ambient_sound_player.play()
 	var error = null
 	
@@ -27,10 +31,10 @@ func _physics_process(_delta):
 	else:
 		join_button.disabled = false
 		
-	show_effect = randi() % 200 == 1
+	show_effect = randi() % lightning_random_divisor == 1
 	
 	if show_effect and not effect_processing:
-		lightning_sound_player.play(4.5 + randf() * 1.5)
+		lightning_sound_player.play(4 + randf() * 1.5)
 		effect_processing = true
 		canvas_modifier = 3
 		
@@ -43,9 +47,7 @@ func _physics_process(_delta):
 
 
 func _on_ready_to_play():
-	var error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")
-	if error:
-		print(error)
+	animation_player.play('fade_out')
 
 
 func _on_Create_pressed():
@@ -58,3 +60,12 @@ func _on_Join_pressed():
 
 func _on_ExitGameButton_pressed():
 	get_tree().quit(-1)
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == 'fade_out':
+		var error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")
+		if error:
+			print(error)
+	else:
+		pass
