@@ -15,9 +15,11 @@ var lightning_random_divisor = 320
 
 func _ready():
 	randomize()
-	ambient_sound_player.play()
-	var error = null
 	
+	$Fader.visible = false
+	ambient_sound_player.play()
+	
+	var error = null
 	error = Network.connect('server_created', self, '_on_ready_to_play')
 	error = Network.connect("join_success", self, "_on_ready_to_play")
 	error = Network.connect("join_fail", self, "_on_join_fail")

@@ -38,7 +38,6 @@ frame_7/delay_sec = 0.0
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = SubResource( 6 )
-modulate_color = Color( 0.623529, 0.623529, 0.623529, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.619608 )
@@ -108,7 +107,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( -10, -0.25, 0, 0.25, 0, -30, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -10, -0.25, 0, 0.25, 0, -25, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.75 )
 }
 tracks/4/type = "value"
@@ -123,11 +122,22 @@ tracks/4/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("LightningSoundPlayer:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.75 )
+}
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 8 )
 
 [node name="StartScreen" type="Panel" parent="."]
+modulate = Color( 0.792157, 0.792157, 0.792157, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
