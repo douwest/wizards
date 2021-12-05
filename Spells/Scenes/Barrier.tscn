@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Spells/Sprites/Energy-Shield.png" type="Texture" id=1]
+[ext_resource path="res://Spells/Scenes/Shield-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Spells/Scripts/Barrier.gd" type="Script" id=2]
 [ext_resource path="res://Spells/Scenes/SpellLight.tscn" type="PackedScene" id=3]
 
@@ -8,14 +8,81 @@
 radius = 2.01623
 height = 26.1553
 
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "idle cast"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "start cast"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+"states/idle cast/node" = SubResource( 2 )
+"states/idle cast/position" = Vector2( 619, 117 )
+"states/start cast/node" = SubResource( 3 )
+"states/start cast/position" = Vector2( 440, 117 )
+transitions = [ "start cast", "idle cast", SubResource( 9 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+[sub_resource type="Animation" id=7]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
 [node name="Barrier" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2.16007, 0.166855 )
+position = Vector2( 5.83993, 0.166855 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 5, 0 )
 texture = ExtResource( 1 )
+hframes = 12
+frame = 9
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite"]
+pause_mode = 2
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+root_motion_track = NodePath(".:frame")
+parameters/playback = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+pause_mode = 2
+autoplay = "idle cast"
+"anims/idle cast" = SubResource( 7 )
+"anims/start cast" = SubResource( 8 )
 
 [node name="SpellLight" parent="." instance=ExtResource( 3 )]
