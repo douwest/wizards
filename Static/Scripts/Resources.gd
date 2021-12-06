@@ -26,5 +26,9 @@ var levels = [
 	{
 		name = "Test Level",
 		scene = 'res://Levels/Scenes/TestLevel.tscn'
+	},
+	{
+		name = "Village",
+		scene = 'res://Levels/Scenes/Village.tscn'
 	}
 ]
