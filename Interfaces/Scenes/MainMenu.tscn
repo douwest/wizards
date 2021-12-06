@@ -6,17 +6,17 @@
 [ext_resource path="res://Static/Resources/Textures/Particles/Raindrop.png" type="Texture" id=4]
 [ext_resource path="res://Static/Resources/Sounds/Ambient/rain-and-thunder-nature-sounds-7803.mp3" type="AudioStream" id=5]
 [ext_resource path="res://Static/Resources/Sounds/Ambient/lightning-storm-6077.mp3" type="AudioStream" id=6]
-[ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_4.png" type="Texture" id=7]
+[ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_4.png" type="Texture" id=7]
 [ext_resource path="res://Interfaces/Scripts/MainMenu.gd" type="Script" id=8]
-[ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_0.png" type="Texture" id=9]
-[ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_5.png" type="Texture" id=10]
-[ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_1.png" type="Texture" id=11]
-[ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_2.png" type="Texture" id=12]
-[ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_3.png" type="Texture" id=13]
-[ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_6.png" type="Texture" id=14]
-[ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_7.png" type="Texture" id=15]
+[ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_0.png" type="Texture" id=9]
+[ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_5.png" type="Texture" id=10]
+[ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_1.png" type="Texture" id=11]
+[ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_2.png" type="Texture" id=12]
+[ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_3.png" type="Texture" id=13]
+[ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_6.png" type="Texture" id=14]
+[ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_7.png" type="Texture" id=15]
 
-[sub_resource type="AnimatedTexture" id=1]
+[sub_resource type="AnimatedTexture" id=6]
 flags = 4
 frames = 8
 fps = 8.0
@@ -36,11 +36,11 @@ frame_6/delay_sec = 0.0
 frame_7/texture = ExtResource( 15 )
 frame_7/delay_sec = 0.0
 
-[sub_resource type="StyleBoxTexture" id=2]
-texture = SubResource( 1 )
+[sub_resource type="StyleBoxTexture" id=1]
+texture = SubResource( 6 )
 region_rect = Rect2( 0, 0, 1280, 720 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.619608 )
 
 [sub_resource type="Curve" id=4]
@@ -49,7 +49,7 @@ _data = [ Vector2( 0, 0.545455 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 
 [sub_resource type="CurveTexture" id=5]
 curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=3]
 lifetime_randomness = 0.25
 emission_shape = 2
 emission_box_extents = Vector3( 1500, 1, 1 )
@@ -141,7 +141,7 @@ script = ExtResource( 8 )
 modulate = Color( 0.792157, 0.792157, 0.792157, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -170,7 +170,7 @@ margin_top = -150.0
 margin_right = 300.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 600, 300 )
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -199,11 +199,11 @@ rect_min_size = Vector2( 0, 150 )
 margin_top = 41.0
 margin_right = 539.0
 margin_bottom = 109.0
-custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.745098 )
 custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
+custom_fonts/font = ExtResource( 1 )
 text = "Dueling Wizards"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -279,7 +279,7 @@ lifetime = 1.5
 preprocess = 3.0
 randomness = 0.72
 visibility_rect = Rect2( 0, 0, 0, 200 )
-process_material = SubResource( 6 )
+process_material = SubResource( 3 )
 texture = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
