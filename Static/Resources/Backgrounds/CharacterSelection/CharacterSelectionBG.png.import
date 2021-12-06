@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BG_4.png-b725ab89498888467e98378c4d350741.stex"
+path="res://.import/CharacterSelectionBG.png-77ebb71f8b88e4eb2fbdb3fe0ffd31eb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Resources/Backgrounds/BG_Animation/BG_4.png"
-dest_files=[ "res://.import/BG_4.png-b725ab89498888467e98378c4d350741.stex" ]
+source_file="res://Static/Resources/Backgrounds/CharacterSelection/CharacterSelectionBG.png"
+dest_files=[ "res://.import/CharacterSelectionBG.png-77ebb71f8b88e4eb2fbdb3fe0ffd31eb.stex" ]
 
 [params]
 
@@ -20,11 +20,11 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

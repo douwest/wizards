@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BG_7.png-6da02a0fb37b0b4bb0e3ed21fccdbae8.stex"
+path="res://.import/CharacterSelectionBG-export.png-e710e51440da3c69e4f69c88d033efc1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Resources/Backgrounds/BG_Animation/BG_7.png"
-dest_files=[ "res://.import/BG_7.png-6da02a0fb37b0b4bb0e3ed21fccdbae8.stex" ]
+source_file="res://Static/Resources/Backgrounds/CharacterSelection/CharacterSelectionBG-export.png"
+dest_files=[ "res://.import/CharacterSelectionBG-export.png-e710e51440da3c69e4f69c88d033efc1.stex" ]
 
 [params]
 
