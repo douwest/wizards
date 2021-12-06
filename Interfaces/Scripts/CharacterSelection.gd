@@ -5,19 +5,22 @@ var player_1_character = null
 var player_2_character = null
 var selected_map = Resources.levels[map_index]
 
-onready var player_1_portrait: TextureRect = $Panel/MenuContainer/ConfigurationContainer/Player1/Portrait
-onready var player_2_portrait: TextureRect = $Panel/MenuContainer/ConfigurationContainer/Player2/Portrait
+onready var player_1_ready: CheckBox = $Player1/Ready/CheckBox
+onready var player_2_ready: CheckBox = $Player2/Ready/CheckBox
+onready var player_1_portrait: TextureRect = $Player1/Portrait
+onready var player_2_portrait: TextureRect = $Player2/Portrait
+onready var player_1_character_label: Label = $Player1/CharacterName
+onready var player_2_character_label: Label = $Player2/CharacterName
 
-onready var player_1_character_label: Label = $Panel/MenuContainer/ConfigurationContainer/Player1/CharacterName
-onready var player_2_character_label: Label = $Panel/MenuContainer/ConfigurationContainer/Player2/CharacterName
-onready var selected_map_label: Label = $Panel/MenuContainer/ConfigurationContainer/SelectionContainer/MapSelectionContainer/MapNameLabel
 
-onready var player_1_ready: CheckBox = $Panel/MenuContainer/ConfigurationContainer/Player1/Ready/CheckBox
-onready var player_2_ready: CheckBox = $Panel/MenuContainer/ConfigurationContainer/Player2/Ready/CheckBox
-onready var start_button: Button = $Panel/MenuContainer/NavigationContainer/StartButton
+onready var selected_map_label: Label = $MapSelectionContainer/MapNameLabel
 
-onready var prevMapBtn: Button = $Panel/MenuContainer/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer/PreviousMapButton
-onready var nextMapBtn: Button = $Panel/MenuContainer/ConfigurationContainer/SelectionContainer/MapSelectionContainer/ButtonContainer/NextMapButton
+
+onready var start_button: Button = $StartButton
+onready var _leave_button: Button = $LeaveButton
+
+onready var prevMapBtn: Button = $MapSelectionContainer/ButtonContainer/PreviousMapButton
+onready var nextMapBtn: Button = $MapSelectionContainer/ButtonContainer/NextMapButton
 onready var rain_sound_player: AudioStreamPlayer = $RainSoundPlayer
 
 # Lifecycle hooks
@@ -100,13 +103,6 @@ func _on_NextMapButton_pressed():
 	rpc('set_map_index', 1)
 
 
-func _on_SelectionContainer_character_selected(character):
-	if get_tree().is_network_server():
-		rpc('update_player_1', character)
-	else:
-		rpc('update_player_2', character)
-
-
 func _on_RandomCharacterButton_pressed():
 	var character = Resources.characters[randi() % Resources.characters.size()]
 	if get_tree().is_network_server():
@@ -144,3 +140,10 @@ func _on_Player2_CheckBox_toggled(button_pressed):
 	if player_2_character:
 		rpc('toggle_p2_ready', button_pressed)
 
+
+
+func _on_TooltipContainer_character_selected(character):
+	if get_tree().is_network_server():
+		rpc('update_player_1', character)
+	else:
+		rpc('update_player_2', character)
