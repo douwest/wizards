@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends MarginContainer
 
 const random_character_description = "Random"
 
