@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Interfaces/Scripts/CharacterSelection.gd" type="Script" id=1]
 [ext_resource path="res://Static/Resources/Fonts/Title_Font.tres" type="DynamicFont" id=2]
@@ -12,12 +12,13 @@
 [ext_resource path="res://Static/Resources/UIElements/Images/MapTemplate.png" type="Texture" id=10]
 [ext_resource path="res://Static/Resources/Textures/Particles/Raindrop.png" type="Texture" id=11]
 [ext_resource path="res://Static/Resources/UIElements/Scripts/RosterButton.gd" type="Script" id=12]
-[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/WindowVIew/WindowView.png" type="Texture" id=13]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerWindowViewport.png" type="Texture" id=13]
 [ext_resource path="res://Levels/Resources/Level-Nature-Shrine.png" type="Texture" id=14]
 [ext_resource path="res://Static/Resources/UIElements/Images/Ready_Disabled_Checked.png" type="Texture" id=15]
 [ext_resource path="res://Static/Resources/UIElements/Images/Ready_Disabled_Unchecked.png" type="Texture" id=16]
-[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/CharacterSelectionBG.png" type="Texture" id=17]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Exterior/TowerInterior.png" type="Texture" id=17]
 [ext_resource path="res://Static/Resources/Sounds/Ambient/rain-on-roof-or-window-nature-sounds-8312.mp3" type="AudioStream" id=18]
+[ext_resource path="res://Static/Resources/Sounds/Ambient/fireplace.mp3" type="AudioStream" id=19]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 17 )
@@ -105,9 +106,9 @@ text = "-"
 align = 1
 
 [node name="Ready" type="HBoxContainer" parent="Player1"]
-margin_top = 483.0
+margin_top = 482.0
 margin_right = 410.0
-margin_bottom = 539.0
+margin_bottom = 538.0
 custom_constants/separation = 50
 alignment = 1
 
@@ -347,8 +348,12 @@ __meta__ = {
 
 [node name="RainSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
-volume_db = -15.0
+volume_db = -22.0
 pitch_scale = 0.87
+
+[node name="FireSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+autoplay = true
 
 [node name="RainEffect" type="Particles2D" parent="."]
 modulate = Color( 1, 1, 1, 0.611765 )

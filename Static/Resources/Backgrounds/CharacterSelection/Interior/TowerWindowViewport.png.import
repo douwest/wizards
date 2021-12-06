@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WindowView.png-eac2b8d72ad4477d4ec908ae52711eb5.stex"
+path="res://.import/TowerWindowViewport.png-9072dc8527f084dfdfa4493ad95eddd2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Resources/Backgrounds/CharacterSelection/WindowVIew/WindowView.png"
-dest_files=[ "res://.import/WindowView.png-eac2b8d72ad4477d4ec908ae52711eb5.stex" ]
+source_file="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerWindowViewport.png"
+dest_files=[ "res://.import/TowerWindowViewport.png-9072dc8527f084dfdfa4493ad95eddd2.stex" ]
 
 [params]
 
