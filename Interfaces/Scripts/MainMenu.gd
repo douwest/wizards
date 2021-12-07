@@ -6,6 +6,7 @@ onready var canvas_modulate = $LightningEffect
 onready var ambient_sound_player = $AmbientSoundPlayer
 onready var lightning_sound_player = $LightningSoundPlayer
 onready var animation_player = $AnimationPlayer
+onready var player_name = $StartScreen/Panel/VBoxContainer/Menu/InputFields/PlayerNameInputField
 
 var effect_processing = false
 var show_effect = false
@@ -16,6 +17,7 @@ var lightning_random_divisor = 320
 func _ready():
 	randomize()
 	
+	$Fader.visible = false
 	ambient_sound_player.play()
 	
 	var error = null
@@ -48,6 +50,7 @@ func _physics_process(_delta):
 
 
 func _on_ready_to_play():
+	Gamestate.player_info.name = player_name.text
 	animation_player.play('fade_out')
 
 
