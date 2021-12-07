@@ -38,7 +38,7 @@ func _ready():
 		player_2_container.visible = true
 		player_2_name.text = Gamestate.player_info.name
 		for id in Network.players:
-			if id == 1:
+			if id == 1 and Network.players[id].character:
 				update_player_1(Network.players[id].character)
 		_on_player_list_changed()
 	else:
