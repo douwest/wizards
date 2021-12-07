@@ -6,6 +6,8 @@ extends Area2D
 # var b = "text"
 
 onready var sprite = $Sprite
+onready var animationPlayer = $AnimationPlayer
+onready var animation_tree = $Sprite/AnimationTree
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,3 +29,5 @@ func disable():
 func enable():
 	visible = true
 	$CollisionShape2D.disabled = false
+	$Sprite/AnimationPlayer.play("start cast")
+	

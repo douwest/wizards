@@ -1,4 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Roster_Frame.png-1e299d7c6eaba2cfc892e5b272cc7c74.stex"
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/Roster_Frame_Pressed.png-849d4d7b04e7330c02fcb62db0504d41.stex"
 
 [sub_resource type="GDScript" id=3]
 script/source = "class_name RosterButton
@@ -7,26 +13,24 @@ extends TextureButton
 onready var portrait = $Portrait
 
 func set_portrait(resource: Texture):
-	portrait.set_texture(resource)
-"
+	portrait.set_texture(resource)"
 
 [node name="RosterButton" type="TextureButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1856.0
 margin_bottom = -1016.0
-rect_min_size = Vector2( 84, 84 )
+rect_min_size = Vector2( 128, 128 )
+rect_scale = Vector2( 2, 2 )
+texture_normal = SubResource( 1 )
+texture_pressed = SubResource( 2 )
+texture_hover = SubResource( 2 )
+texture_focused = SubResource( 2 )
 expand = true
 script = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Portrait" type="TextureRect" parent="."]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}

@@ -16,6 +16,7 @@ var lightning_random_divisor = 320
 func _ready():
 	randomize()
 	
+	$Fader.visible = false
 	ambient_sound_player.play()
 	
 	var error = null
@@ -68,3 +69,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		var error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")
 		if error:
 			print(error)
+	else:
+		pass

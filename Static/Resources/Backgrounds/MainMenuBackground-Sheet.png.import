@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BG_4.png-3540a29af5bcb7e4fe09230419f80b0c.stex"
+path="res://.import/MainMenuBackground-Sheet.png-c2d92d7cfb3fb4de26fe2dbbcf69df26.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Resources/Backgrounds/MainMenu/BG_4.png"
-dest_files=[ "res://.import/BG_4.png-3540a29af5bcb7e4fe09230419f80b0c.stex" ]
+source_file="res://Static/Resources/Backgrounds/MainMenuBackground-Sheet.png"
+dest_files=[ "res://.import/MainMenuBackground-Sheet.png-c2d92d7cfb3fb4de26fe2dbbcf69df26.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
