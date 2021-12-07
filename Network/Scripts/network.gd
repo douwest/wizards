@@ -84,6 +84,7 @@ remote func unregister_player(id):
 # Everyone gets notified whenever a new client joins the server
 func _on_player_connected(id):
 	print('player with ', id, ' connected!')
+	emit_signal("player_list_changed")
 
 
 # Everyone gets notified whenever someone disconnects from the server

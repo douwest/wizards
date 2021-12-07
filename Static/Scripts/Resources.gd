@@ -10,7 +10,7 @@ var characters = [
 	{
 		name = "Green", 
 		portrait = "res://Characters/Sprites/Green/Green_Portrait.png",
-		lobby_scene = "",
+		lobby_scene = "res://Characters/Scenes/Green/GreenLobby.tscn",
 		scene = "res://Characters/Scenes/Green/Green.tscn"
 	},
 #	{

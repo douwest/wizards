@@ -11,6 +11,9 @@ onready var player_1_ready: CheckBox = $Player1/Ready/CheckBox
 onready var player_2_ready: CheckBox = $Player2/Ready/CheckBox
 onready var player_1_character_label: Label = $Player1/CharacterName
 onready var player_2_character_label: Label = $Player2/CharacterName
+onready var player_1_name: Label = $Player1/Title
+onready var player_2_name: Label = $Player2/Title
+onready var player_2_container: VBoxContainer = $Player2
 
 onready var selected_map_label: Label = $MapSelectionContainer/MapNameLabel
 
@@ -25,14 +28,29 @@ onready var rain_sound_player: AudioStreamPlayer = $RainSoundPlayer
 
 
 func _ready():
+	
 	rain_sound_player.play(0.1)
-	var _err = Network.connect("server_closed", self, '_on_server_closed')
+	var error = Network.connect("server_closed", self, '_on_server_closed')
 	
 	if not get_tree().is_network_server():
 		prevMapBtn.disabled = true
 		nextMapBtn.disabled = true
-
+		player_2_container.visible = true
+		player_2_name.text = Gamestate.player_info.name
+		for id in Network.players:
+			if id == 1:
+				update_player_1(Network.players[id].character)
+		_on_player_list_changed()
+	else:
+		player_2_container.visible = false
+		player_1_name.text = Gamestate.player_info.name
+		
+	Network.connect('player_list_changed', self, '_on_player_list_changed')
+	
 	update_map()
+	
+	if error: 
+		print(error)
 
 
 func _process(_delta):
@@ -44,7 +62,8 @@ func _process(_delta):
 	if player_1_character:
 		player_1_ready.disabled = false
 	if player_2_character:
-		player_2_ready.disabled = false	
+		if not get_tree().is_network_server():
+			player_2_ready.disabled = false
 
 
 # Remote functions
@@ -106,6 +125,20 @@ remotesync func toggle_p2_ready(ready):
 
 
 # Signals
+
+
+func _on_player_list_changed():
+	if Network.players.size() == 2:
+		player_2_container.visible = true
+	else:
+		player_2_container.visible = false
+	
+	for id in Network.players:
+		print(Network.players[id])
+		if id == 1:
+			player_1_name.text = Network.players[id].name
+		else:
+			player_2_name.text = Network.players[id].name
 
 
 func _on_PreviousMapButton_pressed():

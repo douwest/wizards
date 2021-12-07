@@ -6,6 +6,7 @@ onready var canvas_modulate = $LightningEffect
 onready var ambient_sound_player = $AmbientSoundPlayer
 onready var lightning_sound_player = $LightningSoundPlayer
 onready var animation_player = $AnimationPlayer
+onready var player_name = $StartScreen/Panel/VBoxContainer/Menu/InputFields/PlayerNameInputField
 
 var effect_processing = false
 var show_effect = false
@@ -49,6 +50,7 @@ func _physics_process(_delta):
 
 
 func _on_ready_to_play():
+	Gamestate.player_info.name = player_name.text
 	animation_player.play('fade_out')
 
 
@@ -69,5 +71,3 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		var error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")
 		if error:
 			print(error)
-	else:
-		pass

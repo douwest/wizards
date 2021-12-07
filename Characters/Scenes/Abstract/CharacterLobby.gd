@@ -24,5 +24,5 @@ func set_is_player_two(value):
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == 'unready':
+	if anim_name == 'unready' or anim_name == 'intro':
 		animation_player.play('idle')

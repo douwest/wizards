@@ -111,42 +111,42 @@ margin_right = 116.0
 margin_bottom = 243.0
 size_flags_horizontal = 3
 custom_constants/separation = 50
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="Title" type="Label" parent="Player1"]
 margin_right = 410.0
-margin_bottom = 68.0
-custom_colors/font_color = Color( 0.654902, 0.815686, 0.572549, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+margin_bottom = 60.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Player 1"
 align = 1
 
 [node name="CharacterName" type="Label" parent="Player1"]
-margin_top = 118.0
+margin_top = 110.0
 margin_right = 410.0
-margin_bottom = 148.0
+margin_bottom = 140.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "-"
 align = 1
 
 [node name="Portrait" type="Control" parent="Player1"]
-margin_top = 198.0
+margin_top = 190.0
 margin_right = 410.0
-margin_bottom = 498.0
+margin_bottom = 490.0
 rect_min_size = Vector2( 0, 300 )
 size_flags_vertical = 3
 
 [node name="Ready" type="HBoxContainer" parent="Player1"]
-margin_top = 548.0
+margin_top = 540.0
 margin_right = 410.0
-margin_bottom = 604.0
+margin_bottom = 596.0
 custom_constants/separation = 50
 alignment = 1
 
@@ -186,27 +186,25 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="Player2"]
 margin_right = 410.0
-margin_bottom = 68.0
-custom_colors/font_color = Color( 0.945098, 0.501961, 0.411765, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+margin_bottom = 60.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Player 2"
 align = 1
 
 [node name="CharacterName" type="Label" parent="Player2"]
-margin_top = 118.0
+margin_top = 110.0
 margin_right = 410.0
-margin_bottom = 148.0
+margin_bottom = 140.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
 text = "-"
 align = 1
 
 [node name="Portrait" type="Control" parent="Player2"]
-margin_top = 198.0
+margin_top = 190.0
 margin_right = 410.0
 margin_bottom = 498.0
 size_flags_vertical = 3

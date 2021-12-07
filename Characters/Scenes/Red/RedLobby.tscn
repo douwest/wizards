@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Characters/Scenes/Abstract/CharacterLobby.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Sprites/Red/Red.png" type="Texture" id=2]
+[ext_resource path="res://Static/Resources/Textures/Generic/CharacterShadow.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -71,10 +72,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+rect_pivot_offset = Vector2( -2105.1, -890.012 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 179.594 )
+scale = Vector2( 6, 6 )
+texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 6, 6 )
