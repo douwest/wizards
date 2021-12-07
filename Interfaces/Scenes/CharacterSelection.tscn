@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Interfaces/Scripts/CharacterSelection.gd" type="Script" id=1]
 [ext_resource path="res://Static/Resources/Fonts/Title_Font.tres" type="DynamicFont" id=2]
@@ -12,16 +12,40 @@
 [ext_resource path="res://Static/Resources/UIElements/Images/MapTemplate.png" type="Texture" id=10]
 [ext_resource path="res://Static/Resources/Textures/Particles/Raindrop.png" type="Texture" id=11]
 [ext_resource path="res://Static/Resources/UIElements/Scripts/RosterButton.gd" type="Script" id=12]
-[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/WindowVIew/WindowView.png" type="Texture" id=13]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Exterior/WindowView3.png" type="Texture" id=13]
 [ext_resource path="res://Levels/Resources/Level-Nature-Shrine.png" type="Texture" id=14]
 [ext_resource path="res://Static/Resources/UIElements/Images/Ready_Disabled_Checked.png" type="Texture" id=15]
 [ext_resource path="res://Static/Resources/UIElements/Images/Ready_Disabled_Unchecked.png" type="Texture" id=16]
-[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/CharacterSelectionBG.png" type="Texture" id=17]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior3.png" type="Texture" id=17]
 [ext_resource path="res://Static/Resources/Sounds/Ambient/rain-on-roof-or-window-nature-sounds-8312.mp3" type="AudioStream" id=18]
+[ext_resource path="res://Static/Resources/Sounds/Ambient/fireplace.mp3" type="AudioStream" id=19]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Exterior/WindowView1.png" type="Texture" id=20]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Exterior/WindowView6.png" type="Texture" id=21]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Exterior/WindowView4.png" type="Texture" id=22]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Exterior/WindowView5.png" type="Texture" id=23]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Exterior/WindowView2.png" type="Texture" id=24]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior5.png" type="Texture" id=25]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior7.png" type="Texture" id=26]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior6.png" type="Texture" id=27]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior4.png" type="Texture" id=28]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior2.png" type="Texture" id=29]
+[ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior1.png" type="Texture" id=30]
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 17 )
-region_rect = Rect2( 0, 0, 320, 180 )
+[sub_resource type="AnimatedTexture" id=9]
+frames = 7
+frame_0/texture = ExtResource( 30 )
+frame_1/texture = ExtResource( 29 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 17 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 28 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 25 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 27 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 26 )
+frame_6/delay_sec = 0.0
 
 [sub_resource type="Curve" id=6]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -49,17 +73,29 @@ color = Color( 0.862745, 0.878431, 1, 1 )
 hue_variation = 0.01
 hue_variation_random = 0.5
 
+[sub_resource type="AnimatedTexture" id=8]
+frames = 6
+frame_0/texture = ExtResource( 20 )
+frame_1/texture = ExtResource( 24 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 13 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 22 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 23 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 21 )
+frame_5/delay_sec = 0.0
+
 [node name="CharacterSelection" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="Background" type="Panel" parent="."]
-modulate = Color( 0.639216, 0.654902, 0.784314, 1 )
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color( 0.835294, 0.835294, 0.835294, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = SubResource( 9 )
+expand = true
 
 [node name="Player1" type="VBoxContainer" parent="."]
 anchor_left = 0.0333333
@@ -67,9 +103,9 @@ anchor_top = 0.208333
 anchor_right = 0.246875
 anchor_bottom = 0.707407
 margin_left = 116.0
-margin_top = 250.0
+margin_top = 243.0
 margin_right = 116.0
-margin_bottom = 250.0
+margin_bottom = 243.0
 size_flags_horizontal = 3
 custom_constants/separation = 50
 __meta__ = {
@@ -88,32 +124,40 @@ custom_fonts/font = ExtResource( 2 )
 text = "Player 1"
 align = 1
 
-[node name="Portrait" type="TextureRect" parent="Player1"]
+[node name="CharacterName" type="Label" parent="Player1"]
 margin_top = 118.0
 margin_right = 410.0
-margin_bottom = 250.0
-size_flags_vertical = 3
-stretch_mode = 6
-
-[node name="CharacterName" type="Label" parent="Player1"]
-margin_top = 300.0
-margin_right = 410.0
-margin_bottom = 330.0
-size_flags_vertical = 2
+margin_bottom = 148.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "-"
 align = 1
 
-[node name="Ready" type="HBoxContainer" parent="Player1"]
-margin_top = 483.0
+[node name="Portrait" type="Control" parent="Player1"]
+margin_top = 198.0
 margin_right = 410.0
-margin_bottom = 539.0
+margin_bottom = 498.0
+rect_min_size = Vector2( 0, 300 )
+size_flags_vertical = 3
+
+[node name="Ready" type="HBoxContainer" parent="Player1"]
+margin_top = 548.0
+margin_right = 410.0
+margin_bottom = 604.0
 custom_constants/separation = 50
 alignment = 1
 
-[node name="CheckBox" type="CheckBox" parent="Player1/Ready"]
+[node name="Label" type="Label" parent="Player1/Ready"]
 margin_left = 101.0
-margin_right = 157.0
+margin_top = 13.0
+margin_right = 203.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 4 )
+text = "Ready?"
+
+[node name="CheckBox" type="CheckBox" parent="Player1/Ready"]
+margin_left = 253.0
+margin_right = 309.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
@@ -126,19 +170,11 @@ enabled_focus_mode = 0
 flat = true
 align = 1
 
-[node name="Label" type="Label" parent="Player1/Ready"]
-margin_left = 207.0
-margin_top = 13.0
-margin_right = 309.0
-margin_bottom = 43.0
-custom_fonts/font = ExtResource( 4 )
-text = "Ready?"
-
 [node name="Player2" type="VBoxContainer" parent="."]
 margin_left = 1272.0
 margin_top = 468.0
-margin_right = 1688.0
-margin_bottom = 1012.0
+margin_right = 1682.0
+margin_bottom = 1072.0
 size_flags_horizontal = 3
 custom_constants/separation = 50
 __meta__ = {
@@ -146,7 +182,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Player2"]
-margin_right = 416.0
+margin_right = 410.0
 margin_bottom = 68.0
 custom_colors/font_color = Color( 0.945098, 0.501961, 0.411765, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
@@ -157,33 +193,39 @@ custom_fonts/font = ExtResource( 2 )
 text = "Player 2"
 align = 1
 
-[node name="Portrait" type="TextureRect" parent="Player2"]
-margin_top = 118.0
-margin_right = 416.0
-margin_bottom = 253.0
-size_flags_vertical = 3
-stretch_mode = 6
-flip_h = true
-
 [node name="CharacterName" type="Label" parent="Player2"]
-margin_top = 303.0
-margin_right = 416.0
-margin_bottom = 438.0
-size_flags_vertical = 3
+margin_top = 118.0
+margin_right = 410.0
+margin_bottom = 148.0
+size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
 text = "-"
 align = 1
 
+[node name="Portrait" type="Control" parent="Player2"]
+margin_top = 198.0
+margin_right = 410.0
+margin_bottom = 498.0
+size_flags_vertical = 3
+
 [node name="Ready" type="HBoxContainer" parent="Player2"]
-margin_top = 488.0
-margin_right = 416.0
-margin_bottom = 544.0
+margin_top = 548.0
+margin_right = 410.0
+margin_bottom = 604.0
 custom_constants/separation = 50
 alignment = 1
 
+[node name="Label" type="Label" parent="Player2/Ready"]
+margin_left = 101.0
+margin_top = 13.0
+margin_right = 203.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 4 )
+text = "Ready?"
+
 [node name="CheckBox" type="CheckBox" parent="Player2/Ready"]
-margin_left = 104.0
-margin_right = 160.0
+margin_left = 253.0
+margin_right = 309.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
@@ -195,14 +237,6 @@ disabled = true
 enabled_focus_mode = 0
 flat = true
 align = 1
-
-[node name="Label" type="Label" parent="Player2/Ready"]
-margin_left = 210.0
-margin_top = 13.0
-margin_right = 312.0
-margin_bottom = 43.0
-custom_fonts/font = ExtResource( 4 )
-text = "Ready?"
 
 [node name="Roster" type="GridContainer" parent="."]
 margin_left = 780.0
@@ -347,8 +381,12 @@ __meta__ = {
 
 [node name="RainSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
-volume_db = -15.0
+volume_db = -22.0
 pitch_scale = 0.87
+
+[node name="FireSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+autoplay = true
 
 [node name="RainEffect" type="Particles2D" parent="."]
 modulate = Color( 1, 1, 1, 0.611765 )
@@ -362,13 +400,13 @@ visibility_rect = Rect2( 0, 0, 0, 200 )
 process_material = SubResource( 7 )
 texture = ExtResource( 11 )
 
-[node name="TextureRect" type="TextureRect" parent="RainEffect"]
+[node name="Exterior" type="TextureRect" parent="RainEffect"]
 show_behind_parent = true
 margin_left = -173.0
 margin_top = 98.0
 margin_right = -23.0
 margin_bottom = 566.0
-texture = ExtResource( 13 )
+texture = SubResource( 8 )
 expand = true
 __meta__ = {
 "_edit_lock_": true,

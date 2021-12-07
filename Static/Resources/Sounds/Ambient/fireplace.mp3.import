@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/fireplace.mp3-ed6852d927c48159d6e416823a588c4e.mp3str"
+
+[deps]
+
+source_file="res://Static/Resources/Sounds/Ambient/fireplace.mp3"
+dest_files=[ "res://.import/fireplace.mp3-ed6852d927c48159d6e416823a588c4e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
