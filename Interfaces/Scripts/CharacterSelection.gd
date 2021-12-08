@@ -81,7 +81,7 @@ remotesync func update_player_1(character):
 		player_1_lobby_scene.queue_free()
 	player_1_lobby_scene = load(player_1_character.lobby_scene).instance()
 	$Player1/Portrait.call_deferred('add_child', player_1_lobby_scene)
-	player_1_character_label.text = player_1_character.name
+	player_1_character_label.text = '- ' + player_1_character.name + ' -'
 	if get_tree().is_network_server():
 		Gamestate.player_info.character = player_1_character
 	
@@ -93,7 +93,7 @@ remotesync func update_player_2(character):
 	player_2_lobby_scene = load(player_2_character.lobby_scene).instance()
 	player_2_lobby_scene.is_player_two = true
 	$Player2/Portrait.call_deferred('add_child', player_2_lobby_scene)
-	player_2_character_label.text = player_2_character.name
+	player_2_character_label.text = '- ' + player_2_character.name + ' -'
 	if !get_tree().is_network_server():
 		Gamestate.player_info.character = player_2_character
 

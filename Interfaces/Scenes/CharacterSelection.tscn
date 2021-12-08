@@ -103,8 +103,8 @@ __meta__ = {
 [node name="Player1" type="VBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -476.0
-margin_right = 294.0
+margin_top = -481.0
+margin_right = 279.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 alignment = 1
@@ -114,7 +114,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Player1"]
-margin_right = 294.0
+margin_right = 279.0
 margin_bottom = 45.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -126,7 +126,7 @@ align = 1
 
 [node name="CharacterName" type="Label" parent="Player1"]
 margin_top = 55.0
-margin_right = 294.0
+margin_right = 279.0
 margin_bottom = 85.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
@@ -136,22 +136,22 @@ align = 1
 [node name="Portrait" type="Control" parent="Player1"]
 show_behind_parent = true
 margin_top = 95.0
-margin_right = 294.0
-margin_bottom = 410.0
+margin_right = 279.0
+margin_bottom = 415.0
 rect_min_size = Vector2( 0, 300 )
 size_flags_vertical = 3
 
 [node name="Ready" type="HBoxContainer" parent="Player1"]
-margin_top = 420.0
-margin_right = 294.0
-margin_bottom = 476.0
+margin_top = 425.0
+margin_right = 279.0
+margin_bottom = 481.0
 custom_constants/separation = 50
 alignment = 1
 
 [node name="Label" type="Label" parent="Player1/Ready"]
-margin_left = 43.0
+margin_left = 35.0
 margin_top = 13.0
-margin_right = 145.0
+margin_right = 137.0
 margin_bottom = 43.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 1
@@ -160,8 +160,8 @@ custom_fonts/font = ExtResource( 4 )
 text = "Ready?"
 
 [node name="CheckBox" type="CheckBox" parent="Player1/Ready"]
-margin_left = 195.0
-margin_right = 251.0
+margin_left = 187.0
+margin_right = 243.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
@@ -182,7 +182,7 @@ anchor_bottom = 1.0
 margin_left = -279.0
 margin_top = -481.0
 size_flags_horizontal = 3
-custom_constants/separation = 50
+custom_constants/separation = 0
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -199,9 +199,9 @@ text = "Player 2"
 align = 1
 
 [node name="CharacterName" type="Label" parent="Player2"]
-margin_top = 95.0
+margin_top = 45.0
 margin_right = 279.0
-margin_bottom = 125.0
+margin_bottom = 75.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
 text = "-"
@@ -209,9 +209,9 @@ align = 1
 
 [node name="Portrait" type="Control" parent="Player2"]
 show_behind_parent = true
-margin_top = 175.0
+margin_top = 75.0
 margin_right = 279.0
-margin_bottom = 375.0
+margin_bottom = 425.0
 size_flags_vertical = 3
 
 [node name="Ready" type="HBoxContainer" parent="Player2"]
@@ -361,9 +361,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -60.0
-margin_top = -15.0
+margin_top = -41.0
 margin_right = 60.0
-margin_bottom = 15.0
+margin_bottom = -11.0
 custom_fonts/font = ExtResource( 4 )
 text = "<tooltip>"
 align = 1
@@ -419,14 +419,13 @@ __meta__ = {
 
 [node name="Exterior" type="TextureRect" parent="RainEffect"]
 show_behind_parent = true
-margin_left = -173.0
-margin_top = 98.0
-margin_right = -23.0
-margin_bottom = 566.0
+margin_left = -187.0
+margin_top = 90.0
+margin_right = -83.0
+margin_bottom = 414.0
 texture = SubResource( 8 )
 expand = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
