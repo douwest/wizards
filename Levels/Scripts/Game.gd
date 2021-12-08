@@ -1,5 +1,5 @@
+class_name Game
 extends Node2D
-
 
 
 func _ready():
@@ -78,8 +78,11 @@ remote func despawn_player(pinfo):
 	player_node.queue_free()
 
 
-func _on_player_died(pinfo, _lives):
-	print('player ', pinfo.name, 'died!')
+func _on_player_died(pinfo, lives):
+	print('Player ', pinfo.name, 'died!', lives, 'lives left.')
+	if lives < 0:
+		print('Game over for ', pinfo.name, '! Going back to the lobby.')
+		rpc('back_to_lobby')
 
 func _on_player_list_changed():
 	print(Network.players)
@@ -88,4 +91,11 @@ func _on_player_removed(pinfo):
 	despawn_player(pinfo)
 
 func _on_server_closed():
+	get_tree().set_network_peer(null)	
 	var _error = get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")
+
+func _on_QuitButton_pressed():
+	rpc('back_to_lobby')
+
+remotesync func back_to_lobby():
+	var _error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")		

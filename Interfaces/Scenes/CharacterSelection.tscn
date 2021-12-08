@@ -1,7 +1,6 @@
 [gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Interfaces/Scripts/CharacterSelection.gd" type="Script" id=1]
-[ext_resource path="res://Static/Resources/Fonts/Title_Font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Characters/Sprites/Random/Random_Portrait.png" type="Texture" id=3]
 [ext_resource path="res://Static/Resources/Fonts/Medium_Font_Cursive.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Static/Resources/UIElements/Images/Ready_Checked.png" type="Texture" id=5]
@@ -30,6 +29,7 @@
 [ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior4.png" type="Texture" id=28]
 [ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior2.png" type="Texture" id=29]
 [ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior1.png" type="Texture" id=30]
+[ext_resource path="res://Static/Resources/Fonts/Medium_Font.tres" type="DynamicFont" id=31]
 
 [sub_resource type="AnimatedTexture" id=9]
 frames = 7
@@ -101,66 +101,67 @@ __meta__ = {
 }
 
 [node name="Player1" type="VBoxContainer" parent="."]
-anchor_left = 0.0333333
-anchor_top = 0.208333
-anchor_right = 0.246875
-anchor_bottom = 0.707407
-margin_left = 116.0
-margin_top = 243.0
-margin_right = 116.0
-margin_bottom = 243.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -481.0
+margin_right = 279.0
 size_flags_horizontal = 3
-custom_constants/separation = 50
+custom_constants/separation = 10
 alignment = 1
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_lock_": true,
+"_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="Player1"]
-margin_right = 410.0
-margin_bottom = 60.0
+margin_right = 279.0
+margin_bottom = 45.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-custom_fonts/font = ExtResource( 2 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 8 )
 text = "Player 1"
 align = 1
 
 [node name="CharacterName" type="Label" parent="Player1"]
-margin_top = 110.0
-margin_right = 410.0
-margin_bottom = 140.0
+margin_top = 55.0
+margin_right = 279.0
+margin_bottom = 85.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "-"
 align = 1
 
 [node name="Portrait" type="Control" parent="Player1"]
-margin_top = 190.0
-margin_right = 410.0
-margin_bottom = 490.0
+show_behind_parent = true
+margin_top = 95.0
+margin_right = 279.0
+margin_bottom = 415.0
 rect_min_size = Vector2( 0, 300 )
 size_flags_vertical = 3
 
 [node name="Ready" type="HBoxContainer" parent="Player1"]
-margin_top = 540.0
-margin_right = 410.0
-margin_bottom = 596.0
+margin_top = 425.0
+margin_right = 279.0
+margin_bottom = 481.0
 custom_constants/separation = 50
 alignment = 1
 
 [node name="Label" type="Label" parent="Player1/Ready"]
-margin_left = 101.0
+margin_left = 35.0
 margin_top = 13.0
-margin_right = 203.0
+margin_right = 137.0
 margin_bottom = 43.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 4 )
 text = "Ready?"
 
 [node name="CheckBox" type="CheckBox" parent="Player1/Ready"]
-margin_left = 253.0
-margin_right = 309.0
+margin_left = 187.0
+margin_right = 243.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
@@ -174,59 +175,66 @@ flat = true
 align = 1
 
 [node name="Player2" type="VBoxContainer" parent="."]
-margin_left = 1272.0
-margin_top = 468.0
-margin_right = 1682.0
-margin_bottom = 1072.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -279.0
+margin_top = -481.0
 size_flags_horizontal = 3
-custom_constants/separation = 50
+custom_constants/separation = 0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="Player2"]
-margin_right = 410.0
-margin_bottom = 60.0
+margin_right = 279.0
+margin_bottom = 45.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-custom_fonts/font = ExtResource( 2 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 8 )
 text = "Player 2"
 align = 1
 
 [node name="CharacterName" type="Label" parent="Player2"]
-margin_top = 110.0
-margin_right = 410.0
-margin_bottom = 140.0
+margin_top = 45.0
+margin_right = 279.0
+margin_bottom = 75.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
 text = "-"
 align = 1
 
 [node name="Portrait" type="Control" parent="Player2"]
-margin_top = 190.0
-margin_right = 410.0
-margin_bottom = 498.0
+show_behind_parent = true
+margin_top = 75.0
+margin_right = 279.0
+margin_bottom = 425.0
 size_flags_vertical = 3
 
 [node name="Ready" type="HBoxContainer" parent="Player2"]
-margin_top = 548.0
-margin_right = 410.0
-margin_bottom = 604.0
+margin_top = 425.0
+margin_right = 279.0
+margin_bottom = 481.0
 custom_constants/separation = 50
 alignment = 1
 
 [node name="Label" type="Label" parent="Player2/Ready"]
-margin_left = 101.0
+margin_left = 35.0
 margin_top = 13.0
-margin_right = 203.0
+margin_right = 137.0
 margin_bottom = 43.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 4 )
 text = "Ready?"
 
 [node name="CheckBox" type="CheckBox" parent="Player2/Ready"]
-margin_left = 253.0
-margin_right = 309.0
+margin_left = 187.0
+margin_right = 243.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 48, 48 )
 focus_mode = 0
@@ -240,23 +248,22 @@ flat = true
 align = 1
 
 [node name="Roster" type="GridContainer" parent="."]
-margin_left = 780.0
-margin_top = 162.0
-margin_right = 1134.0
-margin_bottom = 426.0
-custom_constants/vseparation = 6
-custom_constants/hseparation = 6
+margin_left = 520.0
+margin_top = 108.0
+margin_right = 756.0
+margin_bottom = 284.0
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
 columns = 4
 script = ExtResource( 9 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="RandomCharacterButton" type="TextureButton" parent="Roster"]
-margin_right = 84.0
-margin_bottom = 84.0
-rect_min_size = Vector2( 84, 84 )
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 56, 56 )
 expand = true
 script = ExtResource( 12 )
 
@@ -335,22 +342,28 @@ __meta__ = {
 }
 
 [node name="TooltipContainer" type="Control" parent="."]
-margin_left = 960.0
-margin_top = 757.0
-margin_right = 1045.0
-margin_bottom = 1080.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -101.0
+margin_top = -20.0
+margin_right = 101.0
+margin_bottom = 20.0
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Tooltip" type="Label" parent="TooltipContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -72.0
-margin_top = -274.0
-margin_right = -37.0
-margin_bottom = -567.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -41.0
+margin_right = 60.0
+margin_bottom = -11.0
 custom_fonts/font = ExtResource( 4 )
 text = "<tooltip>"
 align = 1
@@ -359,22 +372,22 @@ __meta__ = {
 }
 
 [node name="LeaveButton" type="Button" parent="."]
-margin_left = 16.0
-margin_top = 1025.0
-margin_right = 131.0
-margin_bottom = 1069.0
-custom_fonts/font = ExtResource( 8 )
+margin_right = 63.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 31 )
 text = "Leave"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StartButton" type="Button" parent="."]
-margin_left = 1693.0
-margin_top = 1022.0
-margin_right = 1907.0
-margin_bottom = 1066.0
-custom_fonts/font = ExtResource( 8 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -729.0
+margin_top = 45.0
+margin_right = -557.0
+margin_bottom = 81.0
+custom_fonts/font = ExtResource( 4 )
 text = "Start game"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -400,17 +413,19 @@ randomness = 0.72
 visibility_rect = Rect2( 0, 0, 0, 200 )
 process_material = SubResource( 7 )
 texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Exterior" type="TextureRect" parent="RainEffect"]
 show_behind_parent = true
-margin_left = -173.0
-margin_top = 98.0
-margin_right = -23.0
-margin_bottom = 566.0
+margin_left = -187.0
+margin_top = 90.0
+margin_right = -83.0
+margin_bottom = 414.0
 texture = SubResource( 8 )
 expand = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

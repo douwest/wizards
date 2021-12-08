@@ -40,4 +40,3 @@ func cast_spell():
 	get_parent().add_child(spell)
 	spell.global_transform = castPosition.global_transform
 	spell.start(sprite.scale.x)
-

@@ -19,6 +19,7 @@ func _on_Roster_character_focus(character):
 
 
 func _on_Roster_character_selected(character):
+	print('character selected in SelectionContainer')
 	emit_signal("character_selected", character)
 
 
