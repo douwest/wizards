@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=10 format=2]
+=======
+[gd_scene load_steps=7 format=2]
+>>>>>>> Stashed changes
 
 [ext_resource path="res://Spells/Scripts/Spell.gd" type="Script" id=1]
 [ext_resource path="res://Spells/Sprites/Basic Attack-Sheet.png" type="Texture" id=2]
@@ -7,12 +11,22 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.00195
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=3]
 resource_name = "Flying"
 length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
+=======
+[sub_resource type="Animation" id=2]
+resource_name = "Flying"
+length = 0.4
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+>>>>>>> Stashed changes
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -24,11 +38,20 @@ tracks/0/keys = {
 "values": [ 2, 3, 4, 5 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=2]
 resource_name = "Start"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
+=======
+[sub_resource type="Animation" id=3]
+resource_name = "Start"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+>>>>>>> Stashed changes
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -40,6 +63,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.686813, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.976074, 0.312649, 0.312649, 1, 0, 0, 0, 0 )
@@ -62,6 +86,8 @@ orbit_velocity_random = 0.33
 angle_random = 0.62
 color_ramp = SubResource( 5 )
 
+=======
+>>>>>>> Stashed changes
 [node name="Spell" type="Area2D"]
 script = ExtResource( 1 )
 
@@ -69,7 +95,11 @@ script = ExtResource( 1 )
 light_mask = 0
 texture = ExtResource( 2 )
 hframes = 6
+<<<<<<< Updated upstream
 frame = 5
+=======
+frame = 2
+>>>>>>> Stashed changes
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2, 0 )
@@ -78,6 +108,7 @@ shape = SubResource( 1 )
 [node name="SpellLight" parent="." instance=ExtResource( 3 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+<<<<<<< Updated upstream
 anims/Flying = SubResource( 3 )
 anims/Start = SubResource( 2 )
 
@@ -88,6 +119,11 @@ preprocess = 65.75
 speed_scale = 6.91
 randomness = 0.5
 process_material = SubResource( 6 )
+=======
+root_node = NodePath("../Sprite")
+anims/Flying = SubResource( 2 )
+anims/Start = SubResource( 3 )
+>>>>>>> Stashed changes
 
 [connection signal="area_entered" from="." to="." method="_on_Spell_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Spell_body_entered"]
