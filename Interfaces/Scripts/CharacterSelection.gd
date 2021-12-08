@@ -151,6 +151,7 @@ func _on_NextMapButton_pressed():
 
 func _on_RandomCharacterButton_pressed():
 	var character = Resources.characters[randi() % Resources.characters.size()]
+	print(character)
 	if get_tree().is_network_server():
 		rpc('update_player_1', character)
 	else:

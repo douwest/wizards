@@ -48,7 +48,7 @@ func _ready() -> void:
 	speed = Vector2(run_speed, jump_strength)
 	if is_network_master():
 		camera = Camera2D.new()
-		camera.zoom = Vector2(0.4, 0.4)
+		camera.zoom = Vector2(0.5, 0.5)
 		self.add_child(camera)
 		camera.make_current()
 		camera.limit_left = -540
