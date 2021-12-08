@@ -19,6 +19,7 @@ func _ready():
 		character_button.set_portrait(texture)		
 
 func on_character_button_pressed(character):
+	print('character selected')
 	emit_signal("character_selected", character)
 	
 func on_character_button_focus(character):

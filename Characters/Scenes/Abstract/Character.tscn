@@ -12,6 +12,8 @@ height = 32.0
 
 [sub_resource type="Animation" id=12]
 resource_name = "block_high"
+length = 0.35
+step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -31,7 +33,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.075 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -41,6 +43,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=14]
 resource_name = "block_low"
+length = 0.35
+step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -60,7 +64,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.075 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -70,6 +74,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=13]
 resource_name = "block_mid"
+length = 0.35
+step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -89,7 +95,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0.075 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -179,7 +185,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "cast_mid"
-length = 0.9
+length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -188,10 +194,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.65, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 46, 47, 48, 49, 50, 51, 52, 53, 54 ]
+"values": [ 32, 33, 32 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -200,7 +206,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.6 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -215,7 +221,7 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.2, 0.6, 0.7 )
+"times": PoolRealArray( 0, 0.2, 0.25, 0.35 )
 }
 
 [sub_resource type="Animation" id=11]
@@ -391,7 +397,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 hframes = 45
-frame = 2
+frame = 32
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/block_high = SubResource( 12 )
@@ -437,4 +443,9 @@ autostart = true
 process_mode = 0
 wait_time = 3.0
 
+[node name="BarrierCooldownTimer" type="Timer" parent="Timers"]
+wait_time = 1.1
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Timers/NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
+[connection signal="timeout" from="Timers/BarrierCooldownTimer" to="." method="_on_BarrierCooldownTimer_timeout"]

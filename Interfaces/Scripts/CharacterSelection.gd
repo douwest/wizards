@@ -38,7 +38,7 @@ func _ready():
 		player_2_container.visible = true
 		player_2_name.text = Gamestate.player_info.name
 		for id in Network.players:
-			if id == 1:
+			if id == 1 and Network.players[id].character:
 				update_player_1(Network.players[id].character)
 		_on_player_list_changed()
 	else:
@@ -81,7 +81,7 @@ remotesync func update_player_1(character):
 		player_1_lobby_scene.queue_free()
 	player_1_lobby_scene = load(player_1_character.lobby_scene).instance()
 	$Player1/Portrait.call_deferred('add_child', player_1_lobby_scene)
-	player_1_character_label.text = player_1_character.name
+	player_1_character_label.text = '- ' + player_1_character.name + ' -'
 	if get_tree().is_network_server():
 		Gamestate.player_info.character = player_1_character
 	
@@ -93,7 +93,7 @@ remotesync func update_player_2(character):
 	player_2_lobby_scene = load(player_2_character.lobby_scene).instance()
 	player_2_lobby_scene.is_player_two = true
 	$Player2/Portrait.call_deferred('add_child', player_2_lobby_scene)
-	player_2_character_label.text = player_2_character.name
+	player_2_character_label.text = '- ' + player_2_character.name + ' -'
 	if !get_tree().is_network_server():
 		Gamestate.player_info.character = player_2_character
 
@@ -151,6 +151,7 @@ func _on_NextMapButton_pressed():
 
 func _on_RandomCharacterButton_pressed():
 	var character = Resources.characters[randi() % Resources.characters.size()]
+	print(character)
 	if get_tree().is_network_server():
 		rpc('update_player_1', character)
 	else:

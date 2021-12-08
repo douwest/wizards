@@ -6,7 +6,7 @@ signal died(pinfo, lives)
 var Spell = preload("res://Spells/Scenes/Spell.tscn")
 var Barrier = preload("res://Spells/Scenes/Barrier.tscn")
 
-export var can_cast_and_move = true
+var barrier_cooldown_active = false
 
 const FLOOR_DETECT_DISTANCE = 20.0
 const HORIZONTAL_CAST_OFFSET = 28.0
@@ -19,13 +19,14 @@ onready var barrier = $Barrier
 onready var tween = $Tween
 onready var stats = $Stats
 onready var respawnTimer = $Timers/RespawnTimer
+onready var barrierCooldownTimer = $Timers/BarrierCooldownTimer
 
 var camera = null
 
 enum State { IDLE = 0, JUMP = 1, RUN = 2, CAST = 3, DEATH = 4, BLOCK = 5 }
 enum Posture { LOW = 0, MEDIUM = 1, HIGH = 2 }
 
-var run_speed = 230
+var run_speed = 200
 var jump_strength = 500
 var state = State.IDLE
 var posture = Posture.MEDIUM
@@ -42,7 +43,7 @@ puppet var puppet_health = 9999
 puppet var puppet_lives = 9999
 puppet var puppet_visible = true
 
-func _ready():
+func _ready() -> void:
 	respawnTimer.connect('timeout', self, 'respawn')
 	speed = Vector2(run_speed, jump_strength)
 	if is_network_master():
@@ -56,33 +57,32 @@ func _ready():
 		camera.limit_bottom = 270 
 
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	if !controllable:
 		return
 		
-	if is_network_master():	
-		respawnTimer.stop()		
-		state = get_state()
-		posture = get_posture()
-		
-		var direction = get_direction()
-	
+	if is_network_master():
+		respawnTimer.stop()
 		if state != State.BLOCK:
-			remove_barrier()
-		if state != State.CAST:
-			castLight.energy = 0
-			
-		if can_cast_and_move || state != State.CAST:
-			var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
-			_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
-			var snap_vector = calculate_snap_vector(direction.y)
-			_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, false, 4, 0.9, false)
-
-		update_sprite_directions(direction.x)
-		play_animation(state, posture, _velocity)
-		update_casting_position(posture)
-		update_barrier_position()
+			state = get_state()
+			posture = get_posture()
 		
+			var direction = get_direction()
+		
+			if state != State.BLOCK:
+				remove_barrier()
+			if state != State.CAST:
+				castLight.energy = 0
+				
+			if !(state == State.CAST || state == State.BLOCK) :
+				var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
+				_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+				var snap_vector = calculate_snap_vector(direction.y)
+				_velocity = move_and_slide_with_snap(_velocity, snap_vector, FLOOR_NORMAL, false, 4, 0.9, false)
+
+			update_sprite_directions(direction.x)
+			play_animation(state, posture, _velocity)
+			update_casting_position(posture)
 	else:
 		visible = puppet_visible
 		if not tween.is_active():
@@ -94,13 +94,12 @@ func _physics_process(_delta):
 		update_sprite_directions(puppet_velocity.x)
 		play_animation(puppet_state, puppet_posture, puppet_velocity)
 		update_casting_position(puppet_posture)
-		update_barrier_position()
+	update_barrier_position()
 
 
-func play_animation(s, p, v):
+func play_animation(s, p, v) -> void:
 	if s == State.DEATH:
 		animationPlayer.play("death")
-		return
 	if s == State.BLOCK:
 		animationPlayer.play("block_" + get_posture_suffix(p))
 	elif s == State.CAST:
@@ -129,7 +128,9 @@ func get_state() -> int:
 		return State.DEATH
 	elif Input.is_action_pressed("move_1") and is_on_floor():
 		return State.CAST
-	elif Input.is_action_pressed("move_2"):
+	elif !barrier_cooldown_active and Input.is_action_pressed("move_2") and is_on_floor():
+		barrier_cooldown_active = true
+		barrierCooldownTimer.start()
 		return State.BLOCK
 	elif !is_on_floor():
 		return State.JUMP
@@ -221,15 +222,15 @@ func update_casting_position(p) -> void:
 	castPosition.position.y = get_cast_height(p)
 
 
-func cast_barrier():
+func cast_barrier() -> void:
 	barrier.enable()
 
 
-func remove_barrier():
+func remove_barrier() -> void:
 	barrier.disable()
 
 
-func _on_NetworkTickRate_timeout():
+func _on_NetworkTickRate_timeout() -> void :
 	if is_network_master():
 		rset_unreliable('puppet_position', global_position)
 		rset_unreliable('puppet_velocity', _velocity)
@@ -246,13 +247,13 @@ func set_puppet_position(new_value) -> void:
 	tween.start()
 
 
-func take_damage(damage):
+func take_damage(damage) -> void:
 	stats.set_current_health(stats.current_health - damage)
 
 
 func player_died() -> void:
 	if(is_network_master()):
-		print('player died!')
+		print('Player', Gamestate.player_info.name, 'died!')
 		emit_signal('died', Gamestate.player_info, 99)		
 		controllable = false
 		if stats.lives > 0:
@@ -262,7 +263,7 @@ func player_died() -> void:
 			print('Player <', Gamestate.player_info.name, '> has lost!')
 	
 
-func respawn():
+func respawn() -> void:
 	if(is_network_master()):
 		state = State.IDLE
 		posture = Posture.MEDIUM
@@ -272,5 +273,14 @@ func respawn():
 	controllable = true
 
 
-func set_controllable(value):
+func set_controllable(value) -> void:
 	controllable = value
+
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name.begins_with('block'):
+		state = State.IDLE
+
+
+func _on_BarrierCooldownTimer_timeout():
+	barrier_cooldown_active = false

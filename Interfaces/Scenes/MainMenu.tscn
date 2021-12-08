@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Static/Resources/Fonts/Title_Font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Static/Resources/Fonts/Medium_Font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Static/Resources/Fonts/Large_Font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Static/Resources/Fonts/Medium_Font_Cursive.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Static/Resources/Textures/Particles/Raindrop.png" type="Texture" id=4]
 [ext_resource path="res://Static/Resources/Sounds/Ambient/rain-and-thunder-nature-sounds-7803.mp3" type="AudioStream" id=5]
 [ext_resource path="res://Static/Resources/Sounds/Ambient/lightning-storm-6077.mp3" type="AudioStream" id=6]
@@ -176,26 +176,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StartScreen/Panel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -269.5
-margin_top = -141.0
-margin_right = 269.5
-margin_bottom = 141.0
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TitleContainer" type="MarginContainer" parent="StartScreen/Panel/VBoxContainer"]
-margin_right = 539.0
-margin_bottom = 150.0
+[node name="TitleContainer" type="MarginContainer" parent="StartScreen/Panel"]
+margin_left = 30.5
+margin_top = 13.0
+margin_right = 569.5
+margin_bottom = 163.0
 rect_min_size = Vector2( 0, 150 )
 
-[node name="Title" type="Label" parent="StartScreen/Panel/VBoxContainer/TitleContainer"]
+[node name="Title" type="Label" parent="StartScreen/Panel/TitleContainer"]
 margin_top = 45.0
 margin_right = 539.0
 margin_bottom = 105.0
@@ -210,24 +198,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="VBoxContainer" type="VBoxContainer" parent="StartScreen/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -173.0
+margin_top = -23.0
+margin_right = 175.0
+margin_bottom = 141.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Menu" type="VBoxContainer" parent="StartScreen/Panel/VBoxContainer"]
-margin_top = 154.0
-margin_right = 539.0
-margin_bottom = 282.0
+margin_top = 22.0
+margin_right = 348.0
+margin_bottom = 142.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="InputFields" type="VBoxContainer" parent="StartScreen/Panel/VBoxContainer/Menu"]
-margin_right = 539.0
+margin_right = 348.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 alignment = 1
 
 [node name="PlayerNameInputField" type="LineEdit" parent="StartScreen/Panel/VBoxContainer/Menu/InputFields"]
-margin_top = 9.0
-margin_right = 539.0
+margin_top = 13.0
+margin_right = 348.0
 margin_bottom = 38.0
 custom_fonts/font = ExtResource( 2 )
 max_length = 16
@@ -238,8 +240,8 @@ __meta__ = {
 
 [node name="IPAddressInputField" type="LineEdit" parent="StartScreen/Panel/VBoxContainer/Menu/InputFields"]
 margin_top = 42.0
-margin_right = 539.0
-margin_bottom = 71.0
+margin_right = 348.0
+margin_bottom = 67.0
 custom_fonts/font = ExtResource( 2 )
 placeholder_text = "Ip address"
 __meta__ = {
@@ -248,14 +250,13 @@ __meta__ = {
 
 [node name="InputButtons" type="HBoxContainer" parent="StartScreen/Panel/VBoxContainer/Menu"]
 margin_top = 84.0
-margin_right = 539.0
-margin_bottom = 128.0
+margin_right = 348.0
+margin_bottom = 120.0
 alignment = 1
 
 [node name="Create" type="Button" parent="StartScreen/Panel/VBoxContainer/Menu/InputButtons"]
-margin_left = 53.0
-margin_right = 292.0
-margin_bottom = 44.0
+margin_right = 192.0
+margin_bottom = 36.0
 custom_fonts/font = ExtResource( 3 )
 text = "Create game"
 __meta__ = {
@@ -263,9 +264,9 @@ __meta__ = {
 }
 
 [node name="Join" type="Button" parent="StartScreen/Panel/VBoxContainer/Menu/InputButtons"]
-margin_left = 296.0
-margin_right = 485.0
-margin_bottom = 44.0
+margin_left = 196.0
+margin_right = 348.0
+margin_bottom = 36.0
 custom_fonts/font = ExtResource( 3 )
 disabled = true
 text = "Join game"
