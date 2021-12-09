@@ -1,7 +1,6 @@
 class_name Game
 extends Node2D
 
-
 func _ready():
 	var error = Network.connect("server_closed", self, '_on_server_closed')
 	
@@ -53,10 +52,10 @@ remote func spawn_players(pinfo, spawn_index):
 	# If this actor does not belong to the server, change the node name and network master accordingly
 	if (pinfo.net_id != 1):
 		nactor.set_network_master(pinfo.net_id)
+
 	nactor.set_name(str(pinfo.net_id))
 	# Finally add the actor into the world
 	add_child(nactor)
-	
 
 remote func despawn_player(pinfo):
 	if (get_tree().is_network_server()):
@@ -79,6 +78,7 @@ remote func despawn_player(pinfo):
 
 
 func _on_player_died(pinfo, lives):
+	
 	print('Player ', pinfo.name, 'died!', lives, 'lives left.')
 	if lives < 0:
 		print('Game over for ', pinfo.name, '! Going back to the lobby.')

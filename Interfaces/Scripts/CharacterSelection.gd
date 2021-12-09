@@ -180,7 +180,6 @@ func _on_server_closed():
 func _on_Player1_CheckBox_toggled(button_pressed):
 	if player_1_character:
 		rpc('toggle_p1_ready', button_pressed)
-		print(button_pressed)
 
 
 func _on_Player2_CheckBox_toggled(button_pressed):

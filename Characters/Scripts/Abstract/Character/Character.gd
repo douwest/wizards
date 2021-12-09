@@ -23,9 +23,19 @@ onready var barrierCooldownTimer = $Timers/BarrierCooldownTimer
 
 var camera = null
 
-enum State { IDLE = 0, JUMP = 1, RUN = 2, CAST = 3, DEATH = 4, BLOCK = 5 }
+enum State { 
+	IDLE = 0, 
+	JUMP = 1, 
+	RUN = 2, 
+	CAST = 3, 
+	DEATH = 4, 
+	BLOCK = 5, 
+	READY_TO_ATTACK = 6, 
+	ATTACK = 7 
+	}
 enum Posture { LOW = 0, MEDIUM = 1, HIGH = 2 }
 
+var lives = 3
 var run_speed = 200
 var jump_strength = 500
 var state = State.IDLE
@@ -60,13 +70,12 @@ func _ready() -> void:
 func _physics_process(_delta) -> void:
 	if !controllable:
 		return
-		
+	print(state)
 	if is_network_master():
 		respawnTimer.stop()
 		if state != State.BLOCK:
-			state = get_state()
 			posture = get_posture()
-		
+			state = get_state()		
 			var direction = get_direction()
 		
 			if state != State.BLOCK:
@@ -100,8 +109,12 @@ func _physics_process(_delta) -> void:
 func play_animation(s, p, v) -> void:
 	if s == State.DEATH:
 		animationPlayer.play("death")
-	if s == State.BLOCK:
+	elif s == State.READY_TO_ATTACK:
+		return
+	elif s == State.BLOCK:
 		animationPlayer.play("block_" + get_posture_suffix(p))
+	elif s == State.ATTACK:
+		animationPlayer.play("attack_" + get_posture_suffix(p))
 	elif s == State.CAST:
 		animationPlayer.play("cast_" + get_posture_suffix(p))
 	elif s == State.RUN:
@@ -126,7 +139,14 @@ func get_posture() -> int:
 func get_state() -> int:
 	if(stats.current_health <= 0):
 		return State.DEATH
-	elif Input.is_action_pressed("move_1") and is_on_floor():
+		
+	if Input.is_action_just_released("move_1") and state == State.READY_TO_ATTACK and is_on_floor():
+		return State.ATTACK
+	elif Input.is_action_pressed("move_1") and state == State.READY_TO_ATTACK and is_on_floor():
+		return State.READY_TO_ATTACK
+		
+		
+	if Input.is_action_pressed("move_1") and state != State.READY_TO_ATTACK and is_on_floor():
 		return State.CAST
 	elif !barrier_cooldown_active and Input.is_action_pressed("move_2") and is_on_floor():
 		barrier_cooldown_active = true
@@ -229,6 +249,8 @@ func cast_barrier() -> void:
 func remove_barrier() -> void:
 	barrier.disable()
 
+func ready_to_attack() -> void:
+	state = State.READY_TO_ATTACK
 
 func _on_NetworkTickRate_timeout() -> void :
 	if is_network_master():
@@ -253,14 +275,11 @@ func take_damage(damage) -> void:
 
 func player_died() -> void:
 	if(is_network_master()):
-		print('Player', Gamestate.player_info.name, 'died!')
-		emit_signal('died', Gamestate.player_info, 99)		
+		emit_signal('died', Gamestate.player_info, lives - 1)		
 		controllable = false
 		if stats.lives > 0:
 			global_position = Vector2(0, 0)			
 			respawnTimer.start()
-		else:
-			print('Player <', Gamestate.player_info.name, '> has lost!')
 	
 
 func respawn() -> void:
@@ -284,3 +303,6 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 
 func _on_BarrierCooldownTimer_timeout():
 	barrier_cooldown_active = false
+
+func set_state(s):
+	state = s
