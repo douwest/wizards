@@ -1,10 +1,14 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Characters/Scripts/Abstract/Stats/Stats.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Sprites/Green/Green.png" type="Texture" id=2]
 [ext_resource path="res://Spells/Scenes/Barrier.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/Scripts/Abstract/Character/Character.gd" type="Script" id=4]
 [ext_resource path="res://Static/Resources/Textures/Particles/Light.png" type="Texture" id=5]
+[ext_resource path="res://Characters/State/StateMachine.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Characters/State/States/Idle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Characters/State/States/Run.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Characters/State/States/Air.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -478,6 +482,7 @@ color = Color( 0.364706, 0.505882, 0.662745, 0.745098 )
 energy = 1.26734
 
 [node name="Barrier" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -496,6 +501,20 @@ wait_time = 3.0
 
 [node name="BarrierCooldownTimer" type="Timer" parent="Timers"]
 wait_time = 1.1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_smoothed = true
+
+[node name="StateMachine" parent="." instance=ExtResource( 6 )]
+initial_state = NodePath("Idle")
+
+[node name="Idle" parent="StateMachine" instance=ExtResource( 7 )]
+
+[node name="Run" parent="StateMachine" instance=ExtResource( 8 )]
+
+[node name="Air" parent="StateMachine" instance=ExtResource( 9 )]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Timers/NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
