@@ -1,7 +1,7 @@
 # Run.gd
 extends CharacterState
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	# Notice how we have some code duplication between states. That's inherent to the pattern,
 	# although in production, your states will tend to be more complex and duplicate code
 	# much more rare.
@@ -13,9 +13,11 @@ func physics_update(delta: float) -> void:
 	
 	character.velocity = character.calculate_move_velocity(character.velocity, direction, character.speed, Input.is_action_just_released("jump") and character.velocity.y < 0.0)	
 	character.velocity = character.move_and_slide_with_snap(character.velocity, character.calculate_snap_vector(direction.y), character.FLOOR_NORMAL, false, 4, 0.9, false)
-	character.animationPlayer.play('walk_' + character.get_posture_suffix())
+	character.animation_state.travel("run")
 
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_pressed("move_2"):
+		state_machine.transition_to("Block")
+	elif Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("Air", {do_jump = true})
 	elif character.is_stopped():
 		state_machine.transition_to("Idle")

@@ -4,7 +4,6 @@ extends Actor
 signal died(pinfo, lives)
 
 var Spell = preload("res://Spells/Scenes/Spell.tscn")
-var Barrier = preload("res://Spells/Scenes/Barrier.tscn")
 
 var barrier_cooldown_active = false
 
@@ -15,12 +14,15 @@ onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
 onready var castPosition = $CastPosition
 onready var castLight = $CastPosition/CastLight
-onready var barrier = $Barrier
 onready var tween = $Tween
 onready var stats = $Stats
 onready var respawnTimer = $Timers/RespawnTimer
 onready var barrierCooldownTimer = $Timers/BarrierCooldownTimer
 onready var camera = $Camera2D
+
+onready var animation_state = $AnimationTree.get('parameters/playback')
+onready var idle_blend_position = $AnimationTree.get('parameters/idle/blend_position')
+onready var run_blend_position = $AnimationTree.get('parameters/run/blend_position')
 
 enum State { 
 	IDLE = 0, 
@@ -43,6 +45,7 @@ export var run_speed = 200
 export var jump_strength = 525
 #var state = State.IDLE
 var posture = Posture.MEDIUM
+var facing_direction = 1
 var controllable = true
 
 var acceleration = 0.5
@@ -66,6 +69,10 @@ func _ready() -> void:
 
 func _physics_process(_delta) -> void:
 	posture = get_posture()
+	idle_blend_position = posture
+	run_blend_position = posture
+	print(idle_blend_position, ', ', run_blend_position)
+	update_casting_position()
 	update_sprite_directions(get_direction().x)
 #	if !controllable:
 #		return
@@ -138,22 +145,18 @@ func get_posture() -> int:
 
 
 func update_sprite_directions(horizontal_direction):
-	if horizontal_direction != 0:
-		if horizontal_direction > 0:
-			sprite.scale.x = 1
-			barrier.set_sprite_scale_x(1)
-			castPosition.position.x = HORIZONTAL_CAST_OFFSET
-		else:
-			sprite.scale.x = -1
-			barrier.set_sprite_scale_x(-1)
-			castPosition.position.x = -HORIZONTAL_CAST_OFFSET
+	if horizontal_direction == 0:
+		return
+	facing_direction = horizontal_direction
+	sprite.scale.x = facing_direction
+	castPosition.position.x = facing_direction * HORIZONTAL_CAST_OFFSET
 
 
 func get_cast_height() -> int:
 	match posture:
-		posture.LOW: return -8
-		posture.MEDIUM: return -24
-		posture.HIGH: return -40
+		Posture.LOW: return -8
+		Posture.MEDIUM: return -24
+		Posture.HIGH: return -40
 		_: return -1
 
 
@@ -194,23 +197,9 @@ func cast_spell() -> void:
 	spell.global_transform = castPosition.global_transform
 
 
-func update_barrier_position() -> void:
-	barrier.global_transform = castPosition.global_transform
-	
-
 func update_casting_position() -> void:
 	castPosition.position.y = get_cast_height()
 
-
-func cast_barrier() -> void:
-	barrier.enable()
-
-
-func remove_barrier() -> void:
-	barrier.disable()
-
-#func ready_to_attack() -> void:
-#	state = State.READY_TO_ATTACK
 
 func _on_NetworkTickRate_timeout() -> void :
 	if is_network_master():
@@ -256,11 +245,9 @@ func set_controllable(value) -> void:
 	controllable = value
 
 
-#func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-#	if anim_name.begins_with('block'):
-#		state = State.IDLE
 func is_stopped():
 	return velocity.x >= -10 and velocity.x <= 10
+
 
 func _on_BarrierCooldownTimer_timeout():
 	barrier_cooldown_active = false

@@ -8,7 +8,7 @@ func enter(msg := {}) -> void:
 		character.velocity.y = -character.jump_strength
 
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	# Horizontal movement.
 	var direction := character.get_direction()
 
@@ -18,7 +18,6 @@ func physics_update(delta: float) -> void:
 
 	# Landing.
 	if character.is_on_floor():
-		print('on  floor')
 		if character.is_stopped():
 			state_machine.transition_to("Idle")
 		else:

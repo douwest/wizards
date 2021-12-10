@@ -1,14 +1,14 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Characters/Scripts/Abstract/Stats/Stats.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Sprites/Green/Green.png" type="Texture" id=2]
-[ext_resource path="res://Spells/Scenes/Barrier.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/Scripts/Abstract/Character/Character.gd" type="Script" id=4]
 [ext_resource path="res://Static/Resources/Textures/Particles/Light.png" type="Texture" id=5]
 [ext_resource path="res://Characters/State/StateMachine.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Characters/State/States/Idle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Characters/State/States/Run.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Characters/State/States/Air.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Characters/State/States/Block.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -78,20 +78,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 42 ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.075 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "cast_barrier"
-} ]
-}
 
 [sub_resource type="Animation" id=14]
 resource_name = "block_low"
@@ -109,20 +95,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 30 ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.075 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "cast_barrier"
-} ]
-}
 
 [sub_resource type="Animation" id=13]
 resource_name = "block_mid"
@@ -139,20 +111,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 36 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.075 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "cast_barrier"
-} ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -333,6 +291,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=6]
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -347,6 +306,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=7]
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -393,6 +353,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=16]
 resource_name = "walk_high"
 length = 0.8
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -409,6 +370,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=15]
 resource_name = "walk_low"
 length = 0.8
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -438,6 +400,61 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 14, 15, 16, 17, 18, 19, 20, 21 ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "idle_mid"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "idle_high"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "idle_low"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=22]
+blend_point_0/node = SubResource( 20 )
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource( 21 )
+blend_point_1/pos = 2.0
+blend_point_2/node = SubResource( 33 )
+blend_point_2/pos = 0.0
+min_space = 0.0
+max_space = 2.0
+value_label = "posture"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "walk_low"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "walk_mid"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "walk_high"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=26]
+blend_point_0/node = SubResource( 27 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 28 )
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource( 29 )
+blend_point_2/pos = 2.0
+min_space = 0.0
+max_space = 2.0
+snap = 1.0
+value_label = "posture"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachine" id=23]
+states/idle/node = SubResource( 22 )
+states/idle/position = Vector2( 206, 236 )
+states/run/node = SubResource( 26 )
+states/run/position = Vector2( 466, 236 )
+transitions = [ "idle", "run", SubResource( 30 ), "run", "idle", SubResource( 31 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
 [node name="Character" type="KinematicBody2D"]
 script = ExtResource( 4 )
@@ -471,6 +488,14 @@ anims/walk_high = SubResource( 16 )
 anims/walk_low = SubResource( 15 )
 anims/walk_mid = SubResource( 10 )
 
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 23 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 24 )
+parameters/idle/blend_position = 1.0
+parameters/run/blend_position = 1.0
+
 [node name="CastPosition" type="Position2D" parent="."]
 position = Vector2( 28, -40 )
 
@@ -480,9 +505,6 @@ scale = Vector2( 0.317801, 0.317801 )
 texture = ExtResource( 5 )
 color = Color( 0.364706, 0.505882, 0.662745, 0.745098 )
 energy = 1.26734
-
-[node name="Barrier" parent="." instance=ExtResource( 3 )]
-visible = false
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -516,6 +538,7 @@ initial_state = NodePath("Idle")
 
 [node name="Air" parent="StateMachine" instance=ExtResource( 9 )]
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[node name="Block" parent="StateMachine" instance=ExtResource( 11 )]
+
 [connection signal="timeout" from="Timers/NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
 [connection signal="timeout" from="Timers/BarrierCooldownTimer" to="." method="_on_BarrierCooldownTimer_timeout"]
