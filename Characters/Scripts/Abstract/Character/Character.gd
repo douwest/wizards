@@ -21,8 +21,7 @@ onready var barrierCooldownTimer = $Timers/BarrierCooldownTimer
 onready var camera = $Camera2D
 
 onready var animation_state = $AnimationTree.get('parameters/playback')
-onready var idle_blend_position = $AnimationTree.get('parameters/idle/blend_position')
-onready var run_blend_position = $AnimationTree.get('parameters/run/blend_position')
+onready var animation_tree = $AnimationTree
 
 enum State { 
 	IDLE = 0, 
@@ -34,7 +33,7 @@ enum State {
 	READY_TO_ATTACK = 6, 
 	ATTACK = 7 
 	}
-	
+
 enum Posture { 
 	LOW = 0, 
 	MEDIUM = 1, 
@@ -69,9 +68,6 @@ func _ready() -> void:
 
 func _physics_process(_delta) -> void:
 	posture = get_posture()
-	idle_blend_position = posture
-	run_blend_position = posture
-	print(idle_blend_position, ', ', run_blend_position)
 	update_casting_position()
 	update_sprite_directions(get_direction().x)
 #	if !controllable:
@@ -114,10 +110,9 @@ func _physics_process(_delta) -> void:
 func get_posture() -> int:
 	if Input.is_action_pressed("crouch"):
 		return Posture.LOW
-	elif Input.is_action_pressed("extend"):
+	if Input.is_action_pressed("extend"):
 		return Posture.HIGH
-	else:
-		return Posture.MEDIUM
+	return Posture.MEDIUM
 
 
 #func get_state() -> int:
@@ -178,7 +173,7 @@ func calculate_snap_vector(vertical_direction) -> Vector2:
 func calculate_move_velocity(linear_velocity, direction, speed, is_jump_interrupted) -> Vector2:
 	var v = linear_velocity
 	
-	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+	if direction.x != 0:
 		v.x = lerp(v.x, speed.x * direction.x, acceleration)
 	else:
 		v.x = lerp(v.x, 0.0, friction)

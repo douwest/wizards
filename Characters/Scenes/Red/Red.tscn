@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/Scripts/Red/Red.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Scenes/Abstract/Character.tscn" type="PackedScene" id=2]
@@ -53,6 +53,8 @@ tracks/2/keys = {
 } ]
 }
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
 [node name="Red" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 
@@ -62,6 +64,9 @@ hframes = 55
 
 [node name="AnimationPlayer" parent="." index="2"]
 anims/teleport = SubResource( 1 )
+
+[node name="AnimationTree" parent="." index="3"]
+parameters/playback = SubResource( 2 )
 
 [node name="CastLight" parent="CastPosition" index="0"]
 energy = 1.29392

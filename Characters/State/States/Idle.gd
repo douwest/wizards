@@ -3,19 +3,26 @@ extends CharacterState
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(_msg := {}) -> void:
+	character.animation_state.travel('idle')		
 	character.velocity = Vector2.ZERO
 
 
-func update(_delta: float) -> void:
-	character.animation_state.travel('idle')
+func physics_update(_delta: float) -> void:
+	character.animation_tree.set('parameters/idle/blend_position', character.get_posture())
 	# If you have platforms that break when standing on them, you need that check for 
 	# the character to fall.
 	if not character.is_on_floor():
 		state_machine.transition_to("Air")
 		return
 		
+	if Input.is_action_just_pressed("move_3"):
+		state_machine.transition_to("Death")
+		
 	if Input.is_action_pressed("move_2"):
 		state_machine.transition_to("Block")
+	elif Input.is_action_just_pressed("move_1"):
+		if state_machine.has_node("PillarJump"):
+			state_machine.transition_to("PillarJump")
 	elif Input.is_action_just_pressed("jump"):
 		# As we'll only have one air state for both jump and fall, we use the `msg` dictionary 
 		# to tell the next state that we want to jump.
