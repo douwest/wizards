@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Static/Resources/UIElements/Scripts/RosterButton.gd"
 }, {
+"base": "AbilityState",
+"class": "SpellState",
+"language": "GDScript",
+"path": "res://Characters/State/Abstract/SpellState.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -67,6 +72,7 @@ _global_script_class_icons={
 "CharacterState": "",
 "Game": "",
 "RosterButton": "",
+"SpellState": "",
 "State": "",
 "StateMachine": "",
 "Stats": ""
