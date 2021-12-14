@@ -45,10 +45,8 @@ func _ready():
 		player_2_container.visible = false
 		player_1_name.text = Gamestate.player_info.name
 		
-	Network.connect('player_list_changed', self, '_on_player_list_changed')
-	
 	update_map()
-	
+	error = Network.connect('player_list_changed', self, '_on_player_list_changed')
 	if error: 
 		print(error)
 
@@ -134,7 +132,6 @@ func _on_player_list_changed():
 		player_2_container.visible = false
 	
 	for id in Network.players:
-		print(Network.players[id])
 		if id == 1:
 			player_1_name.text = Network.players[id].name
 		else:

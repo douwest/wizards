@@ -1,67 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Characters/Scripts/Red/Red.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Scenes/Abstract/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/Sprites/Red/Red.png" type="Texture" id=3]
+[ext_resource path="res://Spells/States/LightningSpell.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Spells/States/PillarJump.tscn" type="PackedScene" id=5]
 
-[sub_resource type="Animation" id=1]
-resource_name = "teleport"
-length = 0.25
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 32, 33, 32 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.25 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"values": [ {
-"args": [ false ],
-"method": "set_controllable"
-}, {
-"args": [  ],
-"method": "teleport"
-}, {
-"args": [ true ],
-"method": "set_controllable"
-} ]
-}
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
 [node name="Red" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+attack_state = ExtResource( 4 )
+special_a_state = ExtResource( 5 )
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
 hframes = 55
 
-[node name="AnimationPlayer" parent="." index="2"]
-anims/teleport = SubResource( 1 )
+[node name="AnimationTree" parent="." index="2"]
+parameters/playback = SubResource( 2 )
+parameters/run/blend_position = 1.0
 
 [node name="CastLight" parent="CastPosition" index="0"]
 energy = 1.29392
