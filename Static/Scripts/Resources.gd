@@ -12,12 +12,7 @@ var characters = [
 		portrait = "res://Characters/Sprites/Green/Green_Portrait.png",
 		lobby_scene = "res://Characters/Scenes/Green/GreenLobby.tscn",
 		scene = "res://Characters/Scenes/Green/Green.tscn"
-	},
-#	{
-#		name = "Warlock", 
-#		portrait = "res://Characters/Sprites/Warlock/Warlock_Portrait.png",
-#		scene = "res://Characters/Scenes/Warlock/Warlock.tscn"
-#	}
+	}
 ]
 
 var levels = [

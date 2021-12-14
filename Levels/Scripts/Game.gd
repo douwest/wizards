@@ -1,10 +1,11 @@
 class_name Game
 extends Node2D
 
+onready var level = load(Gamestate.level.actor_path).instance()
+
 func _ready():
 	var error = Network.connect("server_closed", self, '_on_server_closed')
-	
-	add_child(load(Gamestate.level.actor_path).instance())
+	add_child(level)
 	# Connect event handler to the player_list_changed signal
 	error =  Network.connect("player_list_changed", self, "_on_player_list_changed")
 	# If we are in the server, connect to the event that will deal with player despawning
