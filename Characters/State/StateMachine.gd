@@ -16,10 +16,12 @@ onready var state: State = get_node(initial_state)
 
 
 func _ready() -> void:
-	yield(owner, "ready")
 	# The state machine assigns itself to the State objects' state_machine property.
+	
 	for child in get_children():
 		child.state_machine = self
+		
+	yield(owner, "ready")
 	state.enter()
 
 

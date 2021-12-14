@@ -2,15 +2,14 @@
 extends CharacterState
 
 
-
 # If we get a message asking us to jump, we jump.
 func enter(msg := {}) -> void:
 	if msg.has("do_jump"):
-		character.velocity.y = -character.jump_strength
+		character.velocity.y = -character.speed.y
 
 
 func physics_update(_delta: float) -> void:
-	character.animation_state.travel('jump' if character.velocity.y <= 0 else 'falling')	
+	character.animation_state.travel('jump' if character.velocity.y <= 0 else 'falling')
 	# Horizontal movement.
 	var direction := character.get_direction()
 
