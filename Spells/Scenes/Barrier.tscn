@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Spells/Scenes/Shield-Sheet.png" type="Texture" id=1]
+[ext_resource path="res://Spells/Sprites/Shield-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Spells/Scripts/Barrier.gd" type="Script" id=2]
 [ext_resource path="res://Spells/Scenes/SpellLight.tscn" type="PackedScene" id=3]
 

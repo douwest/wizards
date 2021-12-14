@@ -1,25 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Characters/Scripts/Red/Red.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Scenes/Abstract/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/Sprites/Red/Red.png" type="Texture" id=3]
 [ext_resource path="res://Spells/States/LightningSpell.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Spells/States/PillarJump.tscn" type="PackedScene" id=5]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="Red" instance=ExtResource( 2 )]
-script = ExtResource( 1 )
 attack_state = ExtResource( 4 )
 special_a_state = ExtResource( 5 )
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
-hframes = 55
+frame = 1
 
 [node name="AnimationTree" parent="." index="2"]
-parameters/playback = SubResource( 2 )
-parameters/run/blend_position = 1.0
-
-[node name="CastLight" parent="CastPosition" index="0"]
-energy = 1.29392
+parameters/playback = SubResource( 1 )
