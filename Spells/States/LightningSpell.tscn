@@ -38,6 +38,36 @@ tracks/2/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Spell/StaticBody2D/CollisionShape2D:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 15, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Spell/StaticBody2D/CollisionShape2D:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Spell/StaticBody2D/CollisionShape2D:shape:height")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "lightning"
@@ -68,34 +98,45 @@ tracks/1/keys = {
 "values": [ false, true, false ]
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Spell/StaticBody2D:position:x")
+tracks/2/path = NodePath("Spell/StaticBody2D/CollisionShape2D:position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 240, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 0.65 )
+"points": PoolRealArray( 15, -0.25, 0, 0.25, 0, 15, -0.25, 0, 0.25, 0, 145, -0.25, 0, 0.25, 0, 245, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.55, 0.6 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Spell/StaticBody2D:position:y")
+tracks/3/path = NodePath("Spell/StaticBody2D/CollisionShape2D:position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 0.65 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.55, 0.6 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Spell/StaticBody2D/CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.55, 0.6 )
 }
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 3.0
-height = 2.0
+height = 0.0
 
 [node name="LightningSpell" type="Node"]
 script = ExtResource( 1 )
 
 [node name="Spell" type="Node2D" parent="."]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Spell"]
 root_node = NodePath("../..")
@@ -108,8 +149,11 @@ texture = ExtResource( 2 )
 hframes = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Spell"]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spell/StaticBody2D"]
+position = Vector2( 15, 0 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
