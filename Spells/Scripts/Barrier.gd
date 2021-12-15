@@ -10,6 +10,7 @@ func disable():
 	$SpellLight.energy = 0
 	
 func enable():
+	$SpellLight.energy = 1	
 	$AnimationTree.active = true
 	animation_state.travel("start_cast")
 	$CollisionShape2D.disabled = false

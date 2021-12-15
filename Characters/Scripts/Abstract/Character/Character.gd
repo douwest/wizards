@@ -34,7 +34,7 @@ enum State {
 	BLOCK = 5, 
 	READY_TO_ATTACK = 6, 
 	ATTACK = 7 
-	}
+}
 
 enum Posture { 
 	LOW = 0, 
