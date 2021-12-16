@@ -2,13 +2,10 @@ extends Actor
 
 
 export var health = 10
+onready var state_machine: StateMachine = $StateMachine
 
-func _ready() -> void:
-	pass
-	
-func _physics_process(_delta) -> void:
-	if health <= 0:
-		self.queue_free()
-	
-func take_damage(damage):
+
+func take_damage(damage, pos, dir):
 	health -= damage
+	if health <= 0:
+		state_machine.transition_to("Death", {direction = dir, hit_position = pos})

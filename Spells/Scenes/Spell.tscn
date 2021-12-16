@@ -25,7 +25,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 15, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 30, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "bezier"
@@ -51,7 +51,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "lightning"
-length = 0.7
+length = 0.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spell/Sprite:frame")
@@ -60,7 +60,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.4, 0.5, 0.6 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2 ]
@@ -72,10 +72,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 0.65 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, true, false ]
+"values": [ true, false ]
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("Spell/CollisionShape2D:position:x")
@@ -84,8 +84,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 15, -0.25, 0, 0.25, 0, 15, -0.25, 0, 0.25, 0, 145, -0.25, 0, 0.25, 0, 245, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 0.55, 0.6 )
+"points": PoolRealArray( 15, -0.25, 0, 0.25, 0, 145, -0.25, 0, 0.25, 0, 245, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.25 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("Spell/CollisionShape2D:position:y")
@@ -94,8 +94,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 0.55, 0.6 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.25 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("Spell/CollisionShape2D:shape:height")
@@ -104,8 +104,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.4, 0.55, 0.6 )
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.25 )
 }
 
 [sub_resource type="CapsuleShape2D" id=3]
@@ -113,7 +113,6 @@ radius = 3.0
 height = 0.0
 
 [node name="Spell" type="Area2D"]
-visible = false
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 2 )
@@ -129,7 +128,7 @@ texture = ExtResource( 1 )
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 15, 0 )
+position = Vector2( 30, 0 )
 rotation = 1.5708
 shape = SubResource( 3 )
 

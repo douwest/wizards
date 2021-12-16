@@ -64,13 +64,6 @@ func _ready() -> void:
 
 func _physics_process(_delta) -> void:
 	update_sprite_directions(get_direction().x)
-	# TODO remove in production - for testing purposes
-	if Input.is_action_just_pressed("ui_cancel"):
-		state_machine.transition_to("Death")
-	if stats.current_health <= 0:
-		# Death can happen from any state, and should be immediate. Therefore the transition
-		# is defined on the character itself instead of within every state.
-		state_machine.transition_to("Death")
 
 
 func get_posture() -> int:
@@ -110,8 +103,10 @@ func calculate_move_velocity(linear_velocity, direction, speed, is_jump_interrup
 	return v
 
 
-func take_damage(damage) -> void:
+func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
 	stats.set_current_health(stats.current_health - damage)
+	if stats.current_health <= 0:
+		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
 
 
 func player_died() -> void:
