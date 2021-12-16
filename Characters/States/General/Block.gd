@@ -25,4 +25,5 @@ func update_position():
 
 func _on_Barrier_area_entered(area):
 	barrier.disable()
+	character.animation_tree.set('parameters/recoil/blend_position', character.get_posture())
 	character.animation_state.travel("recoil")

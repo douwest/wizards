@@ -27,6 +27,7 @@ func cast_spell():
 	$Particles2D.process_material.radial_accel = 100
 	is_ready = false
 	character.animation_tree.set('parameters/cast/blend_position', character.get_posture())
+	character.animation_tree.set('parameters/recoil/blend_position', character.get_posture())
 	character.animation_state.travel('cast')
 	cast_timer.start(cast_time)
 	$Particles2D.visible = true

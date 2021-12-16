@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://Characters/Scripts/Abstract/Stats/Stats.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Sprites/Green/Green.png" type="Texture" id=2]
@@ -84,8 +84,25 @@ value_label = "posture"
 [sub_resource type="AnimationNodeAnimation" id=37]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=66]
-animation = "recoil"
+[sub_resource type="AnimationNodeAnimation" id=77]
+animation = "recoil_low"
+
+[sub_resource type="AnimationNodeAnimation" id=78]
+animation = "recoil_mid"
+
+[sub_resource type="AnimationNodeAnimation" id=79]
+animation = "recoil_high"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=73]
+blend_point_0/node = SubResource( 77 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 78 )
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource( 79 )
+blend_point_2/pos = 2.0
+min_space = 0.0
+max_space = 2.0
+snap = 1.0
 
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "walk_low"
@@ -142,15 +159,15 @@ value_label = "posture"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=61]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+[sub_resource type="AnimationNodeStateMachineTransition" id=80]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
 
 [sub_resource type="AnimationNodeStateMachine" id=23]
 states/block/node = SubResource( 47 )
@@ -163,11 +180,11 @@ states/idle/node = SubResource( 22 )
 states/idle/position = Vector2( 102, 302 )
 states/jump/node = SubResource( 37 )
 states/jump/position = Vector2( 367, 69 )
-states/recoil/node = SubResource( 66 )
-states/recoil/position = Vector2( 559, 476 )
+states/recoil/node = SubResource( 73 )
+states/recoil/position = Vector2( 622, 526.613 )
 states/run/node = SubResource( 26 )
 states/run/position = Vector2( 367, 302 )
-transitions = [ "idle", "run", SubResource( 34 ), "run", "idle", SubResource( 35 ), "jump", "falling", SubResource( 38 ), "jump", "run", SubResource( 39 ), "run", "jump", SubResource( 40 ), "idle", "falling", SubResource( 41 ), "falling", "idle", SubResource( 42 ), "idle", "jump", SubResource( 43 ), "jump", "idle", SubResource( 44 ), "run", "falling", SubResource( 45 ), "falling", "run", SubResource( 46 ), "idle", "block", SubResource( 48 ), "block", "idle", SubResource( 49 ), "run", "block", SubResource( 50 ), "block", "run", SubResource( 51 ), "idle", "cast", SubResource( 59 ), "run", "cast", SubResource( 61 ), "cast", "recoil", SubResource( 67 ), "recoil", "idle", SubResource( 68 ), "cast", "idle", SubResource( 71 ), "block", "recoil", SubResource( 72 ) ]
+transitions = [ "idle", "run", SubResource( 34 ), "run", "idle", SubResource( 35 ), "jump", "falling", SubResource( 38 ), "jump", "run", SubResource( 39 ), "run", "jump", SubResource( 40 ), "idle", "falling", SubResource( 41 ), "falling", "idle", SubResource( 42 ), "idle", "jump", SubResource( 43 ), "jump", "idle", SubResource( 44 ), "run", "falling", SubResource( 45 ), "falling", "run", SubResource( 46 ), "idle", "block", SubResource( 48 ), "block", "idle", SubResource( 49 ), "run", "block", SubResource( 50 ), "block", "run", SubResource( 51 ), "idle", "cast", SubResource( 59 ), "run", "cast", SubResource( 61 ), "cast", "idle", SubResource( 71 ), "recoil", "idle", SubResource( 80 ), "cast", "recoil", SubResource( 81 ), "block", "recoil", SubResource( 82 ) ]
 start_node = "idle"
 graph_offset = Vector2( 0, 2.61297 )
 
@@ -401,6 +418,99 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=74]
+resource_name = "recoil_high"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 47 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "Idle", {
+} ],
+"method": "transition_to"
+} ]
+}
+
+[sub_resource type="Animation" id=75]
+resource_name = "recoil_low"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 35 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "Idle", {
+} ],
+"method": "transition_to"
+} ]
+}
+
+[sub_resource type="Animation" id=76]
+resource_name = "recoil_mid"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 41 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "Idle", {
+} ],
+"method": "transition_to"
+} ]
+}
+
 [sub_resource type="Animation" id=63]
 resource_name = "special_a"
 
@@ -480,6 +590,7 @@ parameters/playback = SubResource( 24 )
 parameters/block/blend_position = 0
 parameters/cast/blend_position = 0
 parameters/idle/blend_position = 0.0
+parameters/recoil/blend_position = 0
 parameters/run/blend_position = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationTree"]
@@ -497,6 +608,9 @@ anims/idle_low = SubResource( 7 )
 anims/idle_mid = SubResource( 8 )
 anims/jump = SubResource( 9 )
 anims/recoil = SubResource( 70 )
+anims/recoil_high = SubResource( 74 )
+anims/recoil_low = SubResource( 75 )
+anims/recoil_mid = SubResource( 76 )
 anims/special_a = SubResource( 63 )
 anims/special_b = SubResource( 64 )
 anims/walk_high = SubResource( 16 )
