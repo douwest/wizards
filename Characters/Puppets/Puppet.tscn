@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Characters/Sprites/Red/Red.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Puppets/Puppet.gd" type="Script" id=2]
-[ext_resource path="res://Characters/State/StateMachine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Characters/States/StateMachine.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/Puppets/State/PuppetDeath.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Characters/Puppets/PuppetIdl.gd" type="Script" id=5]
+[ext_resource path="res://Characters/Puppets/State/PuppetIdle.gd" type="Script" id=5]
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 29.2635

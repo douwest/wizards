@@ -22,6 +22,7 @@ onready var stats: Stats = $Stats
 onready var camera: Camera2D = $Camera2D
 onready var animation_state = $AnimationTree.get('parameters/playback')
 onready var animation_tree: AnimationTree = $AnimationTree
+onready var animation_player: AnimationPlayer = $AnimationTree/AnimationPlayer
 onready var state_machine: StateMachine = $StateMachine
 onready var cast_position: CastPosition = $CastPosition
 

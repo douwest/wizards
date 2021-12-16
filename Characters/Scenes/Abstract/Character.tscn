@@ -1,16 +1,15 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://Characters/Scripts/Abstract/Stats/Stats.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Sprites/Green/Green.png" type="Texture" id=2]
-[ext_resource path="res://Characters/State/States/Death.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Characters/States/General/Death.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/Scripts/Abstract/Character/Character.gd" type="Script" id=4]
-[ext_resource path="res://Static/Resources/Textures/Particles/Light.png" type="Texture" id=5]
-[ext_resource path="res://Characters/State/StateMachine.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Characters/State/States/Idle.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Characters/State/States/Run.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Characters/State/States/Air.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Characters/States/StateMachine.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Characters/States/General/Idle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Characters/States/General/Run.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Characters/States/General/Air.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Characters/Scenes/Abstract/PlayerCamera.gd" type="Script" id=10]
-[ext_resource path="res://Characters/State/States/Block.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Characters/States/General/Block.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Characters/Scenes/Abstract/CastPosition.gd" type="Script" id=14]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -85,6 +84,9 @@ value_label = "posture"
 [sub_resource type="AnimationNodeAnimation" id=37]
 animation = "jump"
 
+[sub_resource type="AnimationNodeAnimation" id=66]
+animation = "recoil"
+
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "walk_low"
 
@@ -138,28 +140,36 @@ value_label = "posture"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=59]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=61]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
 
 [sub_resource type="AnimationNodeStateMachine" id=23]
 states/block/node = SubResource( 47 )
 states/block/position = Vector2( 102, 476 )
 states/cast/node = SubResource( 58 )
-states/cast/position = Vector2( 392, 476 )
+states/cast/position = Vector2( 367, 635 )
 states/falling/node = SubResource( 36 )
 states/falling/position = Vector2( 102, 69 )
 states/idle/node = SubResource( 22 )
 states/idle/position = Vector2( 102, 302 )
 states/jump/node = SubResource( 37 )
 states/jump/position = Vector2( 367, 69 )
+states/recoil/node = SubResource( 66 )
+states/recoil/position = Vector2( 559, 476 )
 states/run/node = SubResource( 26 )
 states/run/position = Vector2( 367, 302 )
-transitions = [ "idle", "run", SubResource( 34 ), "run", "idle", SubResource( 35 ), "jump", "falling", SubResource( 38 ), "jump", "run", SubResource( 39 ), "run", "jump", SubResource( 40 ), "idle", "falling", SubResource( 41 ), "falling", "idle", SubResource( 42 ), "idle", "jump", SubResource( 43 ), "jump", "idle", SubResource( 44 ), "run", "falling", SubResource( 45 ), "falling", "run", SubResource( 46 ), "idle", "block", SubResource( 48 ), "block", "idle", SubResource( 49 ), "run", "block", SubResource( 50 ), "block", "run", SubResource( 51 ), "idle", "cast", SubResource( 59 ), "cast", "idle", SubResource( 60 ), "run", "cast", SubResource( 61 ), "cast", "run", SubResource( 62 ) ]
+transitions = [ "idle", "run", SubResource( 34 ), "run", "idle", SubResource( 35 ), "jump", "falling", SubResource( 38 ), "jump", "run", SubResource( 39 ), "run", "jump", SubResource( 40 ), "idle", "falling", SubResource( 41 ), "falling", "idle", SubResource( 42 ), "idle", "jump", SubResource( 43 ), "jump", "idle", SubResource( 44 ), "run", "falling", SubResource( 45 ), "falling", "run", SubResource( 46 ), "idle", "block", SubResource( 48 ), "block", "idle", SubResource( 49 ), "run", "block", SubResource( 50 ), "block", "run", SubResource( 51 ), "idle", "cast", SubResource( 59 ), "run", "cast", SubResource( 61 ), "cast", "recoil", SubResource( 67 ), "recoil", "idle", SubResource( 68 ), "cast", "idle", SubResource( 71 ), "block", "recoil", SubResource( 72 ) ]
 start_node = "idle"
-graph_offset = Vector2( 0, 302.696 )
+graph_offset = Vector2( 0, 2.61297 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
@@ -360,6 +370,37 @@ tracks/0/keys = {
 "values": [ 49 ]
 }
 
+[sub_resource type="Animation" id=70]
+resource_name = "recoil"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 41 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "Idle", {
+} ],
+"method": "transition_to"
+} ]
+}
+
 [sub_resource type="Animation" id=63]
 resource_name = "special_a"
 
@@ -455,6 +496,7 @@ anims/idle_high = SubResource( 6 )
 anims/idle_low = SubResource( 7 )
 anims/idle_mid = SubResource( 8 )
 anims/jump = SubResource( 9 )
+anims/recoil = SubResource( 70 )
 anims/special_a = SubResource( 63 )
 anims/special_b = SubResource( 64 )
 anims/walk_high = SubResource( 16 )
@@ -463,12 +505,6 @@ anims/walk_mid = SubResource( 10 )
 
 [node name="CastPosition" type="Position2D" parent="."]
 script = ExtResource( 14 )
-
-[node name="CastLight" type="Light2D" parent="CastPosition"]
-visible = false
-scale = Vector2( 0.3, 0.3 )
-texture = ExtResource( 5 )
-color = Color( 0.364706, 0.505882, 0.662745, 0.745098 )
 
 [node name="Tween" type="Tween" parent="."]
 

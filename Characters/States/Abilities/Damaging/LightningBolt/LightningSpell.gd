@@ -6,13 +6,14 @@ onready var animation_player: AnimationPlayer = $Spell/AnimationPlayer
 onready var cast_timer: Timer = $Spell/CastTimer
 
 var is_ready = false
-var cast_time = 0.3
+var cast_time = 0.5
 
 func update(_delta: float) -> void:
 	if not Input.is_action_pressed("attack"):
 		cast_timer.stop()
 		$Particles2D.visible = false
 		if is_ready:
+			character.animation_state.travel("recoil")
 			animation_player.play('lightning')
 		else:
 			state_machine.transition_to('Idle')
@@ -35,11 +36,6 @@ func determine_casting_position() -> void:
 	spell.rotation_degrees = 180 if character.facing_direction == -1 else 0
 	spell.position = character.cast_position.position
 	$Particles2D.position = character.cast_position.position
-	
-
-# Signals specific to this spell
-func _on_AnimationPlayer_animation_finished(anim_name):
-	state_machine.transition_to('Idle')
 
 
 func _on_CastTimer_timeout():

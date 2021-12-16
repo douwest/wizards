@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Basic Attack-Sheet.png-dda147034a2bd817efe0b4eee8360cba.stex"
+path="res://.import/RockVolley.png-2844d4a6a8c75b9d2fd7063decf820a1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spells/Sprites/Basic Attack-Sheet.png"
-dest_files=[ "res://.import/Basic Attack-Sheet.png-dda147034a2bd817efe0b4eee8360cba.stex" ]
+source_file="res://Characters/States/Abilities/Damaging/RockVolley/RockVolley.png"
+dest_files=[ "res://.import/RockVolley.png-2844d4a6a8c75b9d2fd7063decf820a1.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

@@ -22,4 +22,7 @@ func update_position():
 	barrier.position = character.cast_position.position
 	barrier.sprite.scale.x = character.facing_direction
 
-	
+
+func _on_Barrier_area_entered(area):
+	barrier.disable()
+	character.animation_state.travel("recoil")
