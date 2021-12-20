@@ -10,7 +10,7 @@ func _ready() -> void:
 	assert(character != null)
 	
 func _physics_process(_delta: float):
-	position.x = character.position.x + (character.facing_direction * HORIZONTAL_CAST_OFFSET)
+	position.x = character.position.x + (character.facing_direction.x * HORIZONTAL_CAST_OFFSET)
 	position.y = character.position.y + get_cast_height()
 	
 func get_cast_height() -> int:

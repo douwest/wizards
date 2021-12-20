@@ -13,7 +13,7 @@ export var initial_state := NodePath()
 
 # The current active state. At the start of the game, we get the `initial_state`.
 onready var state: State = get_node(initial_state)
-
+var message = {}
 
 func _ready() -> void:
 	# The state machine assigns itself to the State objects' state_machine property.
@@ -51,5 +51,6 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 
 	state.exit()
 	state = get_node(target_state_name)
+	message = msg
 	state.enter(msg)
 	emit_signal("transitioned", state.name)

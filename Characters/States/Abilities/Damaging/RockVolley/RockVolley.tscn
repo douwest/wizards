@@ -4,3 +4,8 @@
 
 [node name="RockVolley" type="Node"]
 script = ExtResource( 1 )
+
+[node name="CastTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CastTimer" to="." method="_on_CastTimer_timeout"]

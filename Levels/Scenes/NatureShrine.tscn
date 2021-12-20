@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Levels/Resources/Level-Nature-Shrine.png" type="Texture" id=1]
 [ext_resource path="res://Static/Resources/Textures/Particles/Light.png" type="Texture" id=2]
 [ext_resource path="res://Levels/Scripts/Level.gd" type="Script" id=3]
-[ext_resource path="res://Characters/Puppets/Puppet.tscn" type="PackedScene" id=4]
 
 [node name="NatureShrine" type="StaticBody2D"]
 script = ExtResource( 3 )
@@ -54,6 +53,3 @@ texture_scale = 0.3
 [node name="Moon" type="Light2D" parent="Lights"]
 position = Vector2( -378.761, -147.166 )
 texture = ExtResource( 2 )
-
-[node name="Puppet" parent="." instance=ExtResource( 4 )]
-position = Vector2( -393.628, 112.975 )

@@ -2,16 +2,19 @@ extends Area2D
 
 
 onready var sprite = $Sprite
-onready var animation_state = $AnimationTree.get('parameters/playback')
+onready var animation_tree = $AnimationTree
+onready var animation_state = animation_tree.get('parameters/playback')
+onready var collision_shape: CollisionShape2D = $CollisionShape2D
+onready var spell_light: Light2D = $SpellLight
 
-func disable():
+remotesync func disable():
 	visible = false
-	$CollisionShape2D.disabled = true
-	$SpellLight.energy = 0
+	collision_shape.disabled = true
+	spell_light.energy = 0
 	
 func enable():
-	$SpellLight.energy = 1	
-	$AnimationTree.active = true
+	spell_light.energy = 1
+	animation_tree.active = true
 	animation_state.travel("start_cast")
-	$CollisionShape2D.disabled = false
+	collision_shape.disabled = false
 	

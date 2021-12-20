@@ -27,7 +27,7 @@ func _on_KinematicSpell_tree_entered():
 
 func _on_KinematicSpell_body_entered(body):
 	if body.has_method('take_damage'):
-		body.take_damage(damage)
+		body.take_damage(damage, body.position.direction_to(self.position), Vector3(body.position.x, self.position.y, 0))
 	self.queue_free()
 
 

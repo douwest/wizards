@@ -16,15 +16,16 @@ func physics_update(_delta: float) -> void:
 		state_machine.transition_to("Air")
 		return
 
-	if Input.is_action_pressed("block"):
-		state_machine.transition_to("Block")
-	elif Input.is_action_pressed("attack"):
-		state_machine.transition_to(character.attack_state_name)
-	elif Input.is_action_just_pressed("special_1"):
-		state_machine.transition_to(character.special_a_state_name)
-	elif Input.is_action_just_pressed("special_2"):
-		state_machine.transition_to(character.special_b_state_name)
-	elif Input.is_action_just_pressed("jump"):
-		state_machine.transition_to("Air", {do_jump = true})
-	elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
-		state_machine.transition_to("Run")
+	if character.is_network_master():
+		if Input.is_action_pressed("block"):
+			state_machine.transition_to("Block")
+		elif Input.is_action_pressed("attack"):
+			state_machine.transition_to(character.attack_state_name)
+		elif Input.is_action_just_pressed("special_1"):
+			state_machine.transition_to(character.special_a_state_name)
+		elif Input.is_action_just_pressed("special_2"):
+			state_machine.transition_to(character.special_b_state_name)
+		elif Input.is_action_just_pressed("jump"):
+			state_machine.transition_to("Air", {do_jump = true})
+		elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+			state_machine.transition_to("Run")

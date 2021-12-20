@@ -12,15 +12,16 @@ func physics_update(_delta: float) -> void:
 	update_position()
 	# When we release the block associated button, we want to disable the barrier and transition 
 	# to the idle state.
-	if Input.is_action_just_released("block"):
-		barrier.disable()
-		state_machine.transition_to("Idle")
+	if character.is_network_master():
+		if Input.is_action_just_released("block"):
+			barrier.rpc("disable")
+			state_machine.transition_to("Idle")
 
 func update_position():
 	# Update the position of the barrier to the casting position. Set the scale to the facing direction
 	# of the player.
 	barrier.position = character.cast_position.position
-	barrier.sprite.scale.x = character.facing_direction
+	barrier.sprite.scale.x = character.facing_direction.x
 
 
 func _on_Barrier_area_entered(area):
