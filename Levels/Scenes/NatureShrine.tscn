@@ -53,3 +53,23 @@ texture_scale = 0.3
 [node name="Moon" type="Light2D" parent="Lights"]
 position = Vector2( -378.761, -147.166 )
 texture = ExtResource( 2 )
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnPoint1" type="Position2D" parent="SpawnPoints"]
+position = Vector2( -405, 107 )
+
+[node name="SpawnPoint2" type="Position2D" parent="SpawnPoints"]
+position = Vector2( -38, -4 )
+
+[node name="SpawnPoint3" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 189, 142 )
+
+[node name="SpawnPoint4" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 423, 101 )
+
+[node name="SpawnPoint5" type="Position2D" parent="SpawnPoints"]
+position = Vector2( -36, 130 )
+
+[node name="SpawnPoint6" type="Position2D" parent="SpawnPoints"]
+position = Vector2( -214, 138 )

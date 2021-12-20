@@ -25,6 +25,7 @@ onready var animation_tree: AnimationTree = $AnimationTree
 onready var animation_player: AnimationPlayer = $AnimationTree/AnimationPlayer
 onready var state_machine: StateMachine = $StateMachine
 onready var cast_position: CastPosition = $CastPosition
+onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 enum State { 
 	IDLE = 0, 
@@ -45,9 +46,9 @@ enum Posture {
 
 var posture = Posture.MEDIUM
 var facing_direction: Vector2 = Vector2.RIGHT
-var controllable = true
 var tick_count = 0
 var delta_elapsed: float = 0.0
+
 
 func _ready() -> void:
 	initialize_custom_states()
@@ -61,6 +62,9 @@ func _physics_process(_delta: float) -> void:
 	if is_network_master() && tick_count % 3 == 0:
 		rpc_unreliable("update_puppet", global_position, facing_direction, get_posture(),  delta_elapsed, state_machine.state.name, state_machine.message)
 		delta_elapsed = 0
+
+
+# Movement and general logic
 
 func get_posture() -> int:
 	if is_network_master():
@@ -101,14 +105,6 @@ func calculate_move_velocity(linear_velocity, direction, speed, is_jump_interrup
 	return v
 
 
-func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
-	stats.set_current_health(stats.current_health - damage)
-	if stats.current_health <= 0:
-		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
-		emit_signal('died', Gamestate.player_info, stats.lives)
-
-
-
 func is_stopped():
 	return velocity.x >= -10 and velocity.x <= 10
 
@@ -121,6 +117,17 @@ func get_direction() -> Vector2:
 		)
 	return facing_direction
 
+
+# Combat
+
+func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
+	stats.set_current_health(stats.current_health - damage)
+	if stats.current_health <= 0:
+		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
+		emit_signal('died', Gamestate.player_info, stats.lives)
+
+
+# Custom states
 
 func initialize_custom_states():
 	if attack_state:
@@ -140,7 +147,12 @@ func initialize_custom_states():
 		state.init(self, state_machine)
 
 
-# Network
+func get_level() -> Level:
+	var game = get_parent() as Game
+	assert(game != null)
+	return game.level
+
+# Network synchronization
 
 puppet func update_puppet(_position, _direction, _posture, delta: float, _state_name, _state_msg := {}) -> void:
 	var _err = tween.interpolate_property(self, 'global_position', global_position, _position, delta)

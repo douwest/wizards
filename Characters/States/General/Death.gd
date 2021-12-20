@@ -14,21 +14,31 @@ func enter(msg := {}) -> void:
 	if msg.direction:
 		particles.process_material.direction = msg.direction
 	if msg.hit_position:
-		particles.position = msg.hit_position
+		print(msg.hit_position)
+		particles.global_position = msg.hit_position
 	particles.emitting = true
 	
 	character.visible = false
-	character.controllable = false
+	character.collision_shape.call_deferred('set_disabled', true)
 	
 	if character.stats.lives > 0:
 		respawn_timer.start(respawn_time)
 
 
-func _on_RespawnTimer_timeout():
+func exit() -> void:
+	particles.emitting = false
+	character.visible = true
+	character.collision_shape.call_deferred('set_disabled', false)
+
+
+func _on_RespawnTimer_timeout() -> void:
+	if is_network_master():
+		character.global_position = character.get_level().get_random_spawn_point()
+		rpc('update_spawn_position', character.global_position)
 	character.stats.lives -= 1
 	character.posture = character.Posture.MEDIUM
-	character.global_position = Vector2.ZERO
 	character.stats.current_health = character.stats.max_health
-	character.visible = true
-	character.controllable = true
-	state_machine.transition_to("Idle")
+	state_machine.transition_to("Air")
+
+puppet func update_spawn_position(_position: Vector2) -> void:
+	character.global_position = _position

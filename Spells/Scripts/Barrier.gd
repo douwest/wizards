@@ -9,12 +9,12 @@ onready var spell_light: Light2D = $SpellLight
 
 remotesync func disable():
 	visible = false
-	collision_shape.disabled = true
+	collision_shape.call_deferred('set_disabled', true)
 	spell_light.energy = 0
 	
 func enable():
 	spell_light.energy = 1
 	animation_tree.active = true
 	animation_state.travel("start_cast")
-	collision_shape.disabled = false
+	collision_shape.call_deferred('set_disabled', false)
 	
