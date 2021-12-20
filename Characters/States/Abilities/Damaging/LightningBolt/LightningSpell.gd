@@ -21,8 +21,8 @@ func update(_delta: float) -> void:
 # Should be executed locally and remotely
 remotesync func interrupt() -> void:
 	cast_timer.stop()
-	particles.visible = false
 	if is_ready:
+		particles.visible = false
 		character.animation_state.travel("recoil")
 		animation_player.play('lightning')
 	else:
@@ -37,6 +37,9 @@ func cast_spell():
 	cast_timer.start(cast_time)
 	particles.visible = true
 
+func exit() -> void:
+	spell.visible = false
+	particles.visible = false
 
 func determine_casting_position() -> void:
 	spell.rotation_degrees = 180 if character.facing_direction.x == -1 else 0
