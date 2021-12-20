@@ -103,27 +103,12 @@ func calculate_move_velocity(linear_velocity, direction, speed, is_jump_interrup
 
 func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
 	stats.set_current_health(stats.current_health - damage)
-#	if stats.current_health <= 0:
-#		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
+	if stats.current_health <= 0:
+		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
+		emit_signal('died', Gamestate.player_info, stats.lives)
 
 
-func player_died() -> void:
-	if(is_network_master()):
-		emit_signal('died', Gamestate.player_info, 99)
-		controllable = false
-		if stats.lives > 0:
-			global_position = Vector2(0, 0)
 
-
-func respawn() -> void:
-	if(is_network_master()):
-		posture = Posture.MEDIUM
-		stats.current_health = stats.max_health
-		stats.lives -= 1
-	visible = true
-	controllable = true
-	
-	
 func is_stopped():
 	return velocity.x >= -10 and velocity.x <= 10
 
