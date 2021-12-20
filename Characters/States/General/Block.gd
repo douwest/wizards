@@ -14,8 +14,10 @@ func physics_update(_delta: float) -> void:
 	# to the idle state.
 	if character.is_network_master():
 		if Input.is_action_just_released("block"):
-			barrier.rpc("disable")
 			state_machine.transition_to("Idle")
+
+func exit() -> void:
+	barrier.disable()
 
 func update_position():
 	# Update the position of the barrier to the casting position. Set the scale to the facing direction
