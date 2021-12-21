@@ -26,6 +26,8 @@ onready var animation_player: AnimationPlayer = $AnimationTree/AnimationPlayer
 onready var state_machine: StateMachine = $StateMachine
 onready var cast_position: CastPosition = $CastPosition
 onready var collision_shape: CollisionShape2D = $CollisionShape2D
+onready var invincibility_timer: Timer = $Invincibility/Timer
+onready var invincible_animation_player: AnimationPlayer = $Invincibility/AnimationPlayer
 
 enum State { 
 	IDLE = 0, 
@@ -121,6 +123,8 @@ func get_direction() -> Vector2:
 # Combat
 
 func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
+	if is_invincible():
+		return
 	stats.set_current_health(stats.current_health - damage)
 	if stats.current_health <= 0:
 		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
@@ -152,6 +156,13 @@ func get_level() -> Level:
 	assert(game != null)
 	return game.level
 
+
+func _on_InvincibilityTimer_timeout() -> void:
+	invincible_animation_player.stop()
+
+func is_invincible() -> bool:
+	return invincible_animation_player.is_playing()
+
 # Network synchronization
 
 puppet func update_puppet(_position, _direction, _posture, delta: float, _state_name, _state_msg := {}) -> void:
@@ -166,3 +177,5 @@ puppet func update_puppet(_position, _direction, _posture, delta: float, _state_
 
 master func set_camera() -> void:
 	camera.make_current()
+
+

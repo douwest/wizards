@@ -4,6 +4,9 @@ extends CharacterState
 
 # If we get a message asking us to jump, we jump.
 func enter(msg := {}) -> void:
+	if msg.has("invincible"):
+		character.invincibility_timer.start(msg.invincible)
+		character.invincible_animation_player.play("invincible")
 	if msg.has("do_jump"):
 		character.velocity.y = -character.speed.y
 

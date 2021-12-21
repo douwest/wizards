@@ -2,6 +2,5 @@
 
 [ext_resource path="res://Characters/States/General/Air.gd" type="Script" id=1]
 
-
 [node name="Air" type="Node"]
 script = ExtResource( 1 )
