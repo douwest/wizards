@@ -79,7 +79,7 @@ func get_posture() -> int:
 	
 	
 func update_sprite_directions(horizontal_direction):
-	if horizontal_direction == 0:
+	if horizontal_direction == 0 || state_machine.state.name == "Death":
 		return
 	facing_direction = Vector2(horizontal_direction, facing_direction.y)
 	sprite.scale.x = facing_direction.x
@@ -123,10 +123,8 @@ func get_direction() -> Vector2:
 # Combat
 
 func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
-	print(damage)
 	if is_invincible():
 		return
-	effects_animation_player.play("hit")
 	stats.set_current_health(stats.current_health - damage)
 	if stats.current_health <= 0:
 		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
@@ -136,8 +134,8 @@ func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
 func stun(_duration: float) -> void:
 	if is_invincible():
 		return
-	effects_animation_player.play("hit")
 	state_machine.transition_to("Stunned", {duration = _duration})
+
 
 # Custom states
 

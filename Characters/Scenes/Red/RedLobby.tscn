@@ -86,7 +86,7 @@ texture = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 6, 6 )
 texture = ExtResource( 2 )
-hframes = 74
+hframes = 80
 frame = 46
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

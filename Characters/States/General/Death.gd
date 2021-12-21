@@ -10,15 +10,15 @@ export var respawn_time: float = 5.0 # In seconds
 func enter(msg := {}) -> void:
 	# We must declare all the properties we access through `owner` in the `Player.gd` script.
 	character.velocity = Vector2.ZERO
+	character.animation_tree.active = false
+	character.effects_animation_player.play("death")
 	
 	if msg.has("direction"):
 		particles.process_material.direction = msg.direction
 	if msg.has("hit_position"):
 		particles.global_position = msg.hit_position
-	particles.visible = true
+		
 	particles.emitting = true
-	
-	character.visible = false
 	character.collision_shape.call_deferred('set_disabled', true)
 	
 	if character.stats.lives > 0:
@@ -26,10 +26,10 @@ func enter(msg := {}) -> void:
 
 
 func exit() -> void:
-	particles.visible = false
 	particles.emitting = false
-	character.visible = true
 	character.collision_shape.call_deferred('set_disabled', false)
+	character.effects_animation_player.stop()
+	character.animation_tree.active = true
 
 
 func _on_RespawnTimer_timeout() -> void:
