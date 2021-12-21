@@ -58,6 +58,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if Input.is_action_pressed("ui_cancel"):
+		state_machine.transition_to("Death")
 	tick_count += 1
 	delta_elapsed += _delta
 	update_sprite_directions(get_direction().x)

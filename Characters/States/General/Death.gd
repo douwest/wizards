@@ -25,16 +25,11 @@ func enter(msg := {}) -> void:
 		respawn_timer.start(respawn_time)
 
 
-func exit() -> void:
-	particles.emitting = false
-	character.collision_shape.call_deferred('set_disabled', false)
-	character.effects_animation_player.stop()
-	character.animation_tree.active = true
-
-
 func _on_RespawnTimer_timeout() -> void:
 	# Set physics process to false to update the spawn position without having
 	# the position be interpolated by the update_puppet function.
+	character.animation_tree.active = true
+	character.effects_animation_player.stop()
 	character.set_physics_process(false)
 	
 	# The new spawn point is random, therefore it should only be determined by the master of this character,
@@ -49,6 +44,9 @@ func _on_RespawnTimer_timeout() -> void:
 	character.stats.current_health = character.stats.max_health
 	
 	character.set_physics_process(true)
+	particles.emitting = false
+	character.collision_shape.call_deferred('set_disabled', false)
+
 	
 	# Transition to the Air state so we do not have to be perfectly on the floor when spawning.
 	state_machine.transition_to("Air", {invincible = 3.0})
