@@ -15,6 +15,7 @@ func enter(msg := {}) -> void:
 		particles.process_material.direction = msg.direction
 	if msg.has("hit_position"):
 		particles.global_position = msg.hit_position
+	particles.visible = true
 	particles.emitting = true
 	
 	character.visible = false
@@ -25,6 +26,7 @@ func enter(msg := {}) -> void:
 
 
 func exit() -> void:
+	particles.visible = false
 	particles.emitting = false
 	character.visible = true
 	character.collision_shape.call_deferred('set_disabled', false)
