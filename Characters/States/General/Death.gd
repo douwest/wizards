@@ -31,15 +31,26 @@ func exit() -> void:
 
 
 func _on_RespawnTimer_timeout() -> void:
+	# Set physics process to false to update the spawn position without having
+	# the position be interpolated by the update_puppet function.
+	character.set_physics_process(false)
+	
+	# The new spawn point is random, therefore it should only be determined by the master of this character,
+	# Otherwise, clients may get another spawn point then the owner of the character.
+	# However, the puppets should be informed of the new position.
 	if is_network_master():
-		character.global_position = character.get_level().get_random_spawn_point()
+		character.global_position = character.get_level().get_random_spawn_point()	
 		rpc('update_spawn_position', character.global_position)
+		
 	character.stats.lives -= 1
 	character.posture = character.Posture.MEDIUM
 	character.stats.current_health = character.stats.max_health
 	
+	character.set_physics_process(true)
+	
 	# Transition to the Air state so we do not have to be perfectly on the floor when spawning.
 	state_machine.transition_to("Air", {invincible = 3.0})
+
 
 puppet func update_spawn_position(_position: Vector2) -> void:
 	character.global_position = _position
