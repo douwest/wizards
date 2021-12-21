@@ -123,6 +123,7 @@ func get_direction() -> Vector2:
 # Combat
 
 func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
+	print(damage)
 	if is_invincible():
 		return
 	stats.set_current_health(stats.current_health - damage)

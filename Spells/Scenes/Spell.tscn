@@ -107,6 +107,18 @@ tracks/4/keys = {
 "points": PoolRealArray( 3, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.2, 0.25 )
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Spell/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 3.0
@@ -131,6 +143,7 @@ hframes = 3
 position = Vector2( 30, 0 )
 rotation = 1.5708
 shape = SubResource( 3 )
+disabled = true
 
 [node name="SpellLight" parent="." instance=ExtResource( 3 )]
 

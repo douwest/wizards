@@ -4,11 +4,12 @@ class_name KinematicSpell
 
 signal completed
 
+onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
 export var speed = 500
-export var damage = 99
+export var damage = 10
 
 var direction = 1
-
 
 # Called when the node enters the scene tree for the first time.
 func init(input_position: Vector2, dir: int, node: Node) -> void:
