@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Spells/Scripts/KinematicSpell.gd"
 }, {
+"base": "Node",
+"class": "KinematicSpellFactory",
+"language": "GDScript",
+"path": "res://KinematicSpellFactory.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Level",
 "language": "GDScript",
@@ -92,6 +97,7 @@ _global_script_class_icons={
 "CharacterState": "",
 "Game": "",
 "KinematicSpell": "",
+"KinematicSpellFactory": "",
 "Level": "",
 "PlayerCamera": "",
 "RosterButton": "",

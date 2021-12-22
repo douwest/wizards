@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Spells/Scenes/Factories/KinematicSpellFactory.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Static/Resources/ParticleEffects/LightCloud/LightCloudEffect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Characters/States/Abilities/Damaging/EnergyBall/EnergyBallSpell.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Characters/States/Abilities/Damaging/EnergyBall/EnergyBall.gd" type="Script" id=4]
+
+[node name="EnergyBall" type="Node"]
+script = ExtResource( 4 )
+
+[node name="CastTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="KinematicSpellFactory" parent="." instance=ExtResource( 1 )]
+impact_effect = ExtResource( 2 )
+spell_particle = ExtResource( 3 )
+speed = 550
+
+[connection signal="timeout" from="CastTimer" to="." method="_on_CastTimer_timeout"]

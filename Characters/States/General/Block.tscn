@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Spells/Scenes/Barrier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Spells/Scenes/Block/Barrier.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/States/General/Block.gd" type="Script" id=2]
 
 [node name="Block" type="Node"]

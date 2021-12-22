@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Characters/States/Abilities/Damaging/RockVolley/RockVolley.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/States/Abilities/Damaging/EnergyBall/EnergyBall.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Scenes/Abstract/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/Sprites/Red/Red.png" type="Texture" id=3]
-[ext_resource path="res://Characters/States/Abilities/Damaging/LightningBolt/LightningSpell.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Characters/States/Abilities/Utility/LightningBolt/LightningSpell.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -11,8 +11,8 @@
 attack_state = ExtResource( 1 )
 special_b_state = ExtResource( 4 )
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="2"]
 texture = ExtResource( 3 )
 
-[node name="AnimationTree" parent="." index="2"]
+[node name="AnimationTree" parent="." index="3"]
 parameters/playback = SubResource( 1 )

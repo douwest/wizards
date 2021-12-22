@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Spells/Sprites/Shield-Sheet.png" type="Texture" id=1]
-[ext_resource path="res://Spells/Scripts/Barrier.gd" type="Script" id=2]
-[ext_resource path="res://Spells/Scenes/SpellLight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Static/Scenes/SpellLight.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Spells/Sprites/Shield-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Spells/Scripts/Barrier.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.01623
@@ -78,7 +78,7 @@ tracks/1/keys = {
 visible = false
 collision_layer = 4
 collision_mask = 2
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -97,8 +97,8 @@ anims/idle_cast = SubResource( 7 )
 anims/start_cast = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 hframes = 12
 frame = 9
 
-[node name="SpellLight" parent="." instance=ExtResource( 3 )]
+[node name="SpellLight" parent="." instance=ExtResource( 1 )]

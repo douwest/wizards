@@ -1,6 +1,6 @@
 extends SpellState
 
-export var cast_time: float = 0.3
+export var cast_time: float = 0.35
 
 onready var cast_timer: Timer = $CastTimer
 onready var spell_factory: KinematicSpellFactory = $KinematicSpellFactory
