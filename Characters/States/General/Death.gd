@@ -44,7 +44,6 @@ func _on_RespawnTimer_timeout() -> void:
 	character.stats.current_health = character.stats.max_health
 	
 	character.set_physics_process(true)
-	particles.emitting = false
 	character.collision_shape.call_deferred('set_disabled', false)
 
 	

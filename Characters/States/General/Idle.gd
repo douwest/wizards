@@ -3,7 +3,7 @@ extends CharacterState
 
 
 # Upon entering the state, we set the Player node's velocity to zero.
-func enter(msg := {}) -> void:
+func enter(_msg := {}) -> void:
 	character.animation_state.travel('idle')
 	character.velocity = Vector2.ZERO
 

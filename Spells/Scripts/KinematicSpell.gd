@@ -33,5 +33,5 @@ func _on_KinematicSpell_body_entered(body):
 	self.queue_free()
 
 
-func _on_KinematicSpell_area_entered(area):
+func _on_KinematicSpell_area_entered(_area):
 	self.queue_free()

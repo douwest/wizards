@@ -26,7 +26,7 @@ func update_position():
 	barrier.sprite.scale.x = character.facing_direction.x
 
 
-func _on_Barrier_area_entered(area):
+func _on_Barrier_area_entered(_area):
 	barrier.disable()
 	character.animation_tree.set('parameters/recoil/blend_position', character.get_posture())
 	character.animation_state.travel("recoil")

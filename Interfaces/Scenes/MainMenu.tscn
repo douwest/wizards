@@ -15,7 +15,7 @@
 [ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_3.png" type="Texture" id=13]
 [ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_6.png" type="Texture" id=14]
 [ext_resource path="res://Static/Resources/Backgrounds/BG_Animation/BG_7.png" type="Texture" id=15]
-[ext_resource path="res://Static/Resources/Textures/Generic/Logo.png" type="Texture" id=16]
+[ext_resource path="res://Static/Resources/Art Assets/Studies/Title_Mid.png" type="Texture" id=16]
 
 [sub_resource type="AnimatedTexture" id=1]
 flags = 4
@@ -41,8 +41,8 @@ frame_7/delay_sec = 0.0
 texture = SubResource( 1 )
 region_rect = Rect2( 0, 0, 1280, 720 )
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0, 0, 0.619608 )
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0.545455 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -155,7 +155,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -200.0
 margin_top = -30.0
-text = "Dueling Wizards pre-alpha "
+text = "Wizardly Duels v 0.0.1"
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -171,16 +171,18 @@ margin_top = -158.5
 margin_right = 300.0
 margin_bottom = 158.5
 rect_min_size = Vector2( 600, 300 )
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TitleContainer" type="MarginContainer" parent="StartScreen/Panel"]
-margin_left = 30.5
-margin_top = 13.0
-margin_right = 569.5
-margin_bottom = 163.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -568.5
+margin_top = -53.5
+margin_right = 568.5
+margin_bottom = 263.5
 rect_min_size = Vector2( 0, 150 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -188,9 +190,9 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="StartScreen/Panel/TitleContainer"]
 visible = false
-margin_top = 45.0
-margin_right = 539.0
-margin_bottom = 105.0
+margin_top = 128.0
+margin_right = 1137.0
+margin_bottom = 188.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.745098 )
 custom_constants/shadow_offset_x = 4
@@ -203,8 +205,8 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="StartScreen/Panel/TitleContainer"]
-margin_right = 539.0
-margin_bottom = 150.0
+margin_right = 1137.0
+margin_bottom = 317.0
 texture = ExtResource( 16 )
 expand = true
 stretch_mode = 6
@@ -215,9 +217,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -219.5
-margin_top = 1.0
+margin_top = 191.0
 margin_right = 219.5
-margin_bottom = 167.0
+margin_bottom = 357.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -244,7 +246,7 @@ margin_right = 439.0
 margin_bottom = 38.0
 custom_fonts/font = ExtResource( 2 )
 max_length = 16
-placeholder_text = "Player name"
+placeholder_text = "Summoner name"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -325,7 +327,6 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Fader" type="ColorRect" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )

@@ -6,11 +6,11 @@ var is_on_cooldown = false
 var timer: Timer = Timer.new() 
 
 func _ready():
-	timer.connect('timeout', self, 'reset_cooldown')
+	var _err = timer.connect('timeout', self, 'reset_cooldown')
 	add_child(timer)
 
 
-func enter(msg := {}) -> void:
+func enter(_msg := {}) -> void:
 	if is_on_cooldown:
 		state_machine.transition_to("Idle")
 		return
