@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Characters/States/Abstract/RangedAttack/RangedAttackState.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Static/Resources/ParticleEffects/LightCloud/LightCloudEffect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Static/Scenes/SpellLight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Characters/States/Abilities/Damaging/EnergyBall/Energy-Ball.png" type="Texture" id=4]
+
+[sub_resource type="PackedScene" id=1]
+_bundled = {
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "EnergyBallSpell", "Sprite", "texture", "SpellLight" ),
+"node_count": 2,
+"node_paths": [ NodePath(".") ],
+"nodes": PoolIntArray( -1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 2147483647, 3, 1, 0, 0 ),
+"variants": [ ExtResource( 4 ), ExtResource( 3 ) ],
+"version": 2
+}
+
+[node name="EnergyBall" instance=ExtResource( 1 )]
+cooldown_time = 0.8
+
+[node name="KinematicSpellFactory" parent="." index="1"]
+impact_effect = ExtResource( 2 )
+spell_particle = SubResource( 1 )
+acceleration = 35
+initial_speed = 0
+max_speed = 750

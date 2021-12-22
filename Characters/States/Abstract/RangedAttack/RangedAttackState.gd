@@ -1,6 +1,7 @@
 extends SpellState
+class_name RangedAttackState
 
-export var cast_time: float = 0.35
+export var cast_time: float = 0.3
 
 onready var cast_timer: Timer = $CastTimer
 onready var spell_factory: KinematicSpellFactory = $KinematicSpellFactory

@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Characters/Scenes/Abstract/PlayerCamera.gd"
 }, {
+"base": "SpellState",
+"class": "RangedAttackState",
+"language": "GDScript",
+"path": "res://Characters/States/Abstract/RangedAttack/RangedAttackState.gd"
+}, {
 "base": "TextureButton",
 "class": "RosterButton",
 "language": "GDScript",
@@ -100,6 +105,7 @@ _global_script_class_icons={
 "KinematicSpellFactory": "",
 "Level": "",
 "PlayerCamera": "",
+"RangedAttackState": "",
 "RosterButton": "",
 "Spell": "",
 "SpellState": "",

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dust-1.png-aa757bd72560b4c46b9bed4e66c984ce.stex"
+path="res://.import/Dust-2.png-ef01238416896e1aaaceab74c365e19a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Static/Resources/ParticleEffects/DustCloud/Sprites/Dust-1.png"
-dest_files=[ "res://.import/Dust-1.png-aa757bd72560b4c46b9bed4e66c984ce.stex" ]
+source_file="res://Static/Resources/Textures/Particles/Dust/Dust-2.png"
+dest_files=[ "res://.import/Dust-2.png-ef01238416896e1aaaceab74c365e19a.stex" ]
 
 [params]
 

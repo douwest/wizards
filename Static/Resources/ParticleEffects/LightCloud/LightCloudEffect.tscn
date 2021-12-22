@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Static/Resources/ParticleEffects/DustCloud/Sprites/Dust-2.png" type="Texture" id=1]
-[ext_resource path="res://Static/Resources/ParticleEffects/DustCloud/DustCloudEffect.gd" type="Script" id=2]
-[ext_resource path="res://Static/Resources/ParticleEffects/DustCloud/Sprites/Dust-3.png" type="Texture" id=3]
-[ext_resource path="res://Static/Resources/ParticleEffects/DustCloud/Sprites/Dust-1.png" type="Texture" id=4]
+[ext_resource path="res://Static/Resources/Textures/Particles/Dust/Dust-2.png" type="Texture" id=1]
+[ext_resource path="res://Static/Resources/ParticleEffects/LightCloud/LightCloudEffect.gd" type="Script" id=2]
+[ext_resource path="res://Static/Resources/Textures/Particles/Dust/Dust-3.png" type="Texture" id=3]
+[ext_resource path="res://Static/Resources/Textures/Particles/Dust/Dust-1.png" type="Texture" id=4]
 
 [sub_resource type="Curve" id=1]
 max_value = 2.0

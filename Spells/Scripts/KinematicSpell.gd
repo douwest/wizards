@@ -4,8 +4,12 @@ class_name KinematicSpell
 
 onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
-export var speed = 500
+export var initial_speed = 500
+export var max_speed = 500
+export var acceleration = 0
 export var damage = 10
+
+var speed = 0
 
 var impact_effect = null
 var spell_particle = null # The scene containing the moving object (sprite, maybe a light etc.)
@@ -15,6 +19,7 @@ var attached_node: Node = null
 
 # Called when the node enters the scene tree for the first time.
 func init(input_position: Vector2, dir: int, node: Node) -> void:
+	speed = initial_speed
 	attached_node = node
 	attached_node.add_child(self)
 	position = input_position
@@ -23,6 +28,8 @@ func init(input_position: Vector2, dir: int, node: Node) -> void:
 		add_child(spell_particle.instance())
 
 func _physics_process(delta: float) -> void:
+	if speed < max_speed:
+		speed += acceleration
 	position.x = position.x + (direction * speed * delta)
 	
 

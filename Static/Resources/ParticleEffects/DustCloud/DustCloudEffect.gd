@@ -1,13 +1,13 @@
 extends Node2D
 
 
-onready var light_particles: Particles2D = $LightParticles
+onready var dust_particles: Particles2D = $DustParticles
 
 func _ready():
-	light_particles.emitting = true
+	dust_particles.emitting = true
 	
 func _physics_process(delta) -> void:
-	if light_particles.emitting:
+	if dust_particles.emitting:
 		return
 	else:
 		self.queue_free()

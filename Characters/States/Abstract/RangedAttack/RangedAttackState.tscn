@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Spells/Scenes/Factories/KinematicSpellFactory.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/States/Abstract/RangedAttack/RangedAttackState.gd" type="Script" id=2]
+
+[node name="RangedAttackState" type="Node"]
+script = ExtResource( 2 )
+
+[node name="CastTimer" type="Timer" parent="."]
+
+[node name="KinematicSpellFactory" parent="." instance=ExtResource( 1 )]
+
+[connection signal="timeout" from="CastTimer" to="." method="_on_CastTimer_timeout"]
