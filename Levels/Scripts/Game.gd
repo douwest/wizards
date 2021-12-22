@@ -79,7 +79,7 @@ remote func despawn_player(pinfo):
 
 
 func _on_player_died(pinfo, lives):
-	print('Player ', pinfo.name, 'died!', lives, 'lives left.')
+	print('Player ', pinfo.name, ' was obliterated!', lives, 'lives left.')
 	if lives <= 0:
 		print('Game over for ', pinfo.name, '! Going back to the lobby.')
 		rpc('back_to_lobby')

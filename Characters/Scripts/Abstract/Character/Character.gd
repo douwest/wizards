@@ -179,7 +179,6 @@ puppet func update_puppet(_position, _direction, _posture, delta: float, _state_
 	facing_direction = _direction
 	posture = _posture
 	if _state_name and _state_name != state_machine.state.name:
-		print(_state_name, _state_msg)
 		state_machine.transition_to(_state_name, _state_msg)
 
 
