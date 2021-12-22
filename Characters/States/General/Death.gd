@@ -8,18 +8,18 @@ export var respawn_time: float = 5.0 # In seconds
 
 # Upon entering the state, we set the Player node's velocity to zero.
 func enter(msg := {}) -> void:
-	# We must declare all the properties we access through `owner` in the `Player.gd` script.
-	character.velocity = Vector2.ZERO
-	character.animation_tree.active = false
-	character.effects_animation_player.play("death")
-	
+
 	if msg.has("direction"):
 		particles.process_material.direction = msg.direction
 	if msg.has("hit_position"):
 		particles.global_position = msg.hit_position
 		
 	particles.emitting = true
+	
+	character.velocity = Vector2.ZERO
 	character.collision_shape.call_deferred('set_disabled', true)
+	character.animation_tree.active = false
+	character.effects_animation_player.play("death")
 	
 	if character.stats.lives > 0:
 		respawn_timer.start(respawn_time)
@@ -28,7 +28,7 @@ func enter(msg := {}) -> void:
 func _on_RespawnTimer_timeout() -> void:
 	# Set physics process to false to update the spawn position without having
 	# the position be interpolated by the update_puppet function.
-	character.animation_tree.active = true
+	character.visible = false
 	character.effects_animation_player.stop()
 	character.set_physics_process(false)
 	
@@ -44,8 +44,9 @@ func _on_RespawnTimer_timeout() -> void:
 	character.stats.current_health = character.stats.max_health
 	
 	character.set_physics_process(true)
+	character.animation_tree.active = true
 	character.collision_shape.call_deferred('set_disabled', false)
-
+	character.visible = true
 	
 	# Transition to the Air state so we do not have to be perfectly on the floor when spawning.
 	state_machine.transition_to("Air", {invincible = 3.0})

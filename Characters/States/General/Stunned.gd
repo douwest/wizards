@@ -18,6 +18,7 @@ func enter(msg := {}) -> void:
 
 func exit() -> void:
 	daze_particles.emitting = false
+	stun_timer.stop() #If interrupted (for example by dying while stunned)
 
 func _on_StunTimer_timeout():
 	character.animation_tree.active = true
