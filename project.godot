@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "KinematicSpellFactory",
 "language": "GDScript",
-"path": "res://KinematicSpellFactory.gd"
+"path": "res://Spells/Scenes/KinematicSpellFactory.gd"
 }, {
 "base": "StaticBody2D",
 "class": "Level",

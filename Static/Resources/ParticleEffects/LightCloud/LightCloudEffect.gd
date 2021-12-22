@@ -7,7 +7,7 @@ func _ready():
 	light_particles.emitting = true
 
 
-func _physics_process(delta) -> void:
+func _physics_process(_delta: float) -> void:
 	if light_particles.emitting:
 		return
 	else:

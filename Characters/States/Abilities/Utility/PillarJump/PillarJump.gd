@@ -17,7 +17,7 @@ func enter(_msg := {}) -> void:
 	self.position = character.position
 
 
-func physics_update(_delta: float) -> void:	
+func physics_update(_delta: float) -> void:
 	if count >= 10:
 		state_machine.transition_to("Air")
 		return

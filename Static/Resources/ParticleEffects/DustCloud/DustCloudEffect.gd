@@ -6,7 +6,7 @@ onready var dust_particles: Particles2D = $DustParticles
 func _ready():
 	dust_particles.emitting = true
 	
-func _physics_process(delta) -> void:
+func _physics_process(_delta: float) -> void:
 	if dust_particles.emitting:
 		return
 	else:

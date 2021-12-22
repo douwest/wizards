@@ -17,6 +17,7 @@ var spell_particle = null # The scene containing the moving object (sprite, mayb
 var direction = 1
 var attached_node: Node = null
 
+
 # Called when the node enters the scene tree for the first time.
 func init(input_position: Vector2, dir: int, node: Node) -> void:
 	speed = initial_speed
@@ -26,6 +27,7 @@ func init(input_position: Vector2, dir: int, node: Node) -> void:
 	direction = dir
 	if spell_particle:
 		add_child(spell_particle.instance())
+
 
 func _physics_process(delta: float) -> void:
 	if speed < max_speed:
@@ -38,10 +40,11 @@ func spawn_impact_effect() -> void:
 	impact_effect_instance.global_position = self.position
 	attached_node.add_child(impact_effect_instance)
 
+
 func _on_KinematicSpell_body_entered(body):
 	if body.has_method('take_damage'):
 		var hit_position = Vector2(body.position.x, self.position.y)
-		body.take_damage(damage, hit_position, Vector3(-1 * direction, 0, 0))
+		body.take_damage(damage, hit_position, Vector3(-1 * direction, 0, 0), speed)
 	GlobalEffects.rpc("screen_shake", attached_node.get_characters(), 0.15, 20, 20, 0, self.position)
 	spawn_impact_effect()
 	self.queue_free()

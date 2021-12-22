@@ -47,13 +47,12 @@ enum Posture {
 }
 
 var posture = Posture.MEDIUM
-var facing_direction: Vector2 = Vector2.RIGHT
-var tick_count = 0
+var facing_direction := Vector2.RIGHT
+var tick_count := 0
 var delta_elapsed: float = 0.0
 
 
 # Lifecycle hooks
-
 
 func _ready() -> void:
 	initialize_custom_states()
@@ -125,21 +124,32 @@ func get_direction() -> Vector2:
 
 # Combat
 
-func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
+func take_damage(damage: int, _position: Vector2, _direction: Vector3, impact_speed = null) -> void:
 	if is_invincible():
 		return
+	
+	knockback(_direction.x, impact_speed)
 	camera.screen_shake.start(0.20, 24, 20, 2)
+	
 	stats.set_current_health(stats.current_health - damage)
+	
 	if stats.current_health <= 0:
-		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
+		state_machine.transition_to("Death", {direction = _direction, hit_position = _position})
 		emit_signal('died', Gamestate.player_info, stats.lives)
 
 
 func stun(_duration: float) -> void:
 	if is_invincible():
 		return
+	
 	camera.screen_shake.start(0.15, 10, 16, 1)
 	state_machine.transition_to("Stunned", {duration = _duration})
+
+
+func knockback(h_direction: float, impact_speed: float):
+	if is_network_master() and impact_speed:
+		velocity = move_and_slide(Vector2(-h_direction * (impact_speed * 3), -100), FLOOR_NORMAL)
+
 
 # Custom states
 
