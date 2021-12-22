@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GiantLeaves.mp3-73ec68ff1afd51db0254c28b0df88b37.mp3str"
+
+[deps]
+
+source_file="res://Static/Resources/Sounds/Music/GiantLeaves.mp3"
+dest_files=[ "res://.import/GiantLeaves.mp3-73ec68ff1afd51db0254c28b0df88b37.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Interfaces/Scripts/CharacterSelection.gd" type="Script" id=1]
+[ext_resource path="res://Static/Resources/Sounds/Music/GiantLeaves.mp3" type="AudioStream" id=2]
 [ext_resource path="res://Characters/Sprites/Random/Random_Portrait.png" type="Texture" id=3]
 [ext_resource path="res://Static/Resources/Fonts/Resources/Medium_Font_Cursive.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Static/Resources/UIElements/Images/Ready_Checked.png" type="Texture" id=5]
@@ -400,6 +401,11 @@ pitch_scale = 0.87
 
 [node name="FireSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
+autoplay = true
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.0
 autoplay = true
 
 [node name="RainEffect" type="Particles2D" parent="."]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AmongShades.mp3-7ae7666c36989b6109f2c57a7c8b2015.mp3str"
+
+[deps]
+
+source_file="res://Static/Resources/Sounds/Music/AmongShades.mp3"
+dest_files=[ "res://.import/AmongShades.mp3-7ae7666c36989b6109f2c57a7c8b2015.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

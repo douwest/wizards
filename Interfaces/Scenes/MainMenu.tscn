@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Static/Resources/Fonts/Resources/Title_Font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Static/Resources/Fonts/Resources/Medium_Font.tres" type="DynamicFont" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_Animation/BG_6.png" type="Texture" id=14]
 [ext_resource path="res://Static/Resources/Backgrounds/MainMenu/BG_Animation/BG_7.png" type="Texture" id=15]
 [ext_resource path="res://Static/Resources/Art Assets/Studies/Title_Mid.png" type="Texture" id=16]
+[ext_resource path="res://Static/Resources/Sounds/Music/AmongShades.mp3" type="AudioStream" id=17]
 
 [sub_resource type="AnimatedTexture" id=1]
 flags = 4
@@ -132,6 +133,16 @@ tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.75 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("BackgroundMusicPlayer:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -10, -0.25, 0, 0.25, 0, -25, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.75 )
 }
 
@@ -321,10 +332,16 @@ __meta__ = {
 
 [node name="LightningSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -5.0
 
 [node name="AmbientSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -10.0
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = 5.0
+autoplay = true
 
 [node name="Fader" type="ColorRect" parent="."]
 anchor_right = 1.0
