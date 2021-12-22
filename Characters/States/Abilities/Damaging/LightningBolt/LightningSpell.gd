@@ -20,17 +20,6 @@ func update(_delta: float) -> void:
 			particles.process_material.radial_accel -= 10
 
 
-# Should be executed locally and remotely
-remotesync func interrupt() -> void:
-	cast_timer.stop()
-	if is_ready:
-		particles.visible = false
-		character.animation_state.travel("recoil")
-		animation_player.play('lightning')
-	else:
-		state_machine.transition_to('Idle')
-
-
 func cast_spell():
 	particles.process_material.radial_accel = 100
 	is_ready = false
@@ -54,3 +43,14 @@ func determine_casting_position() -> void:
 
 func _on_CastTimer_timeout():
 	is_ready = true
+
+
+# Should be executed locally and remotely
+remotesync func interrupt() -> void:
+	cast_timer.stop()
+	if is_ready:
+		particles.visible = false
+		character.animation_state.travel("recoil")
+		animation_player.play('lightning')
+	else:
+		state_machine.transition_to('Idle')

@@ -22,16 +22,20 @@ func _physics_process(delta: float) -> void:
 	position.x = position.x + (direction * speed * delta)
 
 
-func _on_KinematicSpell_tree_entered():
-	emit_signal('completed')
-
-
 func _on_KinematicSpell_body_entered(body):
 	if body.has_method('take_damage'):
 		var hit_position = Vector2(body.position.x, self.position.y)
 		body.take_damage(damage, hit_position, Vector3(-1 * direction, 0, 0))
+	print(get_parent().get_characters())
+	GlobalEffects.rpc("screen_shake", get_parent().get_characters(), 0.15, 20, 20, 0, self.position)
 	self.queue_free()
 
 
 func _on_KinematicSpell_area_entered(_area):
+	print(get_parent().get_characters())
+	GlobalEffects.rpc("screen_shake", get_parent().get_characters(), 0.15, 20, 20, 0, self.position)
 	self.queue_free()
+
+
+func _on_KinematicSpell_tree_entered():
+	emit_signal('completed')

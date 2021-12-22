@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Levels/Scripts/Level.gd"
 }, {
+"base": "Camera2D",
+"class": "PlayerCamera",
+"language": "GDScript",
+"path": "res://Characters/Scenes/Abstract/PlayerCamera.gd"
+}, {
 "base": "TextureButton",
 "class": "RosterButton",
 "language": "GDScript",
@@ -88,6 +93,7 @@ _global_script_class_icons={
 "Game": "",
 "KinematicSpell": "",
 "Level": "",
+"PlayerCamera": "",
 "RosterButton": "",
 "Spell": "",
 "SpellState": "",
@@ -107,6 +113,7 @@ config/icon="res://icon.png"
 Gamestate="*res://Network/Scripts/gamestate.gd"
 Network="*res://Network/Scripts/network.gd"
 Resources="*res://Static/Scripts/Resources.gd"
+GlobalEffects="*res://Static/Scripts/GlobalEffects.gd"
 
 [display]
 

@@ -19,7 +19,7 @@ var special_b_state_name = 'undefined'
 onready var sprite: Sprite = $Sprite
 onready var tween: Tween = $Tween
 onready var stats: Stats = $Stats
-onready var camera: Camera2D = $Camera2D
+onready var camera: PlayerCamera = $PlayerCamera
 onready var animation_state = $AnimationTree.get('parameters/playback')
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var animation_player: AnimationPlayer = $AnimationTree/AnimationPlayer
@@ -50,6 +50,9 @@ var posture = Posture.MEDIUM
 var facing_direction: Vector2 = Vector2.RIGHT
 var tick_count = 0
 var delta_elapsed: float = 0.0
+
+
+# Lifecycle hooks
 
 
 func _ready() -> void:
@@ -125,6 +128,7 @@ func get_direction() -> Vector2:
 func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
 	if is_invincible():
 		return
+	camera.screen_shake.start(0.20, 24, 20, 2)
 	stats.set_current_health(stats.current_health - damage)
 	if stats.current_health <= 0:
 		state_machine.transition_to("Death", {direction = dir, hit_position = pos})
@@ -134,8 +138,8 @@ func take_damage(damage: int, pos: Vector2, dir: Vector3) -> void:
 func stun(_duration: float) -> void:
 	if is_invincible():
 		return
+	camera.screen_shake.start(0.15, 10, 16, 1)
 	state_machine.transition_to("Stunned", {duration = _duration})
-
 
 # Custom states
 
@@ -157,17 +161,13 @@ func initialize_custom_states():
 		state.init(self, state_machine)
 
 
-func get_level() -> Level:
-	var game = get_parent() as Game
-	assert(game != null)
-	return game.level
-
-
 func _on_InvincibilityTimer_timeout() -> void:
 	effects_animation_player.stop()
 
+
 func is_invincible() -> bool:
 	return not invincibility_timer.is_stopped()
+
 
 # Network synchronization
 

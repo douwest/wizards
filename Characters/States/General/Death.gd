@@ -36,7 +36,7 @@ func _on_RespawnTimer_timeout() -> void:
 	# Otherwise, clients may get another spawn point then the owner of the character.
 	# However, the puppets should be informed of the new position.
 	if is_network_master():
-		character.global_position = character.get_level().get_random_spawn_point()	
+		character.global_position = character.get_parent().get_random_spawn_point()
 		rpc('update_spawn_position', character.global_position)
 		
 	character.stats.lives -= 1

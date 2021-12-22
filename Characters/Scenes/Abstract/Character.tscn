@@ -9,7 +9,7 @@
 [ext_resource path="res://Characters/States/General/Idle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Characters/States/General/Run.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Characters/States/General/Air.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Characters/Scenes/Abstract/PlayerCamera.gd" type="Script" id=10]
+[ext_resource path="res://Characters/Scenes/Abstract/PlayerCamera.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Characters/States/General/Block.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Characters/Scenes/Abstract/CastPosition.gd" type="Script" id=14]
 
@@ -745,6 +745,10 @@ tracks/3/keys = {
 [node name="Character" type="KinematicBody2D"]
 script = ExtResource( 4 )
 
+[node name="PlayerCamera" parent="." instance=ExtResource( 10 )]
+smoothing_enabled = true
+smoothing_speed = 8.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -24 )
 shape = SubResource( 1 )
@@ -791,10 +795,10 @@ anims/walk_high = SubResource( 16 )
 anims/walk_low = SubResource( 15 )
 anims/walk_mid = SubResource( 10 )
 
+[node name="Tween" type="Tween" parent="."]
+
 [node name="CastPosition" type="Position2D" parent="."]
 script = ExtResource( 14 )
-
-[node name="Tween" type="Tween" parent="."]
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -810,12 +814,6 @@ anims/invincible = SubResource( 83 )
 
 [node name="InvincibilityTimer" type="Timer" parent="Effects"]
 one_shot = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.5, 0.5 )
-limit_smoothed = true
-script = ExtResource( 10 )
 
 [node name="StateMachine" parent="." instance=ExtResource( 6 )]
 initial_state = NodePath("Idle")

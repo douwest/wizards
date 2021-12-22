@@ -1,7 +1,8 @@
 class_name Game
 extends Node2D
 
-onready var level = load(Gamestate.level.actor_path).instance()
+onready var level: Level = load(Gamestate.level.actor_path).instance()
+
 
 func _ready():
 	var error = Network.connect("server_closed", self, '_on_server_closed')
@@ -20,6 +21,11 @@ func _ready():
 
 	if error:
 		print(error)
+
+
+func get_random_spawn_point() -> Vector2:
+	return level.get_random_spawn_point()
+
 
 # Spawns a new player actor, using the provided player_info structure and the given spawn index
 remote func spawn_players(pinfo, spawn_index):
@@ -58,6 +64,7 @@ remote func spawn_players(pinfo, spawn_index):
 	# Finally add the actor into the world
 	add_child(nactor)
 
+
 remote func despawn_player(pinfo):
 	if (get_tree().is_network_server()):
 		for id in Network.players:
@@ -84,18 +91,31 @@ func _on_player_died(pinfo, lives):
 		print('Game over for ', pinfo.name, '! Going back to the lobby.')
 		rpc('back_to_lobby')
 
+
 func _on_player_list_changed():
 	print(Network.players)
 	
+	
 func _on_player_removed(pinfo):
 	despawn_player(pinfo)
+
 
 func _on_server_closed():
 	get_tree().set_network_peer(null)	
 	var _error = get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")
 
+
 func _on_QuitButton_pressed():
 	rpc('back_to_lobby')
+
+
+func get_characters() -> Array:
+	var characters = []
+	for child in get_children():
+		if child is Character:
+			characters.append(child)
+	return characters
+
 
 remotesync func back_to_lobby():
 	var _error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")		

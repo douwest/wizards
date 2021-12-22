@@ -25,7 +25,7 @@ func cast_spell():
 
 func _on_CastTimer_timeout():
 	cast_timer.stop()
-	spell_instance.init(character.cast_position.position, int(character.facing_direction.x), character.get_parent())	
+	spell_instance.init(character.cast_position.position, int(character.facing_direction.x), character.get_parent())
 	state_machine.transition_to('Idle')
 
 remotesync func interrupt() -> void:

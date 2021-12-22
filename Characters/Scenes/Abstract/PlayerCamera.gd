@@ -1,5 +1,7 @@
 extends Camera2D
+class_name PlayerCamera
 
+onready var screen_shake : Node = $ScreenShake #To expose the screen shake to the application
 
 func _ready() -> void:
 	set_camera_limits()
