@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Interfaces/Scripts/CharacterSelection.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Sprites/Random/Random_Portrait.png" type="Texture" id=3]
-[ext_resource path="res://Static/Resources/Fonts/Medium_Font_Cursive.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Static/Resources/Fonts/Resources/Medium_Font_Cursive.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Static/Resources/UIElements/Images/Ready_Checked.png" type="Texture" id=5]
 [ext_resource path="res://Static/Resources/UIElements/Images/Ready_Unchecked.png" type="Texture" id=6]
 [ext_resource path="res://Interfaces/Scripts/SelectionContainer.gd" type="Script" id=7]
-[ext_resource path="res://Static/Resources/Fonts/Large_Font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Static/Resources/Fonts/Resources/Large_Font.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Interfaces/Scripts/Roster.gd" type="Script" id=9]
 [ext_resource path="res://Static/Resources/UIElements/Images/MapTemplate.png" type="Texture" id=10]
 [ext_resource path="res://Static/Resources/Textures/Particles/Raindrop.png" type="Texture" id=11]
@@ -29,7 +29,7 @@
 [ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior4.png" type="Texture" id=28]
 [ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior2.png" type="Texture" id=29]
 [ext_resource path="res://Static/Resources/Backgrounds/CharacterSelection/Interior/TowerInterior1.png" type="Texture" id=30]
-[ext_resource path="res://Static/Resources/Fonts/Medium_Font.tres" type="DynamicFont" id=31]
+[ext_resource path="res://Static/Resources/Fonts/Resources/Medium_Font.tres" type="DynamicFont" id=31]
 
 [sub_resource type="AnimatedTexture" id=9]
 frames = 7
