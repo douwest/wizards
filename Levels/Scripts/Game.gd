@@ -101,7 +101,7 @@ func _on_player_removed(pinfo):
 
 
 func _on_server_closed():
-	get_tree().set_network_peer(null)	
+	get_tree().set_network_peer(null)
 	var _error = get_tree().change_scene("res://Interfaces/Scenes/MainMenu.tscn")
 
 
