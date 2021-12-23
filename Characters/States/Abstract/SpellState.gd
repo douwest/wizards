@@ -14,7 +14,7 @@ func enter(_msg := {}) -> void:
 	if is_on_cooldown:
 		state_machine.transition_to("Idle")
 		return
-		
+			
 	determine_casting_position()
 	cast_spell()
 	start_cooldown()
