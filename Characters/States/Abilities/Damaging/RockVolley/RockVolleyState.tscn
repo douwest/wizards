@@ -10,3 +10,6 @@ cooldown_time = 0.8
 [node name="KinematicSpellFactory" parent="." index="1"]
 impact_effect = ExtResource( 2 )
 spell_particle = ExtResource( 3 )
+acceleration = 50
+initial_speed = 0
+max_speed = 350

@@ -6,7 +6,7 @@ signal died(pinfo, lives)
 const FLOOR_DETECT_DISTANCE = 20.0
 
 export var acceleration: float = 0.5
-export var friction: float = 0.25
+export var friction: float = 0.275
 
 export (PackedScene) var attack_state = null
 export (PackedScene) var special_a_state = null
@@ -63,6 +63,7 @@ func _physics_process(_delta: float) -> void:
 	tick_count += 1
 	delta_elapsed += _delta
 	update_sprite_directions(get_direction().x)
+	# Update at 20 hz
 	if is_network_master() && tick_count % 3 == 0:
 		rpc_unreliable("update_puppet", global_position, facing_direction, get_posture(),  delta_elapsed, state_machine.state.name, state_machine.message)
 		delta_elapsed = 0
@@ -72,9 +73,9 @@ func _physics_process(_delta: float) -> void:
 
 func get_posture() -> int:
 	if is_network_master():
-		if Input.is_action_pressed("crouch"):
+		if Input.is_action_just_pressed("crouch") or Input.is_action_pressed("crouch"):
 			return Posture.LOW
-		if Input.is_action_pressed("extend"):
+		if Input.is_action_just_pressed("extend") or  Input.is_action_pressed("extend"):
 			return Posture.HIGH
 		return Posture.MEDIUM
 	return posture
