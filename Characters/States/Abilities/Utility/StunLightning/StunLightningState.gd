@@ -10,7 +10,7 @@ var is_ready = false
 var cast_time = 0.5
 
 
-func update(_delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if character.is_network_master() and not Input.is_action_pressed("special_2"):
 		rpc("interrupt")
 	else:
@@ -18,7 +18,7 @@ func update(_delta: float) -> void:
 			particles.process_material.radial_accel = -100
 		else:
 			particles.process_material.radial_accel -= 10
-
+	determine_casting_position()
 
 func cast_spell():
 	particles.process_material.radial_accel = 100
@@ -38,7 +38,7 @@ func exit() -> void:
 func determine_casting_position() -> void:
 	spell.rotation_degrees = 180 if character.facing_direction.x == -1 else 0
 	spell.position = character.cast_position.position
-	particles.position = character.cast_position.position
+	particles.position = spell.position
 
 
 func _on_CastTimer_timeout():

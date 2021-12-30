@@ -29,17 +29,6 @@ onready var collision_shape: CollisionShape2D = $CollisionShape2D
 onready var invincibility_timer: Timer = $Effects/InvincibilityTimer
 onready var effects_animation_player: AnimationPlayer = $Effects/AnimationPlayer
 
-enum State { 
-	IDLE = 0, 
-	JUMP = 1, 
-	RUN = 2, 
-	CAST = 3, 
-	DEATH = 4, 
-	BLOCK = 5, 
-	READY_TO_ATTACK = 6, 
-	ATTACK = 7 
-}
-
 enum Posture { 
 	LOW = 0, 
 	MEDIUM = 1, 
@@ -131,10 +120,9 @@ func take_damage(damage: int, _position: Vector2, _direction: Vector3, impact_sp
 	
 	knockback(_direction.x, impact_speed)
 	camera.screen_shake.start(0.20, 24, 20, 2)
-	
 	stats.set_current_health(stats.current_health - damage)
 	
-	if stats.current_health <= 0:
+	if is_network_master() and stats.current_health <= 0:
 		state_machine.transition_to("Death", {direction = _direction, hit_position = _position})
 		emit_signal('died', Gamestate.player_info, stats.lives)
 
@@ -144,12 +132,14 @@ func stun(_duration: float) -> void:
 		return
 	
 	camera.screen_shake.start(0.15, 10, 16, 1)
-	state_machine.transition_to("Stunned", {duration = _duration})
+	
+	if is_network_master():
+		state_machine.transition_to("Stunned", {duration = _duration})
 
 
 func knockback(h_direction: float, impact_speed: float):
 	if is_network_master() and impact_speed:
-		velocity = move_and_slide(Vector2(-h_direction * (impact_speed * 3), -100), FLOOR_NORMAL)
+		velocity = move_and_slide(Vector2(-h_direction * (impact_speed * 3), 0), FLOOR_NORMAL)
 
 
 # Custom states
@@ -182,7 +172,7 @@ func is_invincible() -> bool:
 
 # Network synchronization
 
-puppet func update_puppet(_position, _direction, _posture, delta: float, _state_name, _state_msg := {}) -> void:
+puppet func update_puppet(_position: Vector2, _direction: Vector2, _posture: int, delta: float, _state_name: String, _state_msg := {}) -> void:
 	var _err = tween.interpolate_property(self, 'global_position', global_position, _position, delta)
 	_err = tween.start()
 	facing_direction = _direction
