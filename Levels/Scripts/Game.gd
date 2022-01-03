@@ -118,12 +118,4 @@ func get_characters() -> Array:
 
 
 remotesync func back_to_lobby():
-	var _error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")		
-
-
-func _on_Jump_pressed():
-	pass # Replace with function body.
-
-
-func _on_Attack_pressed():
-	pass # Replace with function body.
+	var _error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")

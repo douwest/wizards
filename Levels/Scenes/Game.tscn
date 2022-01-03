@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Levels/Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Static/Resources/Fonts/Resources/Medium_Font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Levels/Scenes/MobileControls.gd" type="Script" id=3]
-[ext_resource path="res://Static/Resources/UIElements/Images/Ready_Unchecked.png" type="Texture" id=4]
+[ext_resource path="res://Interfaces/MobileControls.gd" type="Script" id=3]
+[ext_resource path="res://Static/Resources/UIElements/Images/Mobile_Button_Lime_Round.png" type="Texture" id=4]
+[ext_resource path="res://Static/Resources/UIElements/Images/Mobile_Button_White_Round.png" type="Texture" id=5]
+[ext_resource path="res://Static/Resources/UIElements/Images/Mobile_Button_Yellow_Round.png" type="Texture" id=6]
+[ext_resource path="res://Static/Resources/UIElements/Images/Mobile_Button_Blue_Round.png" type="Texture" id=7]
+[ext_resource path="res://Static/Resources/UIElements/Images/Mobile_Button_Red_Round.png" type="Texture" id=8]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -29,7 +33,6 @@ __meta__ = {
 }
 
 [node name="MobileControls" type="HBoxContainer" parent="CanvasLayer/Interface"]
-visible = false
 anchor_left = 0.00147476
 anchor_top = 0.729323
 anchor_right = 1.00147
@@ -41,110 +44,77 @@ __meta__ = {
 }
 
 [node name="Movement" type="Control" parent="CanvasLayer/Interface/MobileControls"]
-margin_right = 638.0
-margin_bottom = 193.0
+margin_right = 637.0
+margin_bottom = 192.0
 size_flags_horizontal = 3
 
-[node name="Left" type="TextureButton" parent="CanvasLayer/Interface/MobileControls/Movement"]
-margin_left = 40.4913
-margin_top = 4.27301
-margin_right = 120.491
-margin_bottom = 84.273
-texture_normal = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Left" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Movement"]
+position = Vector2( 30, 10 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 5 )
 
-[node name="Up" type="TextureButton" parent="CanvasLayer/Interface/MobileControls/Movement"]
-margin_left = 118.979
-margin_top = -73.0255
-margin_right = 198.979
-margin_bottom = 6.97455
-texture_normal = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Right" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Movement"]
+position = Vector2( 170, 10 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 5 )
 
-[node name="Down" type="TextureButton" parent="CanvasLayer/Interface/MobileControls/Movement"]
-margin_left = 118.979
-margin_top = 80.3823
-margin_right = 198.979
-margin_bottom = 160.382
-texture_normal = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Up" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Movement"]
+position = Vector2( 100, -60 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 5 )
 
-[node name="Right" type="TextureButton" parent="CanvasLayer/Interface/MobileControls/Movement"]
-margin_left = 197.467
-margin_top = 3.0838
-margin_right = 277.467
-margin_bottom = 83.0838
-texture_normal = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Down" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Movement"]
+position = Vector2( 100, 80 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 5 )
 
 [node name="Actions" type="Control" parent="CanvasLayer/Interface/MobileControls"]
-margin_left = 642.0
-margin_right = 1280.0
-margin_bottom = 193.0
+margin_left = 641.0
+margin_right = 1279.0
+margin_bottom = 192.0
 size_flags_horizontal = 3
 
-[node name="SpecialB" type="TextureButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
-margin_left = 366.56
-margin_top = -1.07239
-margin_right = 446.56
-margin_bottom = 78.9276
-texture_normal = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Block" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
+position = Vector2( 380, 10 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 7 )
 
-[node name="SpecialA" type="TextureButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
-margin_left = 445.048
-margin_top = -78.3708
-margin_right = 525.048
-margin_bottom = 1.62915
-texture_normal = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Attack" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
+position = Vector2( 520, 10 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 8 )
 
-[node name="Jump" type="TextureButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
-margin_left = 445.048
-margin_top = 75.0369
-margin_right = 525.048
-margin_bottom = 155.037
-texture_normal = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Jump" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
+position = Vector2( 450, 80 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 5 )
 
-[node name="Attack" type="TextureButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
-margin_left = 523.536
-margin_top = -2.2616
-margin_right = 603.536
-margin_bottom = 77.7384
-texture_normal = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="SpecialA" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
+position = Vector2( 450, -60 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 6 )
+
+[node name="SpecialB" type="TouchScreenButton" parent="CanvasLayer/Interface/MobileControls/Actions"]
+position = Vector2( 520, -130 )
+scale = Vector2( 6, 6 )
+normal = ExtResource( 4 )
 
 [connection signal="pressed" from="CanvasLayer/Interface/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Movement/Left" to="CanvasLayer/Interface/MobileControls" method="_on_Left_pressed"]
-[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Movement/Up" to="CanvasLayer/Interface/MobileControls" method="_on_Up_pressed"]
-[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Movement/Down" to="CanvasLayer/Interface/MobileControls" method="_on_Down_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Movement/Left" to="CanvasLayer/Interface/MobileControls" method="_on_Left_released"]
 [connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Movement/Right" to="CanvasLayer/Interface/MobileControls" method="_on_Right_pressed"]
-[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Actions/SpecialB" to="CanvasLayer/Interface/MobileControls" method="_on_SpecialB_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Movement/Right" to="CanvasLayer/Interface/MobileControls" method="_on_Right_released"]
+[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Movement/Up" to="CanvasLayer/Interface/MobileControls" method="_on_Up_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Movement/Up" to="CanvasLayer/Interface/MobileControls" method="_on_Up_released"]
+[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Movement/Down" to="CanvasLayer/Interface/MobileControls" method="_on_Down_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Movement/Down" to="CanvasLayer/Interface/MobileControls" method="_on_Down_released"]
+[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Actions/Block" to="CanvasLayer/Interface/MobileControls" method="_on_Block_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Actions/Block" to="CanvasLayer/Interface/MobileControls" method="_on_Block_released"]
+[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Actions/Attack" to="CanvasLayer/Interface/MobileControls" method="_on_Attack_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Actions/Attack" to="CanvasLayer/Interface/MobileControls" method="_on_Attack_released"]
+[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Actions/Jump" to="CanvasLayer/Interface/MobileControls" method="_on_Jump_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Actions/Jump" to="CanvasLayer/Interface/MobileControls" method="_on_Jump_released"]
 [connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Actions/SpecialA" to="CanvasLayer/Interface/MobileControls" method="_on_SpecialA_pressed"]
-[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Actions/Jump" to="." method="_on_Jump_pressed"]
-[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Actions/Attack" to="." method="_on_Attack_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Actions/SpecialA" to="CanvasLayer/Interface/MobileControls" method="_on_SpecialA_released"]
+[connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Actions/SpecialB" to="CanvasLayer/Interface/MobileControls" method="_on_SpecialB_pressed"]
+[connection signal="released" from="CanvasLayer/Interface/MobileControls/Actions/SpecialB" to="CanvasLayer/Interface/MobileControls" method="_on_SpecialB_released"]
