@@ -15,7 +15,7 @@ var characters = [
 	},
 	{
 		name = "Frozen King",
-		portrait = "res://Characters/Sprites/IceKing/Ice_King_Portrait.png",
+		portrait = "res://Characters/Sprites/IceKing/IceKingPortrait.png",
 		lobby_scene = "res://Characters/Scenes/IceKing/IceKingLobby.tscn",
 		scene = "res://Characters/Scenes/IceKing/IceKing.tscn"
 	}
