@@ -4,7 +4,7 @@ var characters = [
 	{
 		name = "Red", 
 		portrait = "res://Characters/Sprites/Red/Red_Portrait.png",
-		lobby_scene = "res://Characters/Scenes/Red/RedLobby.tscn",		
+		lobby_scene = "res://Characters/Scenes/Red/RedLobby.tscn",
 		scene = "res://Characters/Scenes/Red/Red.tscn"
 	},
 	{
@@ -12,6 +12,12 @@ var characters = [
 		portrait = "res://Characters/Sprites/Green/Green_Portrait.png",
 		lobby_scene = "res://Characters/Scenes/Green/GreenLobby.tscn",
 		scene = "res://Characters/Scenes/Green/Green.tscn"
+	},
+	{
+		name = "Frozen King",
+		portrait = "res://Characters/Sprites/IceKing/Ice_King_Portrait.png",
+		lobby_scene = "res://Characters/Scenes/IceKing/IceKingLobby.tscn",
+		scene = "res://Characters/Scenes/IceKing/IceKing.tscn"
 	}
 ]
 

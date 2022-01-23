@@ -67,7 +67,7 @@ tracks/0/keys = {
 "values": [ 39, 38, 37, 36 ]
 }
 
-[node name="GreenPortrait" type="Control"]
+[node name="GreenLobby" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
