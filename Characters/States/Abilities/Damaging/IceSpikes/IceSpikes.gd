@@ -1,33 +1,35 @@
 extends SpellState
 
-export var number_spikes: int = 5
+export var number_spikes: int = 6
 export var delay: float = 0.4
-export var max_distance = 240
+export var max_distance: int = 240
 
-onready var spell_factory = $SpellFactory
+onready var spell_factory: Node2D = $SpellFactory
 
 var spike_positions := []
-
+var buffer_size := 32
 
 
 func cast_spell() -> void:
 	character.animation_tree.set('parameters/cast/blend_position', character.Posture.HIGH)
 	character.animation_state.travel('cast')
+
 	for i in number_spikes:
-		spike_positions.append(get_offset())
+		spike_positions.append(get_offset(i))
+
 	yield(get_tree().create_timer(delay), "timeout")
+
 	for spike_position in spike_positions:
 		spell_factory.create_new(spike_position)
+
 	character.state_machine.transition_to("Idle")
 
 
-func get_offset() -> Vector2:
-	# Get any uniformly distributed number between - 120 and 120
-	var offset = -(max_distance / 2) + (randi() % max_distance)
-	
-	# Try as long as it is between -32 , 32 (too close to character)
-	while offset >= -32 and offset <= 32:
-		offset = -(max_distance / 2) + (randi() % max_distance)
+func get_offset(index: int) -> Vector2:
+	if index > number_spikes / 2 - 1:
+		index += 1
+	var spacing = max_distance / number_spikes
+	var offset = -(max_distance / 2) + (index * spacing)
 	return Vector2(character.position.x + offset, character.position.y)
 
 
