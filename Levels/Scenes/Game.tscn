@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Levels/Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Static/Resources/Fonts/Resources/Medium_Font.tres" type="DynamicFont" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://Static/Resources/UIElements/Images/Mobile_Button_Yellow_Round.png" type="Texture" id=6]
 [ext_resource path="res://Static/Resources/UIElements/Images/Mobile_Button_Blue_Round.png" type="Texture" id=7]
 [ext_resource path="res://Static/Resources/UIElements/Images/Mobile_Button_Red_Round.png" type="Texture" id=8]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+background_energy = 0.5
+glow_enabled = true
+glow_intensity = 0.5
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -99,6 +105,9 @@ normal = ExtResource( 6 )
 position = Vector2( 520, -130 )
 scale = Vector2( 6, 6 )
 normal = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 
 [connection signal="pressed" from="CanvasLayer/Interface/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Interface/MobileControls/Movement/Left" to="CanvasLayer/Interface/MobileControls" method="_on_Left_pressed"]

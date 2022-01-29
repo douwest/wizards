@@ -7,4 +7,4 @@
 script = ExtResource( 1 )
 
 [node name="ParticleFactory" parent="." instance=ExtResource( 2 )]
-buffer_size = 64
+buffer_size = 48
