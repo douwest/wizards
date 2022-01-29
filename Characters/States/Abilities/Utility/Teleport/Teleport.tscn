@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Characters/States/Abilities/Utility/Teleport/Teleport.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.669826, 0.682464, 0.99842, 1 )
+colors = PoolColorArray( 0, 1, 0.771484, 1, 1, 1, 1, 1, 1, 1, 1, 0.982063, 1, 1, 1, 0.118852, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.55
+trail_divisor = 3
+emission_shape = 2
+emission_box_extents = Vector3( 15, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 10.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 120.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 4.0
+scale_random = 0.4
+color_ramp = SubResource( 3 )
+hue_variation = 0.01
+hue_variation_random = 0.27
+
+[node name="Teleport" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 1500
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
