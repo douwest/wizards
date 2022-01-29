@@ -118,4 +118,4 @@ func get_characters() -> Array:
 
 
 remotesync func back_to_lobby():
-	var _error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")		
+	var _error = get_tree().change_scene("res://Interfaces/Scenes/CharacterSelection.tscn")
