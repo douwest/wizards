@@ -69,9 +69,11 @@ collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 hframes = 4
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/emerge = SubResource( 1 )
@@ -85,7 +87,6 @@ process_material = SubResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -22 )
 shape = SubResource( 5 )
-disabled = true
 
 [connection signal="body_entered" from="." to="." method="_on_IceSpikeSpell_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

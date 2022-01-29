@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Characters/Scenes/Abstract/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Characters/States/Abilities/Damaging/EnergyBall/EnergyBallState.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Characters/States/Abilities/Damaging/Icicle/IcicleState.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/States/Abilities/Damaging/IceSpikes/IceSpikes.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/States/Abilities/Utility/IceSlide/IceSlide.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Characters/Sprites/IceKing/IceKing.png" type="Texture" id=5]

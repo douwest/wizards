@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Basic Attack-Sheet.png-6571158d50532c7e16ccb540a722fd49.stex"
+path="res://.import/Icicle.png-bb80a036ef9ae514037a87402de30d25.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/States/Abilities/Damaging/Fireball/Basic Attack-Sheet.png"
-dest_files=[ "res://.import/Basic Attack-Sheet.png-6571158d50532c7e16ccb540a722fd49.stex" ]
+source_file="res://Characters/States/Abilities/Damaging/Icicle/Icicle.png"
+dest_files=[ "res://.import/Icicle.png-bb80a036ef9ae514037a87402de30d25.stex" ]
 
 [params]
 
