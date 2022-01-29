@@ -185,7 +185,7 @@ states/run/node = SubResource( 26 )
 states/run/position = Vector2( 367, 302 )
 transitions = [ "jump", "falling", SubResource( 38 ), "jump", "run", SubResource( 39 ), "run", "jump", SubResource( 40 ), "run", "falling", SubResource( 45 ), "falling", "run", SubResource( 46 ), "run", "block", SubResource( 50 ), "block", "run", SubResource( 51 ), "run", "cast", SubResource( 61 ), "cast", "recoil", SubResource( 81 ), "block", "recoil", SubResource( 82 ), "falling", "idle", SubResource( 91 ), "idle", "falling", SubResource( 92 ), "idle", "run", SubResource( 93 ), "run", "idle", SubResource( 94 ), "idle", "block", SubResource( 95 ), "block", "idle", SubResource( 96 ), "idle", "recoil", SubResource( 97 ), "idle", "jump", SubResource( 98 ), "cast", "idle", SubResource( 99 ), "recoil", "idle", SubResource( 100 ), "jump", "idle", SubResource( 101 ) ]
 start_node = "idle"
-graph_offset = Vector2( -296.535, 33.3939 )
+graph_offset = Vector2( -296.535, 48.0053 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
@@ -481,6 +481,19 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=63]
 resource_name = "special_a"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 57, 58, 59, 60, 61 ]
+}
 
 [sub_resource type="Animation" id=64]
 resource_name = "special_b"

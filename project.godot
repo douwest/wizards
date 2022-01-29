@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Spells/Scripts/Spell.gd"
 }, {
+"base": "Node2D",
+"class": "SpellFactory",
+"language": "GDScript",
+"path": "res://Spells/Scenes/Factories/SpellFactory.gd"
+}, {
 "base": "AbilityState",
 "class": "SpellState",
 "language": "GDScript",
@@ -108,6 +113,7 @@ _global_script_class_icons={
 "RangedAttackState": "",
 "RosterButton": "",
 "Spell": "",
+"SpellFactory": "",
 "SpellState": "",
 "State": "",
 "StateMachine": "",
@@ -131,6 +137,7 @@ GlobalEffects="*res://Static/Scripts/GlobalEffects.gd"
 
 window/size/width=1280
 window/size/height=720
+window/size/fullscreen=true
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"

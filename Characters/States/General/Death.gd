@@ -17,12 +17,22 @@ func enter(msg := {}) -> void:
 	particles.emitting = true
 	
 	character.velocity = Vector2.ZERO
-	character.collision_shape.call_deferred('set_disabled', true)
 	character.animation_tree.active = false
 	character.effects_animation_player.play("death")
 	
 	if character.stats.lives > 0:
 		respawn_timer.start(respawn_time)
+
+
+func physics_update(delta: float) -> void:
+	if not character.is_on_floor():
+		var direction := character.get_direction()
+
+		character.velocity.y = character.calculate_move_velocity(character.velocity, direction, character.speed, Input.is_action_just_released("jump") and character.velocity.y < 0.0).y
+		character.velocity = character.move_and_slide(character.velocity, character.FLOOR_NORMAL)
+	else:
+		character.collision_shape.call_deferred('set_disabled', true)
+		
 
 
 func _on_RespawnTimer_timeout() -> void:

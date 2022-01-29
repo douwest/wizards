@@ -118,7 +118,7 @@ func take_damage(damage: int, _position: Vector2, _direction: Vector3, impact_sp
 	if is_invincible():
 		return
 	
-	knockback(_direction.x, impact_speed)
+	knockback(Vector2(_direction.x, _direction.y), impact_speed)
 	camera.screen_shake.start(0.20, 24, 20, 2)
 	stats.set_current_health(stats.current_health - damage)
 	
@@ -137,9 +137,9 @@ func stun(_duration: float) -> void:
 		state_machine.transition_to("Stunned", {duration = _duration})
 
 
-func knockback(h_direction: float, impact_speed: float):
+func knockback(_direction: Vector2, impact_speed: float):
 	if is_network_master() and impact_speed:
-		velocity = move_and_slide(Vector2(-h_direction * (impact_speed * 3), 0), FLOOR_NORMAL)
+		velocity = move_and_slide(Vector2(-_direction.x * (impact_speed * 3), -_direction.y * (impact_speed * 3)), FLOOR_NORMAL)
 
 
 # Custom states
