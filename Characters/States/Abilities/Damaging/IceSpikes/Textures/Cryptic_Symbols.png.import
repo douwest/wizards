@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/IceSpike-Sheet.png-fa7ef81e99aa8a2e3d821b59271c7e52.stex"
+path="res://.import/Cryptic_Symbols.png-49946b2c0ae57156af35681173710cf3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/States/Abilities/Damaging/IceSpikes/IceSpike-Sheet.png"
-dest_files=[ "res://.import/IceSpike-Sheet.png-fa7ef81e99aa8a2e3d821b59271c7e52.stex" ]
+source_file="res://Characters/States/Abilities/Damaging/IceSpikes/Textures/Cryptic_Symbols.png"
+dest_files=[ "res://.import/Cryptic_Symbols.png-49946b2c0ae57156af35681173710cf3.stex" ]
 
 [params]
 

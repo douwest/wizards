@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Levels/Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Static/Resources/Fonts/Resources/Medium_Font.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -27,5 +31,8 @@ text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 
 [connection signal="pressed" from="CanvasLayer/Interface/QuitButton" to="." method="_on_QuitButton_pressed"]
