@@ -1,6 +1,7 @@
 extends AbilityState
 
 export var slide_friction = 0.05
+export var ice_spawn_distance = 24
 
 onready var particle_factory = $ParticleFactory
 
@@ -8,16 +9,16 @@ var old_friction = 0.275
 var old_speed = 525.0
 
 func enter(_msg := {}) -> void:
-	particle_factory.create_new(character.global_position + character.facing_direction * 8)
+	particle_factory.create_new(character.global_position + character.facing_direction * ice_spawn_distance)
 	old_speed = character.speed.x
 	old_friction = character.friction
 	character.friction = slide_friction
 	character.speed.x += 100
 	character.animation_tree.set('parameters/idle/blend_position', character.Posture.LOW)	
-	character.animation_state.travel("idle")
+	character.animation_state.travel("block")
 
 func physics_update(delta: float) -> void:
-	particle_factory.create_new(character.global_position + character.facing_direction * 8)
+	particle_factory.create_new(character.global_position + character.facing_direction * ice_spawn_distance)
 	if not character.is_on_floor():
 		state_machine.transition_to("Air")
 		return

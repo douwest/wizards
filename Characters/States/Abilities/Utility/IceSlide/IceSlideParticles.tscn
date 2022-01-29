@@ -28,7 +28,7 @@ color_ramp = SubResource( 3 )
 
 [node name="IceSlideParticles" type="Particles2D"]
 emitting = false
-amount = 1500
+amount = 500
 lifetime = 6.0
 one_shot = true
 speed_scale = 3.0
