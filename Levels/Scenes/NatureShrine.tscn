@@ -5,6 +5,7 @@
 [ext_resource path="res://Levels/Scripts/Level.gd" type="Script" id=3]
 
 [node name="NatureShrine" type="StaticBody2D"]
+collision_mask = 0
 script = ExtResource( 3 )
 limit_left = -540
 limit_right = 540
